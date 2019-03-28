@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(~@angular/material/prebuilt-themes/indigo-pink.css);
+/* Universal reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  font-family: Roboto; }
+
+html {
+  font-size: 62.5%; }
+
+@media (min-width: 56.25em) {
+  html {
+    font-size: 50%;
+    /* 1rem = 8px / 16 */ } }
+@media (min-width: 75em) {
+  html {
+    font-size: 56.25%;
+    /* 1rem = 9px, 9/16 = 50% */ } }
+@media (min-width: 112.5em) {
+  html {
+    font-size: 75%;
+    /* 1 rem = 12px / 16 */ } }
+:root {
+  --primary-color: #fcb823;
+  --primary-color-light: lighten(#fcb823, 10%) ;
+  --secondary-color: #1f2123;
+  --secondary-color-light: lighten(#1f2123, 10%);
+  --tertiary-color: #ede9e8;
+  --color-white: #fff;
+  --color-white-darker: #ddd;
+  --color-white-dark: #bbb;
+  --color-black: #111;
+  --color-black-lighter: #333;
+  --color-black-light: #555; }
+
+body {
+  box-sizing: border-box; }
+
+a {
+  color: #00B7FF; }
+
+html, body {
+  height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*# sourceMappingURL=styles.css.map */

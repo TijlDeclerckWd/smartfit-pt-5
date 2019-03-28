@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,uBAAwB;EACtB,UAAU,EAAE,KAAK;EACjB,UAAU,EAAE,gDAAgD;EAAE,SAAS",
+"sources": ["trainer-client.component.scss"],
+"names": [],
+"file": "trainer-client.component.css"
+}

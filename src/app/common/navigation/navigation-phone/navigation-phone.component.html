@@ -1,0 +1,24 @@
+<div class="navigation">
+  <input [checked]="checkboxChecked" type="checkbox" class="navigation__checkbox">
+  <label (click)="changeCheckboxStatus()" class="navigation__button">
+    <span class="navigation__icon">&nbsp;</span>
+  </label>
+  <div class="navigation__background">&nbsp;</div>
+
+  <nav class="navigation__nav">
+    <ul class="navigation__list">
+      <li class="navigation__item">
+        <a (click)="changeCheckboxStatus()" routerLink="clients" class="navigation__link">Clients</a>
+        <i class="material-icons navigation__mat-icon navigation__mat-icon--group">group</i>
+      <!--<i class="fa fa-user-circle-o"></i>-->
+      <li class="navigation__item">
+      <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">Calendar</a>
+      <i class="material-icons navigation__mat-icon navigation__mat-icon--calendar">date_range</i>
+    </li>
+      <li class="navigation__item">
+        <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">Messages</a>
+        <i class="material-icons navigation__mat-icon navigation__mat-icon--message">message</i>
+      </li>
+    </ul>
+  </nav>
+</div>

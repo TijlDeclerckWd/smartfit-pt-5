@@ -1,0 +1,8 @@
+.card {
+  border-radius: 1rem; }
+  .card .card-img-top {
+    border-radius: 1rem 1rem 0 0; }
+  .card .btn-primary {
+    display: block; }
+
+/*# sourceMappingURL=client-card.component.css.map */

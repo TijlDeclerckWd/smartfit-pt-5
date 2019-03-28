@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACJ,aAAa,EAAE,IAAI;EAEnB,mBAAc;IACZ,aAAa,EAAE,aAAa;EAG9B,kBAAa;IACX,OAAO,EAAE,KAAK",
+"sources": ["client-card.component.scss"],
+"names": [],
+"file": "client-card.component.css"
+}

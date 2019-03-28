@@ -1,0 +1,9 @@
+#home {
+  background-image: url("/assets/images/pt-background.jpeg");
+  background-size: cover;
+  background-position: center bottom;
+  height: 100vh;
+  position: relative;
+  padding: 3rem; }
+
+/*# sourceMappingURL=trainer-home.component.css.map */

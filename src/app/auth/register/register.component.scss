@@ -1,0 +1,26 @@
+.register {
+  width: 70%;
+  border-radius: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 5rem;
+  border: 3px solid var(--secondary-color);
+  animation-name: moveDown;
+  animation-duration: 4s;
+  transform: translateY(50vh);
+}
+
+
+mat-radio-button {
+  margin-top: 3rem;
+
+  &:not(:last-child) {
+    margin-right: 3rem;
+  }
+}
+
+
+@keyframes moveDown {
+  from {transform: translateY(-50vh)}
+  to {transform: translateY(50vh)}
+}

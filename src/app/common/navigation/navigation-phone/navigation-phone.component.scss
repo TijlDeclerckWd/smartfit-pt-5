@@ -1,0 +1,59 @@
+@import '../../../SASS/layout/navigation.scss';
+
+.navigation {
+
+  &__background {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    // background-image: radial-gradient(#1f2123, #1f2123);
+
+  }
+
+  &__list {
+  list-style: none;
+    height: 100%;
+    text-align: right;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+  }
+
+  &__item {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__link {
+    font-size: 2.5rem !important;
+    padding: 1rem;
+  }
+
+  &__mat-icon {
+    font-size: 4rem;
+    color: var(--color-black-light);
+    border-radius: 50%;
+    padding: 1rem;
+
+    &--group {
+      background-color: gold;
+    }
+
+    &--calendar {
+      background-color: green;
+      color: var(--color-white);
+    }
+
+    &--message {
+      background-color: blue;
+      color: var(--color-white);
+    }
+  }
+}

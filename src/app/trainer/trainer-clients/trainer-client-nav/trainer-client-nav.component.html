@@ -1,0 +1,9 @@
+<div class="parent2" (click)="handleNav()">
+  <div class="test1" [ngStyle]="styleObject('active1', 0)">
+    <fa-icon matTooltip="User info" aria-label="Button that displays a tooltip in various positions" class="subIcon" [icon]="['fas', 'user']"></fa-icon>
+  </div>
+  <div class="test2" matTooltip="Messages" [ngStyle]="styleObject('active2', 1)"><fa-icon class="subIcon" [icon]="['fas', 'envelope']"></fa-icon></div>
+  <div class="test3" matTooltip="Schedule" [ngStyle]="styleObject('active3', 2)"><fa-icon class="subIcon" [icon]="['fas', 'clock']"></fa-icon></div>
+  <div class="test4" matTooltip="Progress" [ngStyle]="styleObject('active4', 3)"><fa-icon class="subIcon" [icon]="['fas', 'chart-line']"></fa-icon></div>
+  <div class="mask2"><fa-icon class="duugeweune" [icon]="['fas', 'home']"></fa-icon></div>
+</div>
