@@ -1,44 +1,5 @@
-.form-container {
-  height: 100vh;
-  padding: 4rem;
-  font-size: 3rem;
-  background-color: #fdc855; }
-  .form-container .form {
-    height: 100vh;
-    display: grid;
-    align-items: center;
-    align-content: center;
-    grid-row-gap: 4rem;
-    color: var(--secondary-color);
-    grid-template-columns: repeat(2, 1fr);
-    text-align: center; }
-    .form-container .form__title {
-      grid-column: 1 / span 2;
-      font-size: 4.5rem; }
-    .form-container .form mat-form-field {
-      width: 70%;
-      color: green; }
-    .form-container .form .recaptcha {
-      display: block;
-      margin: 0 auto; }
-    .form-container .form .btn-container {
-      grid-column: 1 / -1; }
-      .form-container .form .btn-container .btn {
-        background-color: var(--secondary-color);
-        color: var(--primary-color);
-        display: block;
-        margin: 0 auto;
-        width: 80%;
-        padding: 2rem 0;
-        border-radius: 1rem;
-        font-size: 2.5rem; }
-
-/* Border */
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: white; }
-
-/* Font color */
-input.mat-input-element {
-  color: white; }
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 30rem)); }
 
 /*# sourceMappingURL=register-trainee.component.css.map */

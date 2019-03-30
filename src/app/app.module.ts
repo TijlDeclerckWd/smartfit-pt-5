@@ -7,8 +7,10 @@ import { environment } from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatCardModule, MatDatepicker, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule,
-  MatRadioModule, MatSelectModule, MatTooltipModule
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatButtonModule, MatCardModule, MatDatepicker, MatDatepickerModule, MatDialog, MatDialogModule, MatFormFieldModule, MatInputModule,
+  MatNativeDateModule,
+  MatRadioModule, MatSelectModule, MatStepperModule, MatTooltipModule
 } from '@angular/material';
 import { TrainerHomeComponent } from './trainer/trainer-home/trainer-home.component';
 import {routing} from './app.routing';
@@ -67,6 +69,8 @@ import {
     MatNativeDateModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatStepperModule,
     MatRadioModule,
     routing,
     ReactiveFormsModule,
@@ -75,7 +79,10 @@ import {
     FontAwesomeModule,
     MatTooltipModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, direction: 'ltr'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

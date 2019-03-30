@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {isEqualPassword} from '../../../common/validators/equal-passwords.validator';
 import {countries} from '../../../common/countries';
 
 @Component({
-  selector: 'app-register-trainee',
+  selector: 'register-trainee',
   templateUrl: './register-trainee.component.html',
   styleUrls: ['./register-trainee.component.scss']
 })
@@ -22,12 +22,6 @@ export class RegisterTraineeComponent implements OnInit {
     this.registerForm = new FormGroup({
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
-      username: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(15),
-        Validators.pattern('^[a-zA-Z0-9_.-]*$')]),
-      birthDate: new FormControl(null, Validators.required),
       password1: new FormControl(null, [
         Validators.required,
         Validators.minLength(6),
@@ -39,8 +33,7 @@ export class RegisterTraineeComponent implements OnInit {
       email: new FormControl(null, [
         Validators.required,
         Validators.email]),
-      country: new FormControl(null, Validators.required),
-      captcha: new FormControl(null, Validators.required)
+      country: new FormControl(null, Validators.required)
     });
   }
 
@@ -60,7 +53,20 @@ export class RegisterTraineeComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('valid', this.registerForm.valid);
+this.getFormValidationErrors();
+  }
 
+  getFormValidationErrors() {
+    Object.keys(this.registerForm.controls).forEach(key => {
+
+      const controlErrors: ValidationErrors = this.registerForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+        });
+      }
+    });
   }
 
 }

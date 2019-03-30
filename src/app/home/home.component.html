@@ -7,11 +7,13 @@
       Trainers zone
     </div>
   </div>
-  <h1 class="home__title">Smart Fit</h1>
-  <h3 class="home__secondary-title">Personal Training app</h3>
-  <div class="auth">
-    <button routerLink="register" class="btns register">Register</button>
-    <button class="btns login">Sign in</button>
-    <button class="btns admin">Admin area</button>
+  <div class="bottom">
+    <h1 class="bottom__title">Smart Fit</h1>
+    <h3 class="bottom__secondary-title">Personal Training app</h3>
+    <div class="auth">
+      <button (click)="openDialog()" class="btns register">Register</button>
+      <button class="btns login">Sign in</button>
+      <button class="btns admin">Admin area</button>
+    </div>
   </div>
 </div>

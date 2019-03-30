@@ -1,7 +1,7 @@
 @import "../SASS/abstracts/mixins";
 
 .home {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background-image: url("/assets/images/home-background.jpg");
   background-size: cover;
@@ -54,36 +54,48 @@
   }
 
 
-  &__title {
-    font-size: 9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transform: translateY(20rem);
-  }
+  .bottom {
+    display: grid;
+    grid-template-columns: [full-start] repeat(12, [col-start] 1fr [col-end]) [full-end];
+    &__title {
+      grid-column: full-start / full-end;
+      font-size: 7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+    }
 
-  &__secondary-title {
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transform: translateY(20rem);
-  }
+    &__secondary-title {
+      grid-column: full-start / full-end;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+    }
 
-  .auth {
+    .auth {
+      grid-column: col-start 2 / col-end 10;
+      display: flex;
+      & > * {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        border-radius: .5rem;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        padding: 0.5rem 2rem;
+      }
 
-    & > * {
-      background-color: var(--primary-color);
-      color: var(--secondary-color);
-      border-radius: 1rem;
-      font-size: 2rem;
-      transform: translateY(20rem);
-      margin-top: 4rem;
-      padding: 0.5rem 3rem;
-  }
-
-    .btns {
-      &:not(:last-child) {
-        margin-right: 3rem;
+      .btns {
+        &:not(:last-child) {
+          margin-right: 3rem;
+        }
       }
     }
   }
+}
+
+
+.test {
+  background-color: #fff;
+  height: 1300px;
 }

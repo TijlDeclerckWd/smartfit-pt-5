@@ -8,13 +8,14 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  type;
+
+  constructor() { }
 
   ngOnInit() {
   }
 
-  navigateTo(route) {
-    this.router.navigate([`/register/${route}`]);
+  setTypeAccount(type) {
+    this.type = type;
   }
-
 }
