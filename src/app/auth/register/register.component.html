@@ -1,7 +1,7 @@
 <div class="register">
 
   <mat-horizontal-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step>
       <ng-template matStepLabel>Type Account</ng-template>
       <h2>Would you like to register as a trainee or a trainer?</h2>
       <button (click)="setTypeAccount('trainer')" mat-button matStepperNext>Trainer</button>
