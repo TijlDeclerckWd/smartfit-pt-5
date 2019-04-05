@@ -37,6 +37,9 @@ import {
   faChartLine, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome,
   faPalette, faUser
 } from '@fortawesome/free-solid-svg-icons';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {NotifierModule} from 'angular-notifier';
+import { SignInComponent } from './auth/signIn/sign-in/sign-in.component';
 
 
 @NgModule({
@@ -55,6 +58,7 @@ import {
     TrainerClientFeedComponent,
     TrainerClientComponent,
     TrainerClientNavComponent,
+    SignInComponent,
 
   ],
   imports: [
@@ -76,12 +80,16 @@ import {
     ReactiveFormsModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
+    SnotifyModule,
     FontAwesomeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NotifierModule
   ],
   providers: [
     AuthService,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, direction: 'ltr'}}
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, direction: 'ltr' }},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService
   ],
   bootstrap: [AppComponent]
 })

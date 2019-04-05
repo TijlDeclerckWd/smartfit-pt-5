@@ -15,10 +15,20 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" formControlName="password1" class="form-control" id="password" placeholder="Password">
+      <ng-container *ngIf="f.get('password1').invalid">
+        <mat-error *ngIf="f.get('password1').hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('minlength') && !password1.hasError('required')">Password needs to have at least 6 characters</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('maxlength')">Password needs to be less than 15 characters</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('pattern') && !password1.hasError('minlength') && !password1.hasError('maxlength')">Password needs to have letters and numbers</mat-error>
+      </ng-container>
     </div>
     <div class="form-group">
       <label for="password2">Repeat Password</label>
       <input type="password" formControlName="password2" class="form-control" id="password2" placeholder="Repeat Password">
+      <ng-container *ngIf="f.get('password2').invalid">
+        <mat-error *ngIf="f.get('password2').hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="f.get('password2').hasError('isNotEqual') && !f.get('password2').hasError('required')">Passwords need to match</mat-error>
+      </ng-container>
     </div>
     <div class="form-group">
       <select formControlName="country" class="custom-select">
@@ -29,64 +39,5 @@
     <div class="buttons">
       <button type="submit" class="btn btn-warning btn-block btn-lg">submit</button>
     </div>
-
-
-    <!--<h2 class="form__title">Trainee Signup Form</h2>-->
-    <!--<div class="form-group form__group">-->
-      <!--<mat-form-field>-->
-        <!--<input matInput placeholder="First name" [formControl]="f.get('firstName')">-->
-        <!--<mat-error *ngIf="f.get('firstName').invalid && f.get('firstName').hasError('required')">Last name is required</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="form-group form__group">-->
-      <!--<mat-form-field>-->
-        <!--<input matInput placeholder="Last name" [formControl]="f.get('lastName')">-->
-        <!--<mat-error *ngIf="f.get('lastName').invalid && f.get('lastName').hasError('required')">Last name is required</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="form-group form__group">-->
-      <!--<mat-form-field>-->
-        <!--<input matInput placeholder="Password" [formControl]="f.get('password1')" type="password">-->
-        <!--<mat-error *ngIf="f.get('password1').invalid && f.get('password1').hasError('required')">Password is required</mat-error>-->
-        <!--<mat-error *ngIf="f.get('password1').invalid && f.get('password1').hasError('minlength') && !password1.hasError('required')">Password needs to have at least 6 characters</mat-error>-->
-        <!--<mat-error *ngIf="f.get('password1').invalid && f.get('password1').hasError('maxlength')">Password needs to be less than 15 characters</mat-error>-->
-        <!--<mat-error *ngIf="f.get('password1').invalid && f.get('password1').hasError('pattern') && !password1.hasError('minlength') && !password1.hasError('maxlength')">Password needs to have letters and numbers</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="form-group form__group">-->
-      <!--<mat-form-field>-->
-        <!--<input matInput placeholder="Repeat password" [formControl]="f.get('password2')" type="password">-->
-        <!--<mat-error *ngIf="f.get('password2').invalid && f.get('password2').hasError('required')">Password is required</mat-error>-->
-        <!--<mat-error *ngIf="f.get('password2').hasError('isNotEqual') && !f.get('password2').hasError('required')">Passwords need to match</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="form__group form-group">-->
-      <!--<mat-form-field>-->
-        <!--<input matInput [formControl]="f.get('birthDate')" [matDatepicker]="picker" placeholder="Date of birth (mm/dd/yyyy) ">-->
-        <!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-        <!--<mat-datepicker #picker></mat-datepicker>-->
-        <!--<mat-error *ngIf="f.get('birthDate').invalid && f.get('birthDate').hasError('required')">Birth date is required</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="form-group form__group">-->
-      <!--<mat-form-field>-->
-        <!--<input matInput placeholder="Email" (blur)="checkUniqueEmail()" [formControl]="f.get('email')" type="email">-->
-        <!--<mat-error *ngIf="f.get('email').invalid && f.get('email').hasError('required')">Email is required</mat-error>-->
-        <!--<mat-error *ngIf="f.get('email').invalid && f.get('email').hasError('email') && !f.get('email').hasError('required')">Please enter a valid email address</mat-error>-->
-        <!--<mat-error *ngIf="f.get('email').invalid && f.get('email').hasError('uniqueEmail') && !f.get('email').hasError('email') && !f.get('email').hasError('required')">Email has to be unique</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<div class="form__group">-->
-      <!--<mat-form-field>-->
-        <!--<mat-select #select placeholder="Country" [formControl]="f.get('country')">-->
-          <!--<mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>-->
-        <!--</mat-select>-->
-        <!--<mat-error *ngIf="f.get('country').invalid && f.get('country').hasError('required')">Country is required</mat-error>-->
-      <!--</mat-form-field>-->
-    <!--</div>-->
-    <!--<re-captcha class="recaptcha" theme="dark" (resolved)="$event && resolved($event)" siteKey="6Ld3m3YUAAAAAEwExI-7AXZskjHuAgbxA3&#45;&#45;4amu" formControlName="captcha"></re-captcha>-->
-    <!--<div class="btn-container">-->
-      <!--<button class="btn btn__signup"><i class="fa fa-user"></i>Sign Up!</button>-->
-    <!--</div>-->
   </form>
 </div>
