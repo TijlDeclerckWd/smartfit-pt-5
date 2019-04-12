@@ -1,0 +1,39 @@
+.connect {
+  padding: 3rem; }
+  .connect__message {
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer; }
+  .connect__join {
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer; }
+  .connect__social {
+    display: flex;
+    min-height: 5rem;
+    width: 100%;
+    margin-top: 2rem; }
+    .connect__social > * {
+      flex: 1 0 0; }
+    .connect__social .social-container {
+      display: flex;
+      justify-content: center; }
+      .connect__social .social-container img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%; }
+
+/*# sourceMappingURL=trainer-profile-connect.component.css.map */

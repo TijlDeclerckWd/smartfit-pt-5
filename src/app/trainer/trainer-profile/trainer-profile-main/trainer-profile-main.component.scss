@@ -1,0 +1,14 @@
+.main {
+  padding: 0 3rem 3rem 3rem;
+
+  .description-container {
+    padding: 1rem;
+    //border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: var(--tertiary-color);
+    box-shadow: 0 .5rem 1rem rgba(#000, .3);
+    .description {
+      font-size: 1.3rem;
+    }
+  }
+}

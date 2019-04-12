@@ -1,0 +1,22 @@
+<section class="image">
+  <img
+    src="https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg"
+    alt="profile-man"
+    class="image__img">
+  <h2 class="image__name">Tijl Declerck</h2>
+  <h4 class="image__profession">Cardio Trainer</h4>
+</section>
+<section class="navigation">
+  <div (click)="changeMenu('main')" [ngClass]="{'selected-menu': selectedMenu === 'main'}" class="navigation__item">Main</div>
+  <div (click)="changeMenu('details')" [ngClass]="{'selected-menu': selectedMenu === 'details'}" class="navigation__item">Trainer details</div>
+  <div (click)="changeMenu('connect')" [ngClass]="{'selected-menu': selectedMenu === 'connect'}" class="navigation__item">Connect</div>
+</section>
+<section class="content">
+  <trainer-profile-main
+    *ngIf="selectedMenu === 'main'"
+    [description]="description"
+    [schedule]="schedule"
+  ></trainer-profile-main>
+  <trainer-profile-details *ngIf="selectedMenu === 'details'"></trainer-profile-details>
+  <trainer-profile-connect *ngIf="selectedMenu === 'connect'"></trainer-profile-connect>
+</section>

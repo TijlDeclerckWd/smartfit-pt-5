@@ -1,10 +1,10 @@
 <div class="home">
   <div class="zones">
     <div (click)="enterTraineeZone()" class="zones__clients">
-      Clients zone
+      Clients
     </div>
-    <div routerLink="trainer" class="zones__trainers">
-      Trainers zone
+    <div (click)="enterTrainerZone()" class="zones__trainers">
+      Trainers
     </div>
   </div>
   <div class="bottom">
@@ -12,8 +12,6 @@
     <h3 class="bottom__secondary-title">Personal Training app</h3>
     <div class="auth">
       <button (click)="openDialog()" class="btns register">Register</button>
-      <button class="btns login">Sign in</button>
-      <button class="btns admin">Admin area</button>
     </div>
   </div>
 </div>

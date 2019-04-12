@@ -1,0 +1,50 @@
+.connect {
+  padding: 3rem;
+
+  &__message {
+    display: block;
+  border-radius: 5px;
+    width: 100%;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  &__join {
+    display: block;
+  border-radius: 5px;
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  &__social {
+    display: flex;
+    min-height: 5rem;
+    width: 100%;
+    margin-top: 2rem;
+
+    & > * {
+      flex: 1 0 0;
+    }
+
+    .social-container {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+      }
+    }
+  }
+
+}

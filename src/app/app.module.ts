@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MAT_DIALOG_DEFAULT_OPTIONS,
-  MatButtonModule, MatCardModule, MatDatepicker, MatDatepickerModule, MatDialog, MatDialogModule, MatFormFieldModule, MatInputModule,
+  MatButtonModule, MatCardModule, MatDatepicker, MatDatepickerModule, MatDialog, MatDialogModule, MatFormFieldModule, MatIconModule,
+  MatInputModule,
   MatNativeDateModule,
   MatRadioModule, MatSelectModule, MatStepperModule, MatTooltipModule
 } from '@angular/material';
@@ -21,7 +22,7 @@ import { TraineeComponent } from './trainee/trainee/trainee.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { RegisterTraineeComponent } from './auth/register/register-trainee/register-trainee.component';
 import { RegisterTrainerComponent } from './auth/register/register-trainer/register-trainer.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
 import { NavigationPhoneComponent } from './common/navigation/navigation-phone/navigation-phone.component';
@@ -34,12 +35,26 @@ import { TrainerClientNavComponent } from './trainer/trainer-clients/trainer-cli
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
-  faChartLine, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome,
-  faPalette, faUser
+  faChartLine, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faMapMarkerAlt,
+  faPalette, faSearch, faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NotifierModule} from 'angular-notifier';
 import { SignInComponent } from './auth/signIn/sign-in/sign-in.component';
+import { PickTrainerComponent } from './trainee/pick-trainer/pick-trainer.component';
+import { SearchBarComponent } from './common/search-bar/search-bar.component';
+import {PickedTrainerGuardService} from './services/picked-trainer-guard.service';
+import {ClientService} from './services/client.service';
+import {LoggedInGuardService} from './services/logged-in-guard.service';
+import {TokenInterceptorService} from './services/token-interceptor.service';
+import { PickTrainerMenuComponent } from './trainee/pick-trainer/pick-trainer-menu/pick-trainer-menu.component';
+import { TrainerListItemComponent } from './common/list-items/trainer-list-item/trainer-list-item.component';
+import { TrainerListItemCardComponent } from './common/list-items/trainer-list-item-card/trainer-list-item-card.component';
+import { TrainerProfileComponent } from './trainer/trainer-profile/trainer-profile.component';
+import { TrainerProfileMainComponent } from './trainer/trainer-profile/trainer-profile-main/trainer-profile-main.component';
+import { TrainerProfileDetailsComponent } from './trainer/trainer-profile/trainer-profile-details/trainer-profile-details.component';
+import { TrainerProfileConnectComponent } from './trainer/trainer-profile/trainer-profile-connect/trainer-profile-connect.component';
+import { ScheduledEventComponent } from './common/events/scheduled-event/scheduled-event.component';
 
 
 @NgModule({
@@ -59,10 +74,22 @@ import { SignInComponent } from './auth/signIn/sign-in/sign-in.component';
     TrainerClientComponent,
     TrainerClientNavComponent,
     SignInComponent,
+    PickTrainerComponent,
+    SearchBarComponent,
+    PickTrainerMenuComponent,
+    TrainerListItemComponent,
+    TrainerListItemCardComponent,
+    TrainerProfileComponent,
+    TrainerProfileMainComponent,
+    TrainerProfileDetailsComponent,
+    TrainerProfileConnectComponent,
+    ScheduledEventComponent
 
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
@@ -76,8 +103,9 @@ import { SignInComponent } from './auth/signIn/sign-in/sign-in.component';
     MatDialogModule,
     MatStepperModule,
     MatRadioModule,
+    MatInputModule,
+    MatIconModule,
     routing,
-    ReactiveFormsModule,
     RecaptchaModule.forRoot(),
     RecaptchaFormsModule,
     SnotifyModule,
@@ -87,15 +115,20 @@ import { SignInComponent } from './auth/signIn/sign-in/sign-in.component';
   ],
   providers: [
     AuthService,
+    PickedTrainerGuardService,
+    ClientService,
+    LoggedInGuardService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, direction: 'ltr' }},
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SignInComponent]
 })
-export class AppModule {
 
+export class AppModule {
   constructor() {
-    library.add(faCoffee, faPalette, faHeadphones, faHome, faFile, faEnvelope, faChartLine, faClock, faUser);
+    library.add(faCoffee, faPalette, faHeadphones, faHome, faFile, faEnvelope, faChartLine, faClock, faUser, faSearch, faMapMarkerAlt);
   }
 }

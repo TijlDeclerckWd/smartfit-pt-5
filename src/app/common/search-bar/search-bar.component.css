@@ -1,0 +1,11 @@
+.search-bar-container {
+  height: 3rem; }
+  @media (min-width: 37.5em) {
+    .search-bar-container {
+      height: 5rem; } }
+  .search-bar-container #searchTrainerInput {
+    height: 100%; }
+    .search-bar-container #searchTrainerInput:hover {
+      outline: none; }
+
+/*# sourceMappingURL=search-bar.component.css.map */

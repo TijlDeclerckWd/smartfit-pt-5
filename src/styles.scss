@@ -34,12 +34,13 @@ html {
 
 :root {
   --primary-color: #fcb823;
-  --primary-color-light: lighten(#fcb823, 10%) ;
+  --primary-color-light: #fcbe36 ;
 
   --secondary-color: #1f2123;
   --secondary-color-light: lighten(#1f2123, 10%);
 
   --tertiary-color: #ede9e8;
+  --tertiary-color-dark: #bdbab9;
 
   --color-white: #fff;
   --color-white-darker: #ddd;

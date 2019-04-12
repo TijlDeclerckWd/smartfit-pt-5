@@ -10,7 +10,7 @@
     <mat-step>
       <ng-template matStepLabel>Fill in your info</ng-template>
       <register-trainee *ngIf="type === 'trainee'"></register-trainee>
-      <!--<register-trainer></register-trainer>-->
+      <register-trainer *ngIf="type === 'trainer'"></register-trainer>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

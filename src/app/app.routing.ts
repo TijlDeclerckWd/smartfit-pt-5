@@ -9,6 +9,9 @@ import {TrainerClientsComponent} from './trainer/trainer-clients/trainer-clients
 import {RegisterTrainerComponent} from './auth/register/register-trainer/register-trainer.component';
 import {TrainerClientFeedComponent} from './trainer/trainer-clients/trainer-client/trainer-client-feed/trainer-client-feed.component';
 import {TrainerClientComponent} from './trainer/trainer-clients/trainer-client/trainer-client.component';
+import {PickedTrainerGuardService} from './services/picked-trainer-guard.service';
+import {PickTrainerComponent} from './trainee/pick-trainer/pick-trainer.component';
+import {TrainerProfileComponent} from './trainer/trainer-profile/trainer-profile.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -17,23 +20,31 @@ const APP_ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'trainer',
+    path: 'trainer/:userId',
     component: TrainerHomeComponent,
     children: [
-      { path: 'clients', component: TrainerClientsComponent}
+      { path: 'clients', component: TrainerClientsComponent }
       ]
   },
   {
-    path: 'trainer/clients/clientId',
+    path: 'trainer/:userId/clients/clientId',
     component: TrainerClientComponent,
     children: [
       { path: 'feed', component: TrainerClientFeedComponent }
     ]
   },
   {
-    path: 'trainee',
+    path: 'profile/trainer/:userId',
+    component: TrainerProfileComponent
+  },
+  {
+    path: 'client/:userId',
     component: TraineeComponent,
-    canActivate: [LoggedInGuardService]
+    canActivate: [PickedTrainerGuardService]
+  },
+  {
+    path: 'client/:userId/pickTrainer',
+    component: PickTrainerComponent
   },
   {
     path: 'register',

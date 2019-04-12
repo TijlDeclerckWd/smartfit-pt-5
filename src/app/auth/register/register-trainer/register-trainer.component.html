@@ -1,3 +1,43 @@
-<p>
-  register-trainer works!
-</p>
+<div class="form-container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input type="text" formControlName="firstName" class="form-control" id="firstName" aria-describedby="firstName" placeholder="First name">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Last name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" formControlName="password1" class="form-control" id="password" placeholder="Password">
+      <ng-container *ngIf="f.get('password1').invalid">
+        <mat-error *ngIf="f.get('password1').hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('minlength') && !password1.hasError('required')">Password needs to have at least 6 characters</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('maxlength')">Password needs to be less than 15 characters</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('pattern') && !password1.hasError('minlength') && !password1.hasError('maxlength')">Password needs to have letters and numbers</mat-error>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label for="password2">Repeat Password</label>
+      <input type="password" formControlName="password2" class="form-control" id="password2" placeholder="Repeat Password">
+      <ng-container *ngIf="f.get('password2').invalid">
+        <mat-error *ngIf="f.get('password2').hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="f.get('password2').hasError('isNotEqual') && !f.get('password2').hasError('required')">Passwords need to match</mat-error>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <select formControlName="country" class="custom-select">
+        <option selected>Open this elect menu</option>
+        <option *ngFor="let country of countries" class="option" value="{{country}}">{{country}}</option>
+      </select>
+    </div>
+    <div class="buttons">
+      <button type="submit" class="btn btn-warning btn-block btn-lg">submit</button>
+    </div>
+  </form>
+</div>

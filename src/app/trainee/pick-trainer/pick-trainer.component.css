@@ -1,0 +1,11 @@
+.pick-trainer {
+  background-color: var(--secondary-color);
+  min-height: 100vh;
+  padding: 1rem 0rem; }
+  @media (min-width: 37.5em) {
+    .pick-trainer {
+      padding: 3rem; } }
+  .pick-trainer > * {
+    color: var(--primary-color) !important; }
+
+/*# sourceMappingURL=pick-trainer.component.css.map */

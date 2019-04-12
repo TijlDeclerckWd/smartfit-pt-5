@@ -1,0 +1,17 @@
+<div class="menu">
+  <div
+    [ngClass]="{'selected-item': selected === 'close to you'}"
+    (click)="switchMenu('close to you')"
+    class="menu__option">Close to you
+  </div>
+  <div
+    [ngClass]="{'selected-item': selected === 'new'}"
+    (click)="switchMenu('new')"
+    class="menu__option">New
+  </div>
+  <div
+    [ngClass]="{'selected-item': selected === 'with reviews'}"
+    (click)="switchMenu('with reviews')"
+    class="menu__option">With reviews
+  </div>
+</div>

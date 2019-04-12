@@ -1,0 +1,11 @@
+.main {
+  padding: 0 3rem 3rem 3rem; }
+  .main .description-container {
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--tertiary-color);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); }
+    .main .description-container .description {
+      font-size: 1.3rem; }
+
+/*# sourceMappingURL=trainer-profile-main.component.css.map */

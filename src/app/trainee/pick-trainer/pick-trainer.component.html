@@ -1,0 +1,12 @@
+<div class="pick-trainer">
+  <h2 class="pick-trainer__title">Find your ideal trainer</h2>
+  <search-bar content="Search for your ideal personal trainer"></search-bar>
+  <pick-trainer-menu></pick-trainer-menu>
+  <ng-container *ngIf="innerWidth < 900; else cards">
+    <trainer-list-item *ngFor="let trainer of trainers"></trainer-list-item>
+  </ng-container>
+  <ng-template #cards>
+    <trainer-list-item-card *ngFor="let trainer of trainers"></trainer-list-item-card>
+  </ng-template>
+
+</div>

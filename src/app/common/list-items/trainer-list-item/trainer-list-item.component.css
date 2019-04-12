@@ -1,0 +1,25 @@
+.list-item {
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  min-height: 3rem;
+  width: 90%;
+  border: 1px solid var(--primary-color);
+  background-color: #ddd;
+  border-radius: .5rem;
+  color: #000 !important;
+  margin: 2rem auto;
+  padding: .5rem; }
+  .list-item:hover {
+    background-color: #ccc; }
+  .list-item .img-container img {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%; }
+  .list-item .details-container .description .seeMore {
+    color: blue; }
+    .list-item .details-container .description .seeMore:hover {
+      text-decoration: underline; }
+  .list-item .location-container {
+    display: flex; }
+
+/*# sourceMappingURL=trainer-list-item.component.css.map */

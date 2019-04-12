@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,KAAM;EACJ,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,4CAA4C",
-"sources": ["register-trainee.component.scss"],
+"mappings": "",
+"sources": [],
 "names": [],
 "file": "register-trainee.component.css"
 }

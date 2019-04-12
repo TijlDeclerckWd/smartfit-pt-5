@@ -62,9 +62,6 @@ export class RegisterTraineeComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.getFormValidationErrors();
-
-    console.log('VALID FORM', this.f.valid);
 // if the form is valid
     if (this.f.valid) {
       // we create an object from all the data
@@ -73,14 +70,15 @@ export class RegisterTraineeComponent implements OnInit {
         lastName: this.registerForm.value.lastName,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password1,
-        country: this.registerForm.value.country
+        country: this.registerForm.value.country,
+        type: 'client'
       };
 
       // and send it to the server where it will create a new user
       this.authService.signUp(data)
         .subscribe((res) => {
-          console.log('RESULT', res);
           this.notifier.notify( 'success', 'Successfully created an account!' );
+          this.authService.registrationComplete.next();
         });
     } else {
       this.notifier.notify( 'error', 'There is an invalid value in your form, please correct this before submitting!' );
