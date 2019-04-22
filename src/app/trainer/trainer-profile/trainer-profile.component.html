@@ -1,9 +1,9 @@
-<section class="image">
+<section class="image" *ngIf="profile">
   <img
     src="https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg"
     alt="profile-man"
     class="image__img">
-  <h2 class="image__name">Tijl Declerck</h2>
+  <h2 class="image__name">{{ profile.fullName }}</h2>
   <h4 class="image__profession">Cardio Trainer</h4>
 </section>
 <section class="navigation">

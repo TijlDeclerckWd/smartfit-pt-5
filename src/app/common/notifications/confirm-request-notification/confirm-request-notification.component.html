@@ -1,0 +1,11 @@
+
+<!-- it needs to display the user who sent the request-->
+<div class="notification">
+<div class="notification__text-container">
+  <h3 class="text">{{ update.text }}</h3>
+</div>
+  <div class="notification__button-container">
+    <fa-icon (click)="onResponse('confirm', update.request)" class="confirm" [icon]="['fas', 'check']"></fa-icon>
+    <fa-icon (click)="onResponse('deny', update.request)" class="deny" [icon]="['fas', 'times']"></fa-icon>
+  </div>
+</div>

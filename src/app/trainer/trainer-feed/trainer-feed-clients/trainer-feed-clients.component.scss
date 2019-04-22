@@ -1,0 +1,14 @@
+.clients {
+  display: flex;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  padding: 1rem 5rem 1rem 1rem;
+  background-color: #ccc;
+  border-radius: 5px;
+  &__img {
+    border-radius: 50%;
+    margin-right: 2rem;
+    height: 5rem;
+    width: 5rem;
+  }
+}

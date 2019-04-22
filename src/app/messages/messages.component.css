@@ -1,0 +1,50 @@
+.messages__checkbox {
+  display: none; }
+.messages__icon {
+  font-size: 2rem; }
+.messages__button {
+  background-color: var(--primary-color);
+  height: 5rem;
+  width: 5rem;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border-radius: 50%;
+  z-index: 300;
+  box-shadow: 0 1rem 3rem rgba(var(--color-black), 0.1);
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .messages__button .icon {
+    font-size: 2rem; }
+.messages__background {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  background-image: radial-gradient(#4b4d4e, #1f2123);
+  z-index: 100;
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+.messages__nav {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  padding: .5rem; }
+.messages__checkbox:checked ~ .messages__background {
+  transform: scale(100); }
+.messages__checkbox:checked ~ .messages__nav {
+  opacity: 1;
+  visibility: visible;
+  width: 100%; }
+
+/*# sourceMappingURL=messages.component.css.map */

@@ -1,0 +1,37 @@
+@import "../../../SASS/abstracts/mixins";
+
+.notification {
+  background-color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+
+  &__text-container {
+    flex: 1 0 0;
+    padding: .5rem;
+    background-color: var(--tertiary-color);
+    border-radius: 5px;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 600;
+    //background-color: #fff;
+    padding: 1rem;
+
+    .confirm {
+      color: green !important;
+      margin-right: .5rem;
+    }
+
+    .deny {
+      color: red !important;
+    }
+  }
+}

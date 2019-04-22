@@ -1,0 +1,51 @@
+.list-item {
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  min-height: 3rem;
+  width: 90%;
+  background-color: var(--primary-color-light);
+  border-radius: .5rem;
+  color: #000 !important;
+  margin: 2rem auto;
+  padding: .5rem;
+
+  &:hover {
+    background-color: #ccc;
+  }
+
+  .img-container {
+    img {
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+    }
+  }
+
+  .details-container {
+    .name {
+
+    }
+
+    .lastmessage {
+      .seeMore {
+        color: blue;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .time-container {
+    display: flex;
+    .icon {
+
+    }
+
+    .location {
+
+    }
+  }
+
+}

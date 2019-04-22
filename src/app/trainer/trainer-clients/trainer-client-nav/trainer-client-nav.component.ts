@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'trainer-client-nav',
@@ -7,46 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainerClientNavComponent implements OnInit {
 
-  active1 = false;
-  active2 = false;
-  active3 = false;
-  active4 = false;
+  userId;
+  clientId;
 
-  // Styles
-  activeStyles =
-    [{ 'background-color': 'gray', 'transform': 'translate(0px,125px)' },
-      {'background-color': 'gray', 'transform': 'translate(60px,105px)'},
-      {'background-color': 'gray', 'transform': 'translate(105px,60px)'},
-      {'background-color': 'gray', 'transform': 'translate(125px,0px)'}
-    ];
-
-  inactiveStyles =
-    [
-      {'background-color': 'dimGray', 'transform': 'none'},
-      {'background-color': 'darkGray', 'transform': 'none'},
-      {'background-color': 'gray', 'transform': 'none'},
-      {'background-color': 'silver', 'transform': 'none'}
-    ];
-
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userId = localStorage.getItem('userId');
+    this.route.params.subscribe((params) => this.clientId = params.clientId);
   }
 
-  styleObject(value, i) {
-    if (this[value]) {
-      return this.activeStyles[i];
+  navigate(section) {
+    const link = `/trainer/${this.userId}/clients/${this.clientId}`;
+
+    if (section === 'main') {
+      this.router.navigateByUrl(`/trainer/${this.userId}/feed`);
     } else {
-      return this.inactiveStyles[i];
+      this.router.navigateByUrl(`${link}/${section}`);
     }
   }
 
-  handleNav() {
-      this.active1 = !this.active1;
-      this.active2 = !this.active2;
-      this.active3 = !this.active3;
-      this.active4 = !this.active4;
-
-  }
 
 }

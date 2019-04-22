@@ -45,7 +45,6 @@ export class SignInComponent implements OnInit {
       type: this.signInForm.value.type
     };
 
-
     this.authService.signIn(data)
       .subscribe((res: any) => {
         // set the local storage variables
@@ -54,17 +53,13 @@ export class SignInComponent implements OnInit {
         this.notifierService.notify( 'success', 'Successfully signed in!' );
         this.authService.signInComplete.next();
         if (data.type === 'trainer') {
-          this.router.navigateByUrl(`/trainer/${res.userId}`);
+          this.router.navigateByUrl(`/trainer/${res.userId}/feed`);
         } else if (data.type === 'client') {
-          console.log('client entered');
           if (res.trainerChosen) {
-            console.log('trainerChosen', res.trainerChosen);
             this.router.navigateByUrl(`/client/${res.userId}`);
           } else {
-            console.log('trainerNotChosen', res.trainerChosen);
             this.router.navigateByUrl(`/client/${res.userId}/pickTrainer`);
           }
-
         }
       }, (err) => {
         this.loginErrorMessage = 'Email / password combination was invalid';

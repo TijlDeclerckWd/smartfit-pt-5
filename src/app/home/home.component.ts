@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = event.target.innerWidth;
-    console.log('WIDTH CHANGED', this.innerWidth);
   }
 
   constructor(
@@ -57,7 +56,8 @@ export class HomeComponent implements OnInit {
 
     if (token) {
     //   take the user to the trainer zone
-
+      const userId = localStorage.getItem('userId');
+      this.router.navigateByUrl(`/trainer/${userId}/feed`);
     } else {
       this.signInDialogRef = this.dialog.open(SignInComponent, {
         width: this.innerWidth > 600 ? '50%' : '80%'

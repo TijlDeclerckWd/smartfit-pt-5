@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'trainer-list-item',
@@ -11,7 +11,9 @@ export class TrainerListItemComponent implements OnInit {
     '      elementum. Sed at maximus ipsum. Phasellus congue nisi justo, eu varius tortor pharetra et.\n' +
     '      Curabitur eleifend suscipit metus. In hac habitasse platea dictumst.\n' +
     '      Aliquam faucibus ante mi, in auctor diam lacinia quis. Etiam iaculis sodales enim.\n' +
-    '      Fusce euismod nisl posuere tempor aliquam.'
+    '      Fusce euismod nisl posuere tempor aliquam.';
+
+  @Input('trainer') trainer;
 
   constructor() { }
 

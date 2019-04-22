@@ -16,4 +16,12 @@ export class ClientService {
     return this.http.get(`${this.BASE_API_URL}/client/hasPickedTrainer`)
       .pipe(map((status: any) => status.saved));
   }
+
+  searchTrainer(input) {
+    return this.http.get(`${this.BASE_API_URL}/client/searchTrainer/${input}`);
+  }
+
+  sendHireRequest(data) {
+    return this.http.post(`${this.BASE_API_URL}/client/sendHireRequest`, data);
+  }
 }

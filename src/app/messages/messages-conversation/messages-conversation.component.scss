@@ -1,0 +1,52 @@
+.conversation {
+
+  &__window {
+    min-height: 80vh;
+    border-radius: 5px 5px 0 0;
+    padding: 2rem;
+
+    background-color: var(--primary-color);
+
+    .name {
+      text-align: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid black;
+    }
+
+    .message {
+      border: 1px solid black;
+      padding: .5rem;
+      width: 50%;
+      border-radius: 1rem;
+      background-color: var(--secondary-color);
+      &__text {
+        font-size: 1rem;
+        color: #fff;
+      }
+    }
+  }
+
+  &__input-container  {
+    display: flex;
+    min-height: 10vh;
+    align-items: stretch;
+  }
+
+  &__input {
+    width: 80%;
+  }
+
+  &__confirm-button {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  .send {
+    font-size: 2rem;
+    }
+  }
+
+
+}

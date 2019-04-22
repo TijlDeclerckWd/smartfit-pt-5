@@ -1,0 +1,84 @@
+.messages {
+  &__checkbox {
+    //  We never want to see this one
+    display: none;
+  }
+
+  &__icon {
+    font-size: 2rem;
+  }
+
+  &__button {
+    background-color: var(--primary-color);
+    // we make height and width a bit larger than the background to make sure the background
+    // doesn't show
+    height: 5rem;
+    width: 5rem;
+    position: fixed;
+    // so the background is 1 rem smaller so to position it right under
+    // the button we need 0.5rem less.
+    bottom: 2rem;
+    right: 2rem;
+    border-radius: 50%;
+    z-index: 300;
+    box-shadow: 0 1rem 3rem rgba(var(--color-black), .1);
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+
+  &__background {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    // radial gradient starts in the middle and goes outside from that point
+    background-image: radial-gradient(#4b4d4e, #1f2123);
+    //  to avoid that our element gets hidden behind a section
+    z-index: 100;
+    transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
+    }
+
+
+  &__nav {
+    height: 100vh;
+    //even if we scroll, we want the navigation to stay in the same place
+    position: fixed;
+    top: 0;
+    // We changed this from right to left because the animation looked weird
+    // coming from the other side
+    left: 0;
+    //needs to be above background
+    z-index: 150;
+    // if we had combined the opacity with a normal width, then the links would've been clickable
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    //this makes the list move a bit to the right before it moves back to its OG position
+    transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    padding: .5rem;
+
+  }
+
+  // FUNCTIONALITY
+
+  &__checkbox:checked ~ &__background {
+    transform: scale(100);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+  }
+
+}

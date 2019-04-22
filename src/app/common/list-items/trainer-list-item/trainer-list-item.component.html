@@ -1,9 +1,9 @@
-<div class="list-item" routerLink="/profile/trainer/hdjfdjhfjdf">
+<div class="list-item" [routerLink]="['/profile/trainer/', trainer._id]">
   <div class="img-container">
     <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" alt="Profile Picture">
   </div>
   <div class="details-container">
-    <h3 class="name">Tijl Declerck</h3>
+    <h3 class="name">{{trainer.fullName}}</h3>
     <p class="speciality">Cardio and Muscle Building</p>
     <p class="description">{{ description | slice:0:40 }}...<span class="seeMore" *ngIf="description.length > 41">See More...</span></p>
   </div>

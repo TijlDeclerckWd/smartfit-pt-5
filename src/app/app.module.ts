@@ -35,8 +35,8 @@ import { TrainerClientNavComponent } from './trainer/trainer-clients/trainer-cli
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
-  faChartLine, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faMapMarkerAlt,
-  faPalette, faSearch, faUser
+  faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
+  faPalette, faPaperPlane, faPlus, faSearch, faTimes, faUpload, faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NotifierModule} from 'angular-notifier';
@@ -53,8 +53,24 @@ import { TrainerListItemCardComponent } from './common/list-items/trainer-list-i
 import { TrainerProfileComponent } from './trainer/trainer-profile/trainer-profile.component';
 import { TrainerProfileMainComponent } from './trainer/trainer-profile/trainer-profile-main/trainer-profile-main.component';
 import { TrainerProfileDetailsComponent } from './trainer/trainer-profile/trainer-profile-details/trainer-profile-details.component';
-import { TrainerProfileConnectComponent } from './trainer/trainer-profile/trainer-profile-connect/trainer-profile-connect.component';
+import {
+  DialogContentComponent,
+  TrainerProfileConnectComponent
+} from './trainer/trainer-profile/trainer-profile-connect/trainer-profile-connect.component';
 import { ScheduledEventComponent } from './common/events/scheduled-event/scheduled-event.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessagesMenuComponent } from './messages/messages-menu/messages-menu.component';
+import { MessagesConversationsComponent } from './messages/messages-conversations/messages-conversations.component';
+import { MessagesConversationComponent } from './messages/messages-conversation/messages-conversation.component';
+import { MessagesListItemComponent } from './messages/messages-conversations/messages-list-item/messages-list-item.component';
+import { TrainerFeedComponent } from './trainer/trainer-feed/trainer-feed.component';
+import { ConfirmRequestNotificationComponent } from './common/notifications/confirm-request-notification/confirm-request-notification.component';
+import {TrainerService} from './services/trainer.service';
+import { TrainerFeedClientsComponent } from './trainer/trainer-feed/trainer-feed-clients/trainer-feed-clients.component';
+import { TrainerClientWorkoutsComponent } from './trainer/trainer-clients/trainer-client/trainer-client-workouts/trainer-client-workouts.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CreateExerciseFormComponent } from './common/forms/create-exercise-form/create-exercise-form.component';
+
 
 
 @NgModule({
@@ -83,7 +99,18 @@ import { ScheduledEventComponent } from './common/events/scheduled-event/schedul
     TrainerProfileMainComponent,
     TrainerProfileDetailsComponent,
     TrainerProfileConnectComponent,
-    ScheduledEventComponent
+    ScheduledEventComponent,
+    MessagesComponent,
+    MessagesMenuComponent,
+    MessagesConversationsComponent,
+    MessagesConversationComponent,
+    MessagesListItemComponent,
+    TrainerFeedComponent,
+    ConfirmRequestNotificationComponent,
+    DialogContentComponent,
+    TrainerFeedClientsComponent,
+    TrainerClientWorkoutsComponent,
+    CreateExerciseFormComponent
 
   ],
   imports: [
@@ -111,7 +138,8 @@ import { ScheduledEventComponent } from './common/events/scheduled-event/schedul
     SnotifyModule,
     FontAwesomeModule,
     MatTooltipModule,
-    NotifierModule
+    NotifierModule,
+    NgbModule
   ],
   providers: [
     AuthService,
@@ -121,14 +149,19 @@ import { ScheduledEventComponent } from './common/events/scheduled-event/schedul
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, direction: 'ltr' }},
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
-    SnotifyService
+    SnotifyService,
+    TrainerService,
+
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SignInComponent]
+  entryComponents: [SignInComponent, DialogContentComponent, CreateExerciseFormComponent]
 })
 
 export class AppModule {
   constructor() {
-    library.add(faCoffee, faPalette, faHeadphones, faHome, faFile, faEnvelope, faChartLine, faClock, faUser, faSearch, faMapMarkerAlt);
+    library.add(faCoffee, faPalette, faHeadphones,
+      faHome, faFile, faEnvelope, faChartLine, faClock,
+      faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
+      faCheck, faTimes, faPlus, faUpload);
   }
 }

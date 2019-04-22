@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,MAAO;EACL,KAAK,EAAE,qBAAqB",
+"sources": ["trainer-feed.component.scss"],
+"names": [],
+"file": "trainer-feed.component.css"
+}

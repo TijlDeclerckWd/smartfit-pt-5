@@ -1,6 +1,6 @@
 .trainer-client-section {
   min-height: 100vh;
-  background: linear-gradient(90deg, #16222A 10%, #3A6073 90%);
-  /* W3C */ }
+  max-width: 100vw;
+  background-color: #1f2123 !important; }
 
 /*# sourceMappingURL=trainer-client.component.css.map */

@@ -1,0 +1,10 @@
+<trainer-feed-clients *ngIf="clients" [clients]="clients"></trainer-feed-clients>
+<h2 class="title">Updates:</h2>
+<ng-container *ngFor="let update of updates">
+  <confirm-request-notification
+    *ngIf="update.type === 'request'"
+    [update]="update"
+    (handleRequestResponse)="handleRequestResponse($event)"
+  ></confirm-request-notification>
+</ng-container>
+

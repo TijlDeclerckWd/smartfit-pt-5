@@ -1,0 +1,44 @@
+.workouts {
+  color: var(--tertiary-color) !important;
+  padding: 2rem;
+  min-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+
+  &__btn {
+    background-color: var(--primary-color) !important;
+    border-color: transparent;
+  }
+
+  .form {
+    .input-container {
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        width: 75%;
+      }
+
+      .exercise-icon {
+        width: 10% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--tertiary-color);
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+      }
+    }
+  }
+
+  .submit-form-container {
+    margin-top: auto;
+    text-align: center;
+    .submit-btn {
+      background-color: var(--primary-color);
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+}

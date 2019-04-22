@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {TrainerService} from '../../services/trainer.service';
 
 @Component({
   selector: 'trainer-profile',
@@ -11,16 +13,28 @@ export class TrainerProfileComponent implements OnInit {
   description = '';
   schedule = [];
 
-  constructor() { }
+  profile = null;
+
+
+  constructor(private route: ActivatedRoute, private trainerService: TrainerService) { }
 
   ngOnInit() {
   // here we load the user profile and the change the description and then assign
+    this.route.params.subscribe((params) => {
+      this.getProfile(params.trainerId);
+    });
   }
 
 
   changeMenu(menu) {
-    console.log('change menu called', menu);
     this.selectedMenu = menu;
+  }
+
+  getProfile(trainerId) {
+    this.trainerService.getProfile(trainerId)
+      .subscribe((res: any) => {
+      this.profile = res.trainer;
+    });
   }
 
 }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_API_URL: 'http://localhost:5000/api'
+  BASE_API_URL: 'http://localhost:5000/api',
+
 };
 /*
  * In development mode, to ignore zone related error stack frames such as

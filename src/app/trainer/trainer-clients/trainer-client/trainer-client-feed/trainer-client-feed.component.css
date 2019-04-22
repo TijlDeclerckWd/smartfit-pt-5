@@ -1,3 +1,25 @@
-
+.feed {
+  padding: 2rem;
+  position: relative;
+  color: var(--primary-color); }
+  .feed__new-btn {
+    padding: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333; }
+    .feed__new-btn .icon {
+      display: flex;
+      align-items: center; }
+  .feed__updates-container {
+    height: 50vh; }
 
 /*# sourceMappingURL=trainer-client-feed.component.css.map */

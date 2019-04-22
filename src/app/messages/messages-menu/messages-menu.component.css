@@ -1,0 +1,25 @@
+.menu {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; }
+  .menu__btn:not(:last-child) {
+    margin-right: .3rem; }
+  .menu__btn img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-size: cover; }
+  .menu__btn--main {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .menu__btn--main .main-icon {
+      font-size: 2rem; }
+
+/*# sourceMappingURL=messages-menu.component.css.map */

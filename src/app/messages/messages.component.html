@@ -1,0 +1,16 @@
+<div class="messages">
+  <input [checked]="checkboxChecked" type="checkbox" class="messages__checkbox">
+  <label (click)="changeCheckboxStatus()" class="messages__button">
+    <fa-icon class="messages__icon" [icon]="['fas', 'envelope']"></fa-icon>
+  </label>
+  <div class="messages__background">&nbsp;</div>
+
+  <nav class="messages__nav">
+    <messages-menu
+      (switchConversation)="switchConversation($event)"
+      (switchToMainPage)="switchToMainPage($event)"
+    ></messages-menu>
+    <messages-conversations *ngIf="displayMainPage"></messages-conversations>
+    <messages-conversation></messages-conversation>
+  </nav>
+</div>

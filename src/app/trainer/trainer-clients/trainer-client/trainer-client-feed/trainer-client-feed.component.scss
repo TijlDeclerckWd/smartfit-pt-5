@@ -1,0 +1,30 @@
+.feed {
+  padding: 2rem;
+  position: relative;
+  color: var(--primary-color);
+
+  &__new-btn {
+    padding: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+
+    .icon{
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__updates-container {
+    height: 50vh;
+  }
+}

@@ -1,2 +1,10 @@
-<h1>FEED</h1>
-<fa-icon icon="coffee"></fa-icon>
+<div class="feed">
+  <div (click)="navigateNewWorkout()" class="feed__new-btn"><fa-icon class="icon" [icon]="['fas', 'plus']"></fa-icon></div>
+  <div class="feed__updates-container">
+    <h2 class="feed__title">Client updates:</h2>
+  </div>
+  <div class="feed__scheduled-container">
+    <h2 class="feed__title">Scheduled:</h2>
+  </div>
+
+</div>

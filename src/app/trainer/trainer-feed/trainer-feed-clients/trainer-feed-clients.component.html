@@ -1,0 +1,8 @@
+<div class="clients">
+  <img
+    *ngFor="let client of clients"
+    [src]="client.profile_pic"
+    alt="woman" class="clients__img"
+    (click)="visitClient(client._id)"
+  >
+</div>

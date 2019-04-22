@@ -12,6 +12,8 @@ import {TrainerClientComponent} from './trainer/trainer-clients/trainer-client/t
 import {PickedTrainerGuardService} from './services/picked-trainer-guard.service';
 import {PickTrainerComponent} from './trainee/pick-trainer/pick-trainer.component';
 import {TrainerProfileComponent} from './trainer/trainer-profile/trainer-profile.component';
+import {TrainerFeedComponent} from './trainer/trainer-feed/trainer-feed.component';
+import {TrainerClientWorkoutsComponent} from './trainer/trainer-clients/trainer-client/trainer-client-workouts/trainer-client-workouts.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -23,18 +25,20 @@ const APP_ROUTES: Routes = [
     path: 'trainer/:userId',
     component: TrainerHomeComponent,
     children: [
+      { path: 'feed', component: TrainerFeedComponent },
       { path: 'clients', component: TrainerClientsComponent }
       ]
   },
   {
-    path: 'trainer/:userId/clients/clientId',
+    path: 'trainer/:userId/clients/:clientId',
     component: TrainerClientComponent,
     children: [
-      { path: 'feed', component: TrainerClientFeedComponent }
+      { path: 'feed', component: TrainerClientFeedComponent },
+      { path: 'workouts', component: TrainerClientWorkoutsComponent }
     ]
   },
   {
-    path: 'profile/trainer/:userId',
+    path: 'profile/trainer/:trainerId',
     component: TrainerProfileComponent
   },
   {

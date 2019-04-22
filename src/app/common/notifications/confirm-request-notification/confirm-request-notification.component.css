@@ -1,0 +1,26 @@
+.notification {
+  background-color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column; }
+  .notification__text-container {
+    flex: 1 0 0;
+    padding: .5rem;
+    background-color: var(--tertiary-color);
+    border-radius: 5px; }
+  .notification__button-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 600;
+    padding: 1rem; }
+    .notification__button-container .confirm {
+      color: green !important;
+      margin-right: .5rem; }
+    .notification__button-container .deny {
+      color: red !important; }
+
+/*# sourceMappingURL=confirm-request-notification.component.css.map */
