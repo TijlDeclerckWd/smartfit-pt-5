@@ -12,6 +12,36 @@
   }
 
   .form {
+
+    .form-group {
+      .chosen-exercise-container{
+        .exercises-list {
+         .exercise {
+           background-color: var(--tertiary-color);
+           margin: 1rem 0;
+           color: var(--secondary-color);
+
+           display: flex;
+
+           &__name {
+             width: 50%;
+           }
+
+           &__increment {
+             width: 25%;
+             &--sets {
+
+             }
+
+             &--weight {
+               margin-left: 2%;
+             }
+           }
+         }
+        }
+      }
+    }
+
     .input-container {
       display: flex;
       justify-content: space-between;
@@ -38,7 +68,7 @@
     .submit-btn {
       background-color: var(--primary-color);
       width: 50%;
-      margin: 0 auto;
+      margin: 1rem auto;
     }
   }
 }

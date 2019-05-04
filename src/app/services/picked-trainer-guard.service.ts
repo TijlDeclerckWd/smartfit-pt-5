@@ -25,7 +25,6 @@ export class PickedTrainerGuardService implements CanActivate {
       return false;
     } else {
       const hasPickedTrainer: any = await this.hasPickedTrainer();
-
       if (!!hasPickedTrainer.hasPicked) {
         return true;
       } else {
@@ -39,9 +38,8 @@ export class PickedTrainerGuardService implements CanActivate {
     return new Promise((resolve) => {
       this.http.get(`${this.BASE_API_URL}/client/hasPickedTrainer`)
         .subscribe((status: any) => {
-          console.log('received server response', status);
           resolve({
-            hasPicked: status.haspicked,
+            hasPicked: status.hasPickedTrainer,
             userId: status.userId
           });
         });

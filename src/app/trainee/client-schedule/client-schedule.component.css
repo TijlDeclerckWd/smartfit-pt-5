@@ -1,0 +1,25 @@
+.schedule {
+  color: var(--tertiary-color);
+  padding: 1rem; }
+  .schedule__title {
+    margin-bottom: 2rem;
+    text-align: centerl; }
+  .schedule .workout-container {
+    display: flex; }
+    .schedule .workout-container .date-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 15%;
+      min-width: 15%;
+      height: 5rem;
+      margin-right: 2%;
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+      border-radius: 5px;
+      text-align: center; }
+    .schedule .workout-container .workout-item {
+      width: 100%; }
+
+/*# sourceMappingURL=client-schedule.component.css.map */

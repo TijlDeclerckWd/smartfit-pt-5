@@ -1,0 +1,16 @@
+.card {
+  width: 100% !important;
+  margin: 1rem 0; }
+  .card .card-body {
+    display: flex; }
+    .card .card-body .card-image {
+      width: 5rem;
+      height: 5rem;
+      margin-right: 1rem; }
+    .card .card-body .card-data {
+      flex: 1 0 0;
+      padding: .5rem; }
+    .card .card-body .collapse {
+      margin: 0 0 2rem 0; }
+
+/*# sourceMappingURL=exercise-list-item.component.css.map */

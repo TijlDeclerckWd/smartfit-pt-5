@@ -1,0 +1,47 @@
+.exercise {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tertiary-color);
+  min-height: 95vh; }
+  .exercise__video {
+    height: 30vh; }
+  .exercise__title {
+    text-align: center;
+    margin: 1rem 0 .5rem 0; }
+  .exercise__subtitle {
+    text-align: center;
+    margin-bottom: 1rem; }
+  .exercise__instructions {
+    width: 80%;
+    margin: 1rem auto; }
+  .exercise__bullet-points {
+    margin: 1rem auto;
+    width: 80%;
+    display: grid;
+    grid-row-gap: .5rem;
+    grid-column-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: start; }
+  .exercise .dividing-line {
+    border-top: 1px solid var(--secondary-color); }
+  .exercise__enter-data .enter-data-title {
+    text-align: center;
+    margin: 1rem 0; }
+  .exercise__enter-data .set-container {
+    display: flex;
+    width: 60%;
+    margin: 0 auto .5rem auto;
+    align-items: center; }
+    .exercise__enter-data .set-container .number {
+      width: 50%;
+      margin-bottom: 0 !important; }
+  .exercise__next-btn {
+    padding: .5rem;
+    width: 50%;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 1rem; }
+
+/*# sourceMappingURL=client-exercise.component.css.map */

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {TrainerService} from '../../../../services/trainer.service';
 
 @Component({
   selector: 'app-trainer-client-feed',
@@ -11,13 +12,25 @@ export class TrainerClientFeedComponent implements OnInit {
   trainerId: string;
   clientId: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  scheduledWorkouts = [];
 
-  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private trainerService: TrainerService) {}
 
   ngOnInit() {
     this.trainerId = this.route.snapshot.parent.params.userId;
     this.clientId = this.route.snapshot.parent.params.clientId;
+
+    this.loadClientSchedule();
+  }
+
+  loadClientSchedule() {
+    this.trainerService.loadClientSchedule(this.clientId)
+      .subscribe((res) => {
+        this.scheduledWorkouts = res['workouts'];
+      });
   }
 
   navigateNewWorkout() {

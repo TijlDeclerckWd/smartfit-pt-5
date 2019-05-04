@@ -1,0 +1,39 @@
+.workout {
+  &__main-screen {
+    min-height: 95vh;
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    text-align: center;
+    /* margin-bottom: 4rem; */
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 80%;
+    margin: 0 auto 2rem auto;
+  }
+
+  &__instructions {
+    width: 80%;
+    margin: 0 auto 3rem auto;
+    text-align: center;
+  }
+
+  &__btn {
+    border-radius: 50%;
+    display: block;
+    height: 10rem;
+    width: 10rem;
+    background-color: var(--primary-color);
+    font-size: 1.2rem;
+    border: 1px solid transparent;
+    margin: 0 auto;
+    box-shadow: 0 1rem 2rem rgba(#000, .3);
+  }
+}

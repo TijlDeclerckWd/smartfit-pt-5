@@ -19,12 +19,12 @@ export class TrainerProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute, private trainerService: TrainerService) { }
 
   ngOnInit() {
-  // here we load the user profile and the change the description and then assign
+  // here we load the user profile
+  // perhaps we should change this to snapshot since we don't expect to respond to change
     this.route.params.subscribe((params) => {
       this.getProfile(params.trainerId);
     });
   }
-
 
   changeMenu(menu) {
     this.selectedMenu = menu;
@@ -36,5 +36,4 @@ export class TrainerProfileComponent implements OnInit {
       this.profile = res.trainer;
     });
   }
-
 }

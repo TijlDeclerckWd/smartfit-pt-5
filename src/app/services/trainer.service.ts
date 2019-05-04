@@ -23,4 +23,8 @@ export class TrainerService {
   handleRequestResponse(data) {
     return this.http.put(`${this.BASE_API_URL}/trainer/handleRequestResponse`, data);
   }
+
+  loadClientSchedule(clientId) {
+    return this.http.get(`${this.BASE_API_URL}/trainer/loadClientSchedule/${clientId}`);
+  }
 }

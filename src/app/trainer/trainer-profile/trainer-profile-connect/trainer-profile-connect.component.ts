@@ -8,6 +8,7 @@ export interface DialogData {
   trainerId: string;
 }
 
+// this is the dialog window we display to ask whether the user is sure he wants to send a hire request to this trainer
 @Component({
   selector: 'dialog-content',
   template: `
@@ -42,6 +43,7 @@ export class DialogContentComponent {
   }
 
   onAnswerQuestion(accepted) {
+    // we want to check whether the client decided to send the hire request
     if (!accepted) {
       this.onNoClick();
     } else {
@@ -53,11 +55,9 @@ export class DialogContentComponent {
 
       this.clientService.sendHireRequest(data)
         .subscribe((res) => {
-          console.log('res', res);
-          this.notifierService.notify('success', "You have successfully sent a request to this trainer");
+          this.notifierService.notify('success', "You have successfully sent a hire request to this trainer");
           this.onNoClick();
         }, (err) => {
-          console.log('ERROR', err);
           this.notifierService.notify('error', err.error.message);
         });
     }

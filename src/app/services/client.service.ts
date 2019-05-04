@@ -17,6 +17,10 @@ export class ClientService {
       .pipe(map((status: any) => status.saved));
   }
 
+  loadAllUpdates() {
+    return this.http.get(`${this.BASE_API_URL}/client/loadAllUpdates`);
+  }
+
   searchTrainer(input) {
     return this.http.get(`${this.BASE_API_URL}/client/searchTrainer/${input}`);
   }

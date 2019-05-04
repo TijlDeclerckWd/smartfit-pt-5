@@ -17,8 +17,8 @@
       <div class="form-group">
         <select placeholder="Pick your types" formControlName="type" class="custom-select">
           <option selected>Pick your type</option>
-          <option value="1">Muscle</option>
-          <option value="2">Cardio</option>
+          <option value="muscle">Muscle</option>
+          <option value="cardio">Cardio</option>
         </select>
         <div *ngIf="f.get('type').touched">
           <mat-error *ngIf="f.get('type').hasError('required')">Type is required</mat-error>
@@ -38,6 +38,25 @@
       </div>
       <div class="form-group">
         <label for="exercises">Exercises</label>
+        <div class="chosen-exercise-container">
+          <ul class="exercises-list list-group">
+            <li
+              class="exercise list-group-item"
+              *ngFor="let exercise of selectedExercises; let i = index">
+              <span class="exercise__name">Exercise {{i + 1}}: {{ exercise.name }}</span>
+              <increment-item
+                [placeholder]="'SETS'"
+                (countChanged)="changeExerciseData($event, i, 'sets')"
+                class="exercise__increment exercise__increment--sets">
+              </increment-item>
+              <increment-item
+                [placeholder]="'WEIGHT (KG)'"
+                (countChanged)="changeExerciseData($event, i, 'weight')"
+                class="exercise__increment exercise__increment--weight">
+              </increment-item>
+            </li>
+          </ul>
+        </div>
         <div class="input-container">
           <input placeholder="" id="exercises" type="text" class="form-control exercise-input">
           <fa-icon (click)="openExerciseDialog()" class="exercise-icon" [icon]="['fas', 'plus']"></fa-icon>
@@ -56,9 +75,13 @@
   <!-- check box option to search through entire exercise database -->
   <!-- When they pick a workout that had been used before then we change the date of course. and the user if necessary-->
   <div *ngIf="displayedSection === 'list'" class="list-section">
-    <input placeholder="Search Workouts" type="text" class="workouts__search form-control my-3">
-    <h3 class="workouts__recent-workouts">Recent Workouts</h3>
-    <h3 class="workouts__search-results">Search Results</h3>
+    <input [(ngModel)]="workoutSearch" placeholder="Search Workouts" type="text" class="workouts__search form-control my-3">
+    <div *ngIf="recentWorkouts && !workoutSearch" class="recent-workouts-container">
+      <h3 class="workouts__recent-workouts">Recent Workouts</h3>
+      <workout-list-item *ngFor="let recentWorkout of recentWorkouts" [workout]="recentWorkout" ></workout-list-item>
+    </div>
+
+    <h3 *ngIf="!!workoutSearch" class="workouts__search-results">Search Results</h3>
     <!-- here will be a list of all the previous workout this client has done, or the search results-->
     <!-- Every workout list item should -->
   </div>

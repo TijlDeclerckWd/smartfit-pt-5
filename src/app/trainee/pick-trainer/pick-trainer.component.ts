@@ -8,6 +8,7 @@ import {ClientService} from '../../services/client.service';
 })
 export class PickTrainerComponent implements OnInit {
 
+  // the width of the screen
   innerWidth;
 
   trainers = [];
@@ -16,14 +17,13 @@ export class PickTrainerComponent implements OnInit {
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    console.log('this.innerwidth', this.innerWidth);
   }
 
   searchTrainer(e) {
+    // look for trainers based on the input of users
     this.clientService.searchTrainer(e)
       .subscribe((res: any) => {
         this.trainers = res.trainers;
       });
   }
-
 }

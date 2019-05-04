@@ -1,0 +1,28 @@
+<div class="exercise">
+  <iframe
+    *ngIf="exercise.videoLink"
+    class="exercise__video"
+    height="300"
+    [src]="safeUrl(exercise.videoLink)"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+  <h3 class="exercise__title">{{exercise.name}}</h3>
+  <h4 class="exercise__subtitle"><span class="sets">{{exerciseData.sets}} sets - </span><span class="kilo">{{ exerciseData.weight }}kg</span></h4>
+  <p class="exercise__instructions">{{ exercise.instructions }}</p>
+  <hr class="dividing-line">
+  <div class="exercise__bullet-points">
+    <div *ngFor="let bulletPoint of exercise.bulletPoints" class="bullet-point">- {{ bulletPoint }}</div>
+  </div>
+  <hr class="dividing-line">
+  <div class="exercise__enter-data">
+    <h4 class="enter-data-title">Enter Reps here</h4>
+    <!-- for every set there should be an input-->
+    <div *ngFor="let input of inputs; let i = index" class="set-container">
+      <p class="number">Set {{ i + 1 }}</p>
+      <input type="text" class="form-control rep-input rep-input--{{i}}">
+    </div>
+  </div>
+  <!-- we should make this dynamic so that text is different for the last exercise-->
+  <button (click)="completeExercise()" class="exercise__next-btn">Go to next Exercise</button>
+</div>

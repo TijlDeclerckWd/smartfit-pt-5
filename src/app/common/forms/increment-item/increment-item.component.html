@@ -1,0 +1,5 @@
+<div class="increment">
+  <button (click)="changeCount('minus')" class="btn btn-warning increment__btn increment__btn--minus">-</button>
+  <input #input (change)="changedInput(input.value)" [value]="inputValue" [placeholder]="placeholder" type="text" class="increment__input">
+  <button (click)="changeCount('plus')" class="btn btn-warning increment__btn increment__btn--plus">+</button>
+</div>

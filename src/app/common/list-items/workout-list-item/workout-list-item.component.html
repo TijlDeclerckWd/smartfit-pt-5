@@ -1,0 +1,30 @@
+<div (click)="toggleSelection()" [ngClass]="{'golden-border': workoutIsSelected, 'transparent-border': !workoutIsSelected }" class="card">
+  <div *ngIf="isUpdate" class="card-header">
+    <img src="/assets/images/woman.jpg" alt="woman">
+    <h6 class="update-title">TrainerName created a new exercise for you</h6>
+  </div>
+  <div class="card-body">
+    <img class="card-img" src="/assets/images/woman.jpg" alt="woman">
+    <div class="card-data">
+      <h5 class="card-title">{{ workout.name }}</h5>
+      <p class="card-text">{{ workout.description }}</p>
+    </div>
+    <hr *ngIf="!isUpdate" class="dividing-line">
+    <div *ngIf="!isUpdate" class="see-exercises-container">
+      <button
+        (click)="toggleCollapse($event)"
+        [attr.aria-expanded]="!collapsedExercises"
+        aria-controls="collapse"
+        class="btn btn-warning see-exercises">
+        See Exercises
+      </button>
+    </div>
+    <div id="collapse" [ngbCollapse]="collapsedExercises">
+      <exercise-list-item class="exercise-list-item" *ngFor="let exercise of workout.exercises" [exercise]="exercise"></exercise-list-item>
+    </div>
+  </div>
+  <div class="card-footer">
+   <mat-checkbox (click)="toggleCheckbox($event)" color="warn">Workout Complete?</mat-checkbox>
+    <fa-icon (click)="startWorkout(workout._id)" class="play-icon" [icon]="['fas', 'play']"></fa-icon>
+  </div>
+</div>

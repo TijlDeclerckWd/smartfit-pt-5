@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,iBAAkB;EAChB,OAAO,EAAE,IAAI;EAEb,uBAAM;IACJ,KAAK,EAAE,GAAG;EAGd,0BAAS;IACP,KAAK,EAAE,GAAG;;AAKV,8BAAkB;EAChB,eAAe,EAAE,IAAI",
+"sources": ["create-exercise-form.component.scss"],
 "names": [],
 "file": "create-exercise-form.component.css"
 }

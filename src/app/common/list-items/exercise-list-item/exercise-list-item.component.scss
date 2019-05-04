@@ -1,0 +1,23 @@
+.card {
+  width: 100% !important;
+  margin: 1rem 0;
+
+  .card-body {
+    display: flex;
+
+    .card-image {
+      width: 5rem;
+      height: 5rem;
+      margin-right: 1rem;
+    }
+
+    .card-data {
+      flex: 1 0 0;
+      padding: .5rem;
+    }
+
+    .collapse {
+      margin: 0 0 2rem 0;
+    }
+  }
+}

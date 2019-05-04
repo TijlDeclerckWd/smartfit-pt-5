@@ -8,7 +8,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MAT_DIALOG_DEFAULT_OPTIONS,
-  MatButtonModule, MatCardModule, MatDatepicker, MatDatepickerModule, MatDialog, MatDialogModule, MatFormFieldModule, MatIconModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepicker, MatDatepickerModule, MatDialog, MatDialogModule, MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatNativeDateModule,
   MatRadioModule, MatSelectModule, MatStepperModule, MatTooltipModule
@@ -36,7 +37,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
-  faPalette, faPaperPlane, faPlus, faSearch, faTimes, faUpload, faUser
+  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faTimes, faUpload, faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NotifierModule} from 'angular-notifier';
@@ -70,8 +71,27 @@ import { TrainerFeedClientsComponent } from './trainer/trainer-feed/trainer-feed
 import { TrainerClientWorkoutsComponent } from './trainer/trainer-clients/trainer-client/trainer-client-workouts/trainer-client-workouts.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CreateExerciseFormComponent } from './common/forms/create-exercise-form/create-exercise-form.component';
+import {ExerciseService} from './services/exercise.service';
+import {WorkoutService} from './services/workout.service';
+import { WorkoutListItemComponent } from './common/list-items/workout-list-item/workout-list-item.component';
+import { ExerciseListItemComponent } from './common/list-items/exercise-list-item/exercise-list-item.component';
+import { ClientScheduleComponent } from './trainee/client-schedule/client-schedule.component';
+import { ClientStatsComponent } from './trainee/client-stats/client-stats.component';
+import { ClientNavComponent } from './trainee/client-nav/client-nav.component';
+import {ClientFeedComponent} from './trainee/client-feed/client-feed.component';
+import {MomentModule} from 'ngx-moment';
+import { ClientWorkoutComponent } from './trainee/client-workout/client-workout.component';
+import { ClientExerciseComponent } from './trainee/client-exercise/client-exercise.component';
+import { IncrementItemComponent } from './common/forms/increment-item/increment-item.component';
+import {NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER} from 'ngx-ui-loader';
 
-
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  fgsType: SPINNER.foldingCube,
+  fgsColor: '#1f2123',
+  overlayColor: '#fcb823',
+  pbThickness: 5, // progress bar thickness
+  pbColor: '#bdbab9'
+};
 
 @NgModule({
   declarations: [
@@ -110,7 +130,16 @@ import { CreateExerciseFormComponent } from './common/forms/create-exercise-form
     DialogContentComponent,
     TrainerFeedClientsComponent,
     TrainerClientWorkoutsComponent,
-    CreateExerciseFormComponent
+    CreateExerciseFormComponent,
+    WorkoutListItemComponent,
+    ExerciseListItemComponent,
+    ClientScheduleComponent,
+    ClientStatsComponent,
+    ClientNavComponent,
+    ClientFeedComponent,
+    ClientWorkoutComponent,
+    ClientExerciseComponent,
+    IncrementItemComponent
 
   ],
   imports: [
@@ -139,7 +168,10 @@ import { CreateExerciseFormComponent } from './common/forms/create-exercise-form
     FontAwesomeModule,
     MatTooltipModule,
     NotifierModule,
-    NgbModule
+    NgbModule,
+    MomentModule,
+    MatCheckboxModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
   providers: [
     AuthService,
@@ -151,7 +183,8 @@ import { CreateExerciseFormComponent } from './common/forms/create-exercise-form
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService,
     TrainerService,
-
+ExerciseService,
+    WorkoutService
   ],
   bootstrap: [AppComponent],
   entryComponents: [SignInComponent, DialogContentComponent, CreateExerciseFormComponent]
@@ -162,6 +195,6 @@ export class AppModule {
     library.add(faCoffee, faPalette, faHeadphones,
       faHome, faFile, faEnvelope, faChartLine, faClock,
       faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
-      faCheck, faTimes, faPlus, faUpload);
+      faCheck, faTimes, faPlus, faUpload, faPlay);
   }
 }

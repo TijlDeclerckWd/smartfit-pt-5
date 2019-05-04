@@ -5,6 +5,7 @@
   </div>
   <div class="feed__scheduled-container">
     <h2 class="feed__title">Scheduled:</h2>
+    <workout-list-item *ngFor="let workout of scheduledWorkouts" [workout]="workout"></workout-list-item>
   </div>
 
 </div>

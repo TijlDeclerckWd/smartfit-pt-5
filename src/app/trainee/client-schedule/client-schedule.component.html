@@ -1,0 +1,14 @@
+<div class="schedule">
+  <h3 class="schedule__title">Upcoming Workouts</h3>
+  <ng-container *ngFor="let workout of scheduledWorkouts">
+    <!-- later we will add scheduled meals as well and then we'll have to add ngifs-->
+    <div class="workout-container">
+      <div [style.visibility]="determineDate(workout)" class="date-container">
+        <h3>{{ getDay(workout.date) }}</h3>
+        <h5>{{ getMonth(workout.date) }}</h5>
+      </div>
+      <workout-list-item class="workout-item" [workout]="workout"></workout-list-item>
+    </div>
+  </ng-container>
+
+</div>

@@ -1,0 +1,68 @@
+
+.exercise {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tertiary-color);
+  min-height: 95vh;
+  &__video {
+    height: 30vh;
+  }
+
+  &__title {
+    text-align: center;
+    margin: 1rem 0 .5rem 0;
+  }
+
+  &__subtitle {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__instructions {
+    width: 80%;
+    margin: 1rem auto;
+  }
+
+  &__bullet-points {
+    margin: 1rem auto;
+    width: 80%;
+    display: grid;
+    grid-row-gap: .5rem;
+    grid-column-gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    justify-items: start;
+  }
+
+  .dividing-line {
+    border-top: 1px solid var(--secondary-color);
+  }
+
+  &__enter-data {
+    .enter-data-title {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .set-container {
+      display: flex;
+      width: 60%;
+      margin: 0 auto .5rem auto;
+      align-items: center;
+      .number {
+        width: 50%;
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
+  &__next-btn {
+    padding: .5rem;
+    width: 50%;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-top: 1rem;
+  }
+}

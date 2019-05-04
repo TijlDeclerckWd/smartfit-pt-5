@@ -38,20 +38,26 @@ export class HomeComponent implements OnInit {
   }
 
   enterTraineeZone() {
+    // we grab the token from the localstorage to check whether the user is logged in
+    // this is flawed because trainers can enter the client zone
+    // We should do some checking before they try to enter the homepage
+    // when the user is a trainer, we should redirect them tp the trainer part, if he's a client, to the client section
+    // When people are not logged in they should simply be able to enter this homepage
     const token = localStorage.getItem('token');
     if (token) {
-    // take the user to the client zone
+    // take the user to the client zone feed
       const userId = localStorage.getItem('userId');
-      this.router.navigateByUrl(`/client/${userId}`);
+      this.router.navigateByUrl(`/client/${userId}/feed`);
     } else {
-    //  show the login dialog
+    //  So when there is no token, they are not logged in and we want to display a dialog to make them log in
       this.signInDialogRef = this.dialog.open(SignInComponent, {
-        width: '80%'
+        width: this.innerWidth > 600 ? '50%' : '80%'
       });
     }
   }
 
   enterTrainerZone() {
+    // same logic as client, perhaps we could turn this into one function with different arguments
     const token = localStorage.getItem('token');
 
     if (token) {
@@ -60,17 +66,16 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl(`/trainer/${userId}/feed`);
     } else {
       this.signInDialogRef = this.dialog.open(SignInComponent, {
+        // we want the width of the login dialog to be dependent on the width of the screen
         width: this.innerWidth > 600 ? '50%' : '80%'
       });
     }
   }
 
+  // We want to register, so we open the dialog with the registercomponent inside
   openDialog(): void {
     this.dialogRef = this.dialog.open(RegisterComponent, {
       width: this.innerWidth > 600 ? '50%' : '80%'
     });
-
-
   }
-
 }

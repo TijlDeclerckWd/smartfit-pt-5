@@ -11,6 +11,7 @@
   <div (click)="changeMenu('details')" [ngClass]="{'selected-menu': selectedMenu === 'details'}" class="navigation__item">Trainer details</div>
   <div (click)="changeMenu('connect')" [ngClass]="{'selected-menu': selectedMenu === 'connect'}" class="navigation__item">Connect</div>
 </section>
+<!-- we load different sections based on the section picked in the menu-->
 <section class="content">
   <trainer-profile-main
     *ngIf="selectedMenu === 'main'"

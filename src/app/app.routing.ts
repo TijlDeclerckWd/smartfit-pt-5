@@ -14,6 +14,10 @@ import {PickTrainerComponent} from './trainee/pick-trainer/pick-trainer.componen
 import {TrainerProfileComponent} from './trainer/trainer-profile/trainer-profile.component';
 import {TrainerFeedComponent} from './trainer/trainer-feed/trainer-feed.component';
 import {TrainerClientWorkoutsComponent} from './trainer/trainer-clients/trainer-client/trainer-client-workouts/trainer-client-workouts.component';
+import {ClientFeedComponent} from './trainee/client-feed/client-feed.component';
+import {ClientScheduleComponent} from './trainee/client-schedule/client-schedule.component';
+import {ClientStatsComponent} from './trainee/client-stats/client-stats.component';
+import {ClientWorkoutComponent} from './trainee/client-workout/client-workout.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -44,7 +48,13 @@ const APP_ROUTES: Routes = [
   {
     path: 'client/:userId',
     component: TraineeComponent,
-    canActivate: [PickedTrainerGuardService]
+    canActivate: [PickedTrainerGuardService],
+    children: [
+      { path: 'feed', component: ClientFeedComponent },
+      { path: 'schedule', component: ClientScheduleComponent },
+      { path: 'statistics', component: ClientStatsComponent },
+      { path: 'workout/:workoutId', component: ClientWorkoutComponent }
+    ]
   },
   {
     path: 'client/:userId/pickTrainer',

@@ -1,0 +1,15 @@
+.increment {
+  display: flex;
+  color: var(--secondary-color); }
+  .increment__input {
+    width: 50%;
+    border: 1px solid transparent;
+    text-align: center; }
+  .increment__btn {
+    width: 25%; }
+    .increment__btn--minus {
+      border-radius: 5px 0 0 5px; }
+    .increment__btn--plus {
+      border-radius: 0 5px 5px 0; }
+
+/*# sourceMappingURL=increment-item.component.css.map */

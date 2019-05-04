@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,iBAAkB;EAChB,UAAU,EAAE,KAAK;EACjB,gBAAgB,EAAE,sBAAsB",
+"sources": ["trainee.component.scss"],
 "names": [],
 "file": "trainee.component.css"
 }

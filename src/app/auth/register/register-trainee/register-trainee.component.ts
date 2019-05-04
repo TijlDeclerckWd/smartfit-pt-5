@@ -46,9 +46,9 @@ export class RegisterTraineeComponent implements OnInit {
     });
   }
 
+  // not priority, but definitely needs to be added before launch
   checkUniqueEmail() {
     if (!this.f.get('email').hasError('email')) {
-      console.log('here we check whether the email is unique');
       // this.authService.checkEmailUniqueness(this.email.value)
       //   .subscribe((data: any) => {
       //     console.log('result from unique check', data.obj);
@@ -78,22 +78,11 @@ export class RegisterTraineeComponent implements OnInit {
       this.authService.signUp(data)
         .subscribe((res) => {
           this.notifier.notify( 'success', 'Successfully created an account!' );
+          // to close the dialog
           this.authService.registrationComplete.next();
         });
     } else {
       this.notifier.notify( 'error', 'There is an invalid value in your form, please correct this before submitting!' );
     }
   }
-
-  getFormValidationErrors() {
-    Object.keys(this.registerForm.controls).forEach(key => {
-      const controlErrors: ValidationErrors = this.registerForm.get(key).errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-        });
-      }
-    });
-  }
-
 }

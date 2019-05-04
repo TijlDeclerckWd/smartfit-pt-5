@@ -13,6 +13,7 @@ export class SignInComponent implements OnInit {
 
   signInForm: FormGroup;
 
+  // this message will display when there was an issue logging in at the server
   loginErrorMessage = '';
 
   get f() {
@@ -25,19 +26,25 @@ export class SignInComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    // create the sign in form
     this.signInForm = new FormGroup({
       email: new FormControl(null, [
+        // we should check for async unique email validator, try to read docs on the third argument of this formControl
         Validators.email,
         Validators.required]),
       password: new FormControl( null, [
         Validators.required
       ]),
+      // type to differentiate between trainers and clients
       type: new FormControl(null)
     });
   }
 
   onSubmit() {
-    // this.getFormValidationErrors();
+    // we should add logic to avoid double submits
+    // also check if the form is valid before we make the server request
+
+    // reset the login error message
     this.loginErrorMessage = '';
     const data = {
       email: this.signInForm.value.email,
@@ -50,31 +57,29 @@ export class SignInComponent implements OnInit {
         // set the local storage variables
         localStorage.setItem('token', res.token);
         localStorage.setItem('userId', res.userId);
+
         this.notifierService.notify( 'success', 'Successfully signed in!' );
+
+        // we call this subject so we can close the sign in dialog
         this.authService.signInComplete.next();
+
+        // we navigate to the right section of the app by differentiating between trainers and clients
         if (data.type === 'trainer') {
           this.router.navigateByUrl(`/trainer/${res.userId}/feed`);
         } else if (data.type === 'client') {
+          // we look whether this person has already chosen a trainer
           if (res.trainerChosen) {
-            this.router.navigateByUrl(`/client/${res.userId}`);
+            // if he has, we navigate to his feed page
+            this.router.navigateByUrl(`/client/${res.userId}/feed`);
           } else {
+            // if he hasn't then navigate to the page where he can find his own PT
             this.router.navigateByUrl(`/client/${res.userId}/pickTrainer`);
           }
         }
       }, (err) => {
+        // the error message we will display in the mat-error when there were server issues
+        // we need to further differentiate between the different types of errors.
         this.loginErrorMessage = 'Email / password combination was invalid';
       });
   }
-
-  getFormValidationErrors() {
-    Object.keys(this.signInForm.controls).forEach(key => {
-      const controlErrors: ValidationErrors = this.signInForm.get(key).errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-        });
-      }
-    });
-  }
-
 }

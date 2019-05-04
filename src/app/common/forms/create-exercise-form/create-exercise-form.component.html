@@ -2,21 +2,36 @@
   <h3 class="title">Create Exercise:</h3>
 
   <form [formGroup]="createExerciseForm" (ngSubmit)="createExercise()" class="form">
-<div class="form-group">
-    <input type="text" class="form-control" placeholder="name" formControlName="name">
-  </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="name" formControlName="name">
+    </div>
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Targeted Muscles" formControlName="targetMuscles">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="videoLink" formControlName="videoLink">
+      <input type="text" class="form-control" placeholder="Youtube Link" formControlName="videoLink">
+      <ng-container *ngIf="f.get('videoLink').touched">
+        <mat-error *ngIf="f.get('videoLink').hasError('matchYoutubeUrl')">This is not a valid Youtube link</mat-error>
+      </ng-container>
     </div>
     <div class="form-group">
-    <textarea rows="10" type="text" class="form-control" placeholder="Instructions" formControlName="name"></textarea>
-  </div>
+      <textarea rows="10" type="text" class="form-control" placeholder="Instructions" formControlName="instructions"></textarea>
+    </div>
+    <ul class="bullet-list">
+      <li class="bullet-list-item" *ngFor="let bullet of bulletPoints">{{ bullet }}</li>
+    </ul>
+    <div class="bullet-container">
+      <input
+        #bulletInput
+        [ngModelOptions]="{standalone: true}"
+        placeholder="Bullet point"
+        [(ngModel)]="bullet" type="text"
+        class="form-control">
+      <button (click)="addBulletPoint()" class="btn btn-warning mb-2 add-btn"><fa-icon [icon]="['fas', 'plus']"></fa-icon></button>
+    </div>
     <div class="form-group">
       <div class="custom-file">
-        <input type="file" class="custom-file-input" id="customFile">
+        <input (change)="onFileChange($event)" type="file" class="custom-file-input" id="customFile" multiple>
         <label class="custom-file-label" for="customFile">Choose file</label>
       </div>
     </div>
