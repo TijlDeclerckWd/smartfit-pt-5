@@ -18,6 +18,11 @@ import {ClientFeedComponent} from './trainee/client-feed/client-feed.component';
 import {ClientScheduleComponent} from './trainee/client-schedule/client-schedule.component';
 import {ClientStatsComponent} from './trainee/client-stats/client-stats.component';
 import {ClientWorkoutComponent} from './trainee/client-workout/client-workout.component';
+import {CompletedWorkoutsComponent} from './trainee/client-stats/completed-workouts/completed-workouts.component';
+import {OneRMStatsComponent} from './trainee/client-stats/one-rm-stats/one-rm-stats.component';
+import {ExerciseVolumeStatsComponent} from './trainee/client-stats/exercise-volume-stats/exercise-volume-stats.component';
+import {WeightStatsComponent} from './trainee/client-stats/weight-stats/weight-stats.component';
+import {MuscleGroupStatsComponent} from './trainee/client-stats/muscle-group-stats/muscle-group-stats.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -26,11 +31,12 @@ const APP_ROUTES: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'trainer/:userId',
+    path: 'trainer/:trainerId',
     component: TrainerHomeComponent,
     children: [
       { path: 'feed', component: TrainerFeedComponent },
-      { path: 'clients', component: TrainerClientsComponent }
+      { path: 'clients', component: TrainerClientsComponent },
+      { path: 'profile', component: TrainerProfileComponent }
       ]
   },
   {
@@ -53,6 +59,11 @@ const APP_ROUTES: Routes = [
       { path: 'feed', component: ClientFeedComponent },
       { path: 'schedule', component: ClientScheduleComponent },
       { path: 'statistics', component: ClientStatsComponent },
+      { path: 'statistics/completed-workouts', component: CompletedWorkoutsComponent },
+      { path: 'statistics/volume', component: ExerciseVolumeStatsComponent },
+      { path: 'statistics/weight', component: WeightStatsComponent },
+      { path: 'statistics/muscle-groups', component: MuscleGroupStatsComponent },
+      { path: 'statistics/RM', component: OneRMStatsComponent },
       { path: 'workout/:workoutId', component: ClientWorkoutComponent }
     ]
   },

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {WorkoutService} from '../../services/workout.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
+import {NotifierService} from 'angular-notifier';
+import {StatsService} from '../../services/stats.service';
 
 @Component({
   selector: 'client-workout',
@@ -10,32 +12,44 @@ import {NgxUiLoaderService} from 'ngx-ui-loader';
 })
 export class ClientWorkoutComponent implements OnInit {
 
-  workoutStarted = false;
-
   // make front end model for this.
   workout;
   workoutId;
 
   exerciseCount = 0;
   exercise;
+  exerciseData = [];
+
+  workoutComplete = false;
+
+  clientId;
 
   constructor(private workoutService: WorkoutService,
               private route: ActivatedRoute,
               private router: Router,
-              private ngxService: NgxUiLoaderService) { }
+              private ngxService: NgxUiLoaderService,
+              private notifierService: NotifierService,
+              private statsService: StatsService) { }
 
   ngOnInit() {
     this.ngxService.start();
+    this.clientId = this.route.parent.snapshot.params.userId;
     this.workoutId = this.route.snapshot.params.workoutId;
     this.getWorkout();
   }
 
   changeExercise() {
+    this.ngxService.start();
     this.exercise = this.workout.exercises[this.exerciseCount - 1];
+    this.exerciseData = this.workout.exerciseData[this.exerciseCount - 1];
+
+    setTimeout(() => {
+      this.ngxService.stop();
+    }, 500);
   }
 
   exerciseCompleted(data) {
-    this.saveExerciseData(data);
+    this.saveExerciseData(data, this.exercise._id);
 
     const nextExercise = this.exerciseCount + 1;
     this.router.navigate([], {
@@ -53,17 +67,21 @@ export class ClientWorkoutComponent implements OnInit {
     this.workoutService.getWorkout(this.workoutId)
       .subscribe(res => {
         this.workout = res['workout'];
-        console.log('WORKOUT', this.workout);
+console.log('this.workout', this.workout);
+        this.ngxService.stop();
         this.subscribeToQueryParams();
       });
   }
 
-  saveExerciseData(data) {
-    // const data = {
-    //   workoutId: this.workoutId,
-    //   exerciseId: data.exerciseId,
-    //   reps: data.reps
-    // };
+  saveExerciseData(data, exerciseId) {
+  // save the data on the backend after each exercise
+  // this will prevent chaos when the page would be reloaded
+    this.statsService.saveExerciseData(this.workoutId, this.exerciseCount, exerciseId, data)
+      .subscribe((res) => {
+        console.log('res data', res);
+      }, (err) => {
+        this.notifierService.notify('error', 'Something went wrong when we tried to save the exercise data');
+      });
   }
 
   startWorkout() {
@@ -86,7 +104,12 @@ export class ClientWorkoutComponent implements OnInit {
       if (this.exerciseCount === 100) {
       //  the workout is complete
       //  show complete workout screen with all the data
-        console.log('the workout is complete');
+        this.workoutComplete = true;
+        this.workoutService.completedWorkout(this.workoutId)
+          .subscribe((res) => {
+            console.log('res complete', res);
+          });
+      //  upload all the data and make calculations on the backend
       } else if (this.exerciseCount > 0) {
         this.changeExercise();
       }

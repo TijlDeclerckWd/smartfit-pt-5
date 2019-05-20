@@ -2,6 +2,10 @@
   <div (click)="navigateNewWorkout()" class="feed__new-btn"><fa-icon class="icon" [icon]="['fas', 'plus']"></fa-icon></div>
   <div class="feed__updates-container">
     <h2 class="feed__title">Client updates:</h2>
+    <ng-container *ngFor="let update of clientUpdates | slice:updatesStart:updatesEnd">
+        <workout-list-item [workout]="update.workout" [update]="update" [isClient]="false" ></workout-list-item>
+    </ng-container>
+    <h6 (click)="loadMoreUpdates()" *ngIf="anyUpdatesLeft()" class="load-more">Older Updates...</h6>
   </div>
   <div class="feed__scheduled-container">
     <h2 class="feed__title">Scheduled:</h2>

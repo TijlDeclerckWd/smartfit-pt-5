@@ -16,7 +16,11 @@ export class ClientNavComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
   }
 
-  navigate(section) {
+  closeNav() {
+
+  }
+
+  navigate(section, toggleEl) {
     const link = `/client/${this.userId}`;
 
     if (section === 'main') {
@@ -24,7 +28,7 @@ export class ClientNavComponent implements OnInit {
     } else {
       this.router.navigateByUrl(`${link}/${section}`);
     }
+
+    toggleEl.click();
   }
-
-
 }

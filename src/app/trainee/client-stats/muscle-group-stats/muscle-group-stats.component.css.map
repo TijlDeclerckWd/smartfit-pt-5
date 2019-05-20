@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAc;EACZ,KAAK,EAAE,qBAAqB;EAE5B,oCAAuB;IACrB,OAAO,EAAE,IAAI;IACb,eAAe,EAAE,YAAY;IAC7B,gBAAgB,EAAE,sBAAsB;IACxC,KAAK,EAAE,oBAAoB;IAC3B,WAAW,EAAE,MAAM;IACnB,OAAO,EAAE,IAAI;IAEb,0CAAM;MACJ,SAAS,EAAE,IAAI",
+"sources": ["muscle-group-stats.component.scss"],
+"names": [],
+"file": "muscle-group-stats.component.css"
+}

@@ -1,0 +1,12 @@
+.chart-container .btn-container {
+  display: flex;
+  justify-content: space-between; }
+  .chart-container .btn-container .btn {
+    width: 33.3%;
+    padding: .5rem;
+    border-radius: 0; }
+.chart-container .chart {
+  background-color: #eee;
+  min-height: 30vh; }
+
+/*# sourceMappingURL=one-rm-stats.component.css.map */

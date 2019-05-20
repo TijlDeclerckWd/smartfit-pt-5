@@ -4,7 +4,6 @@
     <span class="navigation__icon">&nbsp;</span>
   </label>
   <div class="navigation__background">&nbsp;</div>
-
   <nav class="navigation__nav">
     <ul class="navigation__list">
       <li class="navigation__item">
@@ -19,6 +18,11 @@
         <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">Messages</a>
         <i class="material-icons navigation__mat-icon navigation__mat-icon--message">message</i>
       </li>
+      <li class="navigation__item">
+        <a (click)="changeCheckboxStatus()" routerLink="profile" class="navigation__link">Profile</a>
+        <i class="material-icons navigation__mat-icon navigation__mat-icon--profile">person_pin</i>
+      </li>
+
     </ul>
   </nav>
 </div>

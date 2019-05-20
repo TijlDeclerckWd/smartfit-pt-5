@@ -13,6 +13,10 @@ export class WorkoutService {
     return this.http.post(`${this.BASE_API_URL}/workout/createNewWorkout`, data);
   }
 
+  completedWorkout(workoutId) {
+    return this.http.get(`${this.BASE_API_URL}/workout/completedWorkout/${workoutId}`);
+  }
+
   getWorkout(workoutId) {
     return this.http.get(`${this.BASE_API_URL}/workout/getWorkout/${workoutId}`);
   }

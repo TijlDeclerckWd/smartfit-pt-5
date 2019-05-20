@@ -9,22 +9,18 @@ import {Router} from '@angular/router';
 export class WorkoutListItemComponent implements OnInit {
 
   @Input('workout') workout;
-  @Input('isUpdate') isUpdate = true;
+  @Input('update') update;
+  @Input('isClient') isClient = false;
 
   collapsedExercises = true;
-
-  workoutIsSelected = false;
 
   clientId;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log('this update', this.update);
     this.clientId = localStorage.getItem('userId');
-  }
-
-  toggleSelection() {
-    this.workoutIsSelected = !this.workoutIsSelected;
   }
 
   toggleCollapse(e) {
@@ -39,5 +35,4 @@ export class WorkoutListItemComponent implements OnInit {
   startWorkout(workoutId) {
     this.router.navigateByUrl(`/client/${this.clientId}/workout/${workoutId}`);
   }
-
 }

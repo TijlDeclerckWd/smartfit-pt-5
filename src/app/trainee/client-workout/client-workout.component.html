@@ -1,13 +1,26 @@
 <div class="workout">
-  <div *ngIf="!exercise && !!workout" class="workout__main-screen">
-    <h2 class="workout__title">{{workout.name}}</h2>
-    <p class="workout__instructions">{{ workout.instruction }}</p>
-    <button (click)="startWorkout()" class="workout__btn">Start Workout!</button>
-  </div>
-  <client-exercise
-    *ngIf="exercise"
-    [exercise]="exercise"
-    [exerciseData]="workout.exerciseData[exerciseCount-1]"
-    (exerciseCompleted)="exerciseCompleted($event)"
-  ></client-exercise>
+  <ng-container *ngIf="!workoutComplete; else completeWorkout">
+
+    <!-- this is the start screen of the workout-->
+    <div *ngIf="!exercise && !!workout" class="workout__main-screen">
+      <h2 class="workout__title">{{workout.name}}</h2>
+      <p class="workout__instructions">{{ workout.instruction }}</p>
+      <button (click)="startWorkout()" class="workout__btn">Start Workout!</button>
+    </div>
+
+    <!-- when we clicked start we will actually display the exercices -->
+    <client-exercise
+      *ngIf="exercise"
+      [exercise]="exercise"
+      [exerciseData]="workout.exerciseData[exerciseCount-1]"
+      (exerciseCompleted)="exerciseCompleted($event)"
+    ></client-exercise>
+  </ng-container>
+
+  <!-- this is the screen we'll see when the workout is complete-->
+  <ng-template #completeWorkout>
+    <h2 class="workout__title workout__title--complete">Workout complete!</h2>
+    <p class="workout__instructions workout__instructions--complete">Some Instructions Some InstructionsSome InstructionsSome InstructionsSome Instructions</p>
+    <button [routerLink]="['/client', clientId, 'feed']" class="workout__btn">Go back to home page</button>
+  </ng-template>
 </div>

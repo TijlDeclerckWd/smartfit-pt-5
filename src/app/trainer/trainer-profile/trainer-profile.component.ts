@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TrainerService} from '../../services/trainer.service';
+import {AuthService} from '../../services/auth.service';
+import { environment } from '../../../environments/environment';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'trainer-profile',
@@ -15,15 +18,26 @@ export class TrainerProfileComponent implements OnInit {
 
   profile = null;
 
+  isOwnProfile = false;
 
-  constructor(private route: ActivatedRoute, private trainerService: TrainerService) { }
+  trainerId;
+
+  profilePic = [];
+
+  BASE_BE_URL = environment.BASE_BE_URL;
+
+  constructor(
+    private route: ActivatedRoute,
+    private trainerService: TrainerService,
+    private authService: AuthService,
+    private notifierService: NotifierService
+  ) { }
 
   ngOnInit() {
-  // here we load the user profile
-  // perhaps we should change this to snapshot since we don't expect to respond to change
-    this.route.params.subscribe((params) => {
-      this.getProfile(params.trainerId);
-    });
+
+    this.trainerId = this.route.snapshot.params.trainerId ? this.route.snapshot.params.trainerId : this.route.parent.snapshot.params.trainerId;
+    this.getProfileStatus();
+    this.getProfile(this.trainerId);
   }
 
   changeMenu(menu) {
@@ -35,5 +49,33 @@ export class TrainerProfileComponent implements OnInit {
       .subscribe((res: any) => {
       this.profile = res.trainer;
     });
+  }
+
+  getProfileStatus() {
+    this.authService.getId()
+      .subscribe((res) => {
+        this.isOwnProfile = res['userId'] == this.trainerId;
+      });
+  }
+
+  openImgMenu() {
+
+  }
+
+  uploadProfilePicture(e) {
+
+    this.profilePic = e.target.files;
+
+  //  create formdata
+    if (this.profilePic) {
+      const formdata = new FormData();
+      formdata.append('profilePic', this.profilePic[0], this.profilePic[0]['name']);
+
+      this.trainerService.uploadProfilePic(formdata)
+        .subscribe((res) => {
+          this.profile = res['updatedTrainer'];
+          this.notifierService.notify('success', 'You successfully uploaded the profile picture');
+        });
+    }
   }
 }

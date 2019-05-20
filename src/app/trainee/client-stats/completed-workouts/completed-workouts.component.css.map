@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,0CAAO;EACL,MAAM,EAAE,KAAK;EACb,KAAK,EAAE,IAAI;EAEX,gBAAgB,EAAE,IAAI",
+"sources": ["completed-workouts.component.scss"],
+"names": [],
+"file": "completed-workouts.component.css"
+}

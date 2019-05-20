@@ -1,4 +1,8 @@
 .workout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 95vh;
   &__main-screen {
     min-height: 95vh;
     background-color: var(--tertiary-color);
@@ -17,12 +21,22 @@
     letter-spacing: 2px;
     width: 80%;
     margin: 0 auto 2rem auto;
+    color: var(--secondary-color);
+
+    &--complete {
+      color: var(--tertiary-color);
+    }
   }
 
   &__instructions {
     width: 80%;
     margin: 0 auto 3rem auto;
     text-align: center;
+    color: var(--secondary-color);
+
+    &--complete {
+      color: var(--tertiary-color);
+    }
   }
 
   &__btn {

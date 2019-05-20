@@ -1,0 +1,12 @@
+<div class="muscle-group">
+  <div class="week-picker-container">
+    <fa-icon (click)="previousWeek()" class="icon icon--left" [icon]="['fas', 'angle-left']"></fa-icon>
+    <h3 class="week">{{ beginWeek.format('ll') }} - {{ endWeek.format('ll') }}</h3>
+    <fa-icon (click)="nextWeek()" class="icon icon--right" [icon]="['fas', 'angle-right']"></fa-icon>
+  </div>
+  <div class="chart-container">
+    <canvas #chart class="chart">
+
+    </canvas>
+  </div>
+</div>

@@ -7,7 +7,7 @@
         <h3>{{ getDay(workout.date) }}</h3>
         <h5>{{ getMonth(workout.date) }}</h5>
       </div>
-      <workout-list-item class="workout-item" [workout]="workout"></workout-list-item>
+      <workout-list-item class="workout-item" [workout]="workout" [isClient]="true"></workout-list-item>
     </div>
   </ng-container>
 

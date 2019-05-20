@@ -57,10 +57,21 @@
             </li>
           </ul>
         </div>
-        <div class="input-container">
-          <input placeholder="" id="exercises" type="text" class="form-control exercise-input">
+        <div class="input-container" ngbDropdown #myDrop="ngbDropdown">
+          <input
+            ngbDropdownAnchor
+            autocomplete="off"
+            (keyup)="getExerciseSearchResults()"
+            placeholder="enter name exercise"
+            id="exercises"
+            type="text"
+            [(ngModel)]="exerciseName"
+            [ngModelOptions]="{ standalone: true }"
+            class="form-control exercise-input">
+          <div ngbDropdownMenu >
+            <exercise-list-item (click)="addToSelectedExercises(exercise)" *ngFor="let exercise of exerciseSearchResults" [exercise]="exercise"></exercise-list-item>
+          </div>
           <fa-icon (click)="openExerciseDialog()" class="exercise-icon" [icon]="['fas', 'plus']"></fa-icon>
-          <fa-icon class="exercise-icon" [icon]="['fas', 'upload']"></fa-icon>
         </div>
       </div>
       <div class="form-group">

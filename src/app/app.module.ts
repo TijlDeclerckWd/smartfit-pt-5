@@ -36,6 +36,7 @@ import { TrainerClientNavComponent } from './trainer/trainer-clients/trainer-cli
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
+  faAngleLeft, faAngleRight,
   faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
   faPalette, faPaperPlane, faPlay, faPlus, faSearch, faTimes, faUpload, faUser
 } from '@fortawesome/free-solid-svg-icons';
@@ -84,6 +85,14 @@ import { ClientWorkoutComponent } from './trainee/client-workout/client-workout.
 import { ClientExerciseComponent } from './trainee/client-exercise/client-exercise.component';
 import { IncrementItemComponent } from './common/forms/increment-item/increment-item.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER} from 'ngx-ui-loader';
+import { WorkoutUpdateComponent } from './common/updates/workout-update/workout-update.component';
+import {StatsService} from './services/stats.service';
+import {ChartsModule} from 'ng2-charts';
+import { CompletedWorkoutsComponent } from './trainee/client-stats/completed-workouts/completed-workouts.component';
+import { OneRMStatsComponent } from './trainee/client-stats/one-rm-stats/one-rm-stats.component';
+import { ExerciseVolumeStatsComponent } from './trainee/client-stats/exercise-volume-stats/exercise-volume-stats.component';
+import { WeightStatsComponent } from './trainee/client-stats/weight-stats/weight-stats.component';
+import { MuscleGroupStatsComponent } from './trainee/client-stats/muscle-group-stats/muscle-group-stats.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.foldingCube,
@@ -139,8 +148,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ClientFeedComponent,
     ClientWorkoutComponent,
     ClientExerciseComponent,
-    IncrementItemComponent
-
+    IncrementItemComponent,
+    WorkoutUpdateComponent,
+    CompletedWorkoutsComponent,
+    OneRMStatsComponent,
+    ExerciseVolumeStatsComponent,
+    WeightStatsComponent,
+    MuscleGroupStatsComponent
   ],
   imports: [
     BrowserModule,
@@ -170,6 +184,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NotifierModule,
     NgbModule,
     MomentModule,
+    ChartsModule,
     MatCheckboxModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
   ],
@@ -184,7 +199,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SnotifyService,
     TrainerService,
 ExerciseService,
-    WorkoutService
+    WorkoutService,
+    StatsService
   ],
   bootstrap: [AppComponent],
   entryComponents: [SignInComponent, DialogContentComponent, CreateExerciseFormComponent]
@@ -195,6 +211,6 @@ export class AppModule {
     library.add(faCoffee, faPalette, faHeadphones,
       faHome, faFile, faEnvelope, faChartLine, faClock,
       faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
-      faCheck, faTimes, faPlus, faUpload, faPlay);
+      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight);
   }
 }

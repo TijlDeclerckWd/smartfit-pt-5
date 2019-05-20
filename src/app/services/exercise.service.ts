@@ -17,4 +17,12 @@ export class ExerciseService {
   createNewExercise(formData) {
     return this.http.post(`${this.BASE_API_URL}/exercise/createNewExercise`, formData);
   }
+
+  getClientExercises() {
+    return this.http.get(`${this.BASE_API_URL}/exercise/getClientExercises`);
+  }
+
+  getExerciseSearchResults(exerciseName) {
+    return this.http.get(`${this.BASE_API_URL}/exercise/getExerciseSearchResults/${exerciseName}`);
+  }
 }

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,gBAAiB;EACf,gBAAgB,EAAE,IAAI;EAEtB,uBAAO;IACL,UAAU,EAAE,IAAI",
+"sources": ["exercise-volume-stats.component.scss"],
+"names": [],
+"file": "exercise-volume-stats.component.css"
+}

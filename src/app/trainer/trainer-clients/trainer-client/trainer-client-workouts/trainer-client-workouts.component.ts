@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {CreateExerciseFormComponent} from '../../../../common/forms/create-exercise-form/create-exercise-form.component';
 import {ExerciseService} from '../../../../services/exercise.service';
 import {WorkoutService} from '../../../../services/workout.service';
 import {ActivatedRoute} from '@angular/router';
+import {NotifierService} from 'angular-notifier';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 
   selectedExercises = [];
   exerciseData = [];
+  exerciseName = '';
+  exerciseSearchResults = [];
 
   workoutSearch = '';
 
@@ -26,6 +29,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 
   clientId;
   exerciseDialogRef;
+
+  @ViewChild('myDrop') myDrop;
 
   get f() {
     return this.newWorkoutForm;
@@ -35,7 +40,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
     public dialog: MatDialog,
     private exerciseService: ExerciseService,
     private workoutService: WorkoutService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private notifierService: NotifierService) { }
 
 
   ngOnInit() {
@@ -47,7 +53,6 @@ export class TrainerClientWorkoutsComponent implements OnInit {
      this.exerciseData.push({ sets: 0, weight: 0 });
      this.exerciseDialogRef.close();
    });
-
    this.loadRecentWorkouts();
   }
 
@@ -57,10 +62,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 
   addNewWorkout() {
     const pickedAllData = this.pickedAllData();
-    console.log('valid', this.newWorkoutForm.valid);
-    console.log('selected', this.selectedExercises.length > 0);
-    console.log('pickedAllData', pickedAllData);
-    if (this.newWorkoutForm.valid && this.selectedExercises.length > 0 && pickedAllData) {
+
+      if (this.newWorkoutForm.valid && this.selectedExercises.length > 0 && pickedAllData) {
 //   add this workout to the database and make it show it up on the client his feed
       const exercises = this.selectedExercises.map((item: any) => item._id);
       const values = this.newWorkoutForm.value;
@@ -77,9 +80,14 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 
       this.workoutService.createNewWorkout(data)
         .subscribe((res) => {
-          console.log('Res', res);
+          this.notifierService.notify('success', 'You successfully created a new workout')
         });
     }
+  }
+
+  addToSelectedExercises(exercise) {
+    this.selectedExercises.push(exercise);
+    this.exerciseData.push({ sets: 0, weight: 0 });
   }
 
   changeExerciseData(data, index, type) {
@@ -98,6 +106,22 @@ export class TrainerClientWorkoutsComponent implements OnInit {
     });
   }
 
+  getExerciseSearchResults() {
+    if (this.exerciseName) {
+      this.exerciseService.getExerciseSearchResults(this.exerciseName)
+        .subscribe((res) => {
+          this.exerciseSearchResults = res['exercises'];
+
+          if (this.exerciseSearchResults) {
+            this.myDrop.open();
+          }
+        }) ;
+    } else {
+      this.exerciseSearchResults = [];
+      this.myDrop.close();
+    }
+  }
+
   loadRecentWorkouts() {
     this.workoutService.loadRecentWorkouts(this.clientId)
       .subscribe((res) => {
@@ -108,7 +132,6 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   pickedAllData() {
     // here we make sure that we picked the sets and the weight for every exercise
     return this.exerciseData.every((exercise) => {
-      console.log('exercise', exercise);
       return exercise.sets > 0 && exercise.weight > 0;
     });
   }

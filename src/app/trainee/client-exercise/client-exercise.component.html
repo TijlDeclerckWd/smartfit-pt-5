@@ -20,7 +20,7 @@
     <!-- for every set there should be an input-->
     <div *ngFor="let input of inputs; let i = index" class="set-container">
       <p class="number">Set {{ i + 1 }}</p>
-      <input type="text" class="form-control rep-input rep-input--{{i}}">
+      <input #repInputs type="text" class="form-control rep-input rep-input--{{i}}">
     </div>
   </div>
   <!-- we should make this dynamic so that text is different for the last exercise-->

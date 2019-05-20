@@ -13,6 +13,10 @@ export class TrainerClientFeedComponent implements OnInit {
   clientId: string;
 
   scheduledWorkouts = [];
+  clientUpdates = [];
+
+  updatesStart = 0;
+  updatesEnd = 3;
 
   constructor(
     private router: Router,
@@ -24,6 +28,11 @@ export class TrainerClientFeedComponent implements OnInit {
     this.clientId = this.route.snapshot.parent.params.clientId;
 
     this.loadClientSchedule();
+    this.loadClientUpdates();
+  }
+
+  anyUpdatesLeft() {
+    return this.clientUpdates.length > this.updatesEnd;
   }
 
   loadClientSchedule() {
@@ -33,8 +42,19 @@ export class TrainerClientFeedComponent implements OnInit {
       });
   }
 
+  loadClientUpdates() {
+    this.trainerService.loadClientUpdates(this.clientId)
+      .subscribe((res) => {
+        console.log('RES', res);
+        this.clientUpdates = res['updates'];
+      });
+  }
+
+  loadMoreUpdates() {
+    this.updatesEnd = this.updatesEnd + 3;
+  }
+
   navigateNewWorkout() {
     this.router.navigateByUrl(`/trainer/${this.trainerId}/clients/${this.clientId}/workouts`);
   }
-
 }

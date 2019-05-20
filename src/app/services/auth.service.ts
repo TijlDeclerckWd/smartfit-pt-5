@@ -3,10 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Subject} from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   BASE_API_URL = environment.BASE_API_URL;
@@ -14,6 +14,10 @@ export class AuthService {
   signInComplete = new Subject();
 
   constructor(private http: HttpClient) { }
+
+  getId() {
+    return this.http.get(`${this.BASE_API_URL}/auth/getId`);
+  }
 
   getToken() {
     return localStorage.getItem('token');

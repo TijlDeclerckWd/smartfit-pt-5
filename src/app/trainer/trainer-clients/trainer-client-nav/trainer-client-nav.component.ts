@@ -11,6 +11,8 @@ export class TrainerClientNavComponent implements OnInit {
   userId;
   clientId;
 
+
+
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -18,7 +20,7 @@ export class TrainerClientNavComponent implements OnInit {
     this.route.params.subscribe((params) => this.clientId = params.clientId);
   }
 
-  navigate(section) {
+  navigate(section, toggleEl) {
     const link = `/trainer/${this.userId}/clients/${this.clientId}`;
 
     if (section === 'main') {
@@ -26,6 +28,8 @@ export class TrainerClientNavComponent implements OnInit {
     } else {
       this.router.navigateByUrl(`${link}/${section}`);
     }
+
+    toggleEl.click();
   }
 
 

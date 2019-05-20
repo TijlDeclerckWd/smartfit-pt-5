@@ -1,0 +1,16 @@
+.muscle-group {
+  color: var(--tertiary-color);
+
+  .week-picker-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    align-items: center;
+    padding: 2rem;
+
+    .icon {
+      font-size: 2rem;
+    }
+  }
+}

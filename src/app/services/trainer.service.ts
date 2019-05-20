@@ -27,4 +27,12 @@ export class TrainerService {
   loadClientSchedule(clientId) {
     return this.http.get(`${this.BASE_API_URL}/trainer/loadClientSchedule/${clientId}`);
   }
+
+  loadClientUpdates(clientId) {
+    return this.http.get(`${this.BASE_API_URL}/trainer/loadClientUpdates/${clientId}`);
+  }
+
+  uploadProfilePic(formdata) {
+    return this.http.post(`${this.BASE_API_URL}/trainer/uploadProfilePic`, formdata);
+  }
 }

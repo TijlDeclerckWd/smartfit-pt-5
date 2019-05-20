@@ -1,54 +1,57 @@
-.image {
-  background-color: var(--secondary-color);
-  min-height: 30vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-
-
-  & > * {
-    color: var(--primary-color);
-  }
-  &__img {
-    height: 10rem;
-    width: 10rem;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-  }
-
-  &__name {
-    font-size: 2rem;
-    margin-bottom: .5rem;
-  }
-
-  &__profession {
-    font-size: 1.2rem;
-    color: var(--primary-color-light) !important;
-  }
-}
-
-.navigation {
-  display: flex;
+.trainer-profile {
+  min-height: 100vh;
   background-color: var(--tertiary-color);
-  min-height: 5vh;
-  align-items: center;
-  box-shadow: 0 .5rem 1rem rgba(#000, .2);
-  margin-bottom: 3rem;
+  .image {
+    background-color: var(--secondary-color);
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 
-  &__item {
-    width: 33%;
-    text-align: center;
-    padding: 1rem;
-    font-weight: 600;
-    font-size: 1.2rem;
-    border-bottom: 3px solid transparent;
-    align-self: flex-end;
+    & > * {
+      color: var(--primary-color);
+    }
+    &__img {
+      height: 10rem;
+      width: 10rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    &__name {
+      font-size: 2rem;
+      margin-bottom: .5rem;
+    }
+
+    &__profession {
+      font-size: 1.2rem;
+      color: var(--primary-color-light) !important;
+    }
   }
-}
 
-.selected-menu {
-  border-bottom: 3px solid var(--primary-color);
+  .navigation {
+    display: flex;
+    background-color: var(--tertiary-color);
+    min-height: 5vh;
+    align-items: center;
+    box-shadow: 0 .5rem 1rem rgba(#000, .2);
+    margin-bottom: 3rem;
 
+    &__item {
+      width: 33%;
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-bottom: 3px solid transparent;
+      align-self: flex-end;
+    }
+  }
+
+  .selected-menu {
+    border-bottom: 3px solid var(--primary-color);
+
+  }
 }

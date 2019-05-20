@@ -25,6 +25,13 @@
   }
 
   &__updates-container {
-    height: 50vh;
+    min-height: 50vh;
+
+    .load-more {
+      text-align: center;
+      margin: 1rem 0;
+      text-transform: uppercase;
+      text-decoration: underline;
+    }
   }
 }

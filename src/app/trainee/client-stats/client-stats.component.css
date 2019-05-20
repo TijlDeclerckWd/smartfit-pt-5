@@ -1,3 +1,43 @@
-
+.stats-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-auto-rows: min-content;
+  grid-gap: 1rem;
+  align-content: center;
+  padding: 1rem; }
+  .stats-container .stats-button {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, min-content);
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+    padding: .5rem;
+    border-radius: 5px; }
+    .stats-container .stats-button--amount {
+      color: blue; }
+    .stats-container .stats-button--RM {
+      color: orangered; }
+    .stats-container .stats-button--volume {
+      color: red; }
+    .stats-container .stats-button--weight {
+      color: green; }
+    .stats-container .stats-button--photos {
+      color: purple; }
+    .stats-container .stats-button--group {
+      color: brown; }
+    .stats-container .stats-button .title {
+      grid-column: 1 / -1;
+      text-align: right; }
+    .stats-container .stats-button .icon {
+      justify-self: start;
+      font-size: 1.8rem;
+      border: 2px solid;
+      padding: .2rem;
+      border-radius: 50%; }
+    .stats-container .stats-button .value {
+      justify-self: end;
+      margin: 0;
+      align-self: center; }
 
 /*# sourceMappingURL=client-stats.component.css.map */

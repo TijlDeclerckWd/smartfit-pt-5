@@ -1,0 +1,21 @@
+<div class="one-rm">
+  <select (change)="changeSelectedExercise($event)" class="custom-select">
+    <option selected>Select An Exercise</option>
+    <option *ngFor="let exercise of exercises" [value]="exercise._id">{{exercise.name}}</option>
+  </select>
+  <div class="chart-container">
+    <div class="btn-container">
+      <button (click)="changeChartView('day')" class="btn btn-warning btn-lg">Day</button>
+      <button (click)="changeChartView('week')" class="btn btn-warning btn-lg">Week</button>
+      <button (click)="changeChartView('month')" class="btn btn-warning btn-lg">Month</button>
+    </div>
+    <canvas
+      #chart
+      class="chart"
+    ></canvas>
+  </div>
+  <div class="data-container">
+
+  </div>
+</div>
+
