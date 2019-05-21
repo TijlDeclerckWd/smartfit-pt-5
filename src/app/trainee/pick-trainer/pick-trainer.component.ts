@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ClientService} from '../../services/client.service';
+import {TrainerService} from '../../services/trainer.service';
 
 @Component({
   selector: 'pick-trainer',
@@ -13,10 +14,18 @@ export class PickTrainerComponent implements OnInit {
 
   trainers = [];
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private trainerService: TrainerService) { }
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
+    this.getTrainers()
+  }
+
+  getTrainers() {
+    this.trainerService.getRecentlyRegisteredTrainers()
+      .subscribe((res) => {
+        this.trainers = res['trainers'];
+      });
   }
 
   searchTrainer(e) {

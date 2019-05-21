@@ -20,6 +20,10 @@ export class TrainerService {
     return this.http.get(`${this.BASE_API_URL}/trainer/getAllUpdates`);
   }
 
+  getRecentlyRegisteredTrainers() {
+    return this.http.get(`${this.BASE_API_URL}/trainer/getRecentlyRegisteredTrainers`);
+  }
+
   handleRequestResponse(data) {
     return this.http.put(`${this.BASE_API_URL}/trainer/handleRequestResponse`, data);
   }

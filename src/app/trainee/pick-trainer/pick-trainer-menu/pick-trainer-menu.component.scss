@@ -6,7 +6,7 @@
   margin-top: 4%;
   &__option {
     color: var(--primary-color);
-    width: 33%;
+    width: 50%;
     text-align: center;
     font-size: 1rem;
     cursor: pointer;
@@ -14,7 +14,7 @@
     @include respond(tab-port) {
       margin-left: 5%;
       margin-right: 5%;
-      width: 25%;
+      width: 30%;
       font-size: 1.5rem;
       padding: 1rem;
     }
