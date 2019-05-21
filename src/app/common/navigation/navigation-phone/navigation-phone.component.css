@@ -163,10 +163,13 @@
     background-color: green;
     color: var(--color-white); }
   .navigation__mat-icon--message {
-    background-color: blue;
+    background-color: red;
     color: var(--color-white); }
   .navigation__mat-icon--profile {
-    background-color: red;
+    background-color: blue;
+    color: var(--color-white); }
+  .navigation__mat-icon--log {
+    background-color: orange;
     color: var(--color-white); }
 
 /*# sourceMappingURL=navigation-phone.component.css.map */

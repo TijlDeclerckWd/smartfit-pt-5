@@ -10,5 +10,10 @@
     margin-right: 2rem;
     height: 5rem;
     width: 5rem; }
+  .clients .no-clients-container {
+    display: flex;
+    width: 100%; }
+    .clients .no-clients-container .no-clients-btn {
+      margin-left: auto; }
 
 /*# sourceMappingURL=trainer-feed-clients.component.css.map */

@@ -7,22 +7,36 @@
   <nav class="navigation__nav">
     <ul class="navigation__list">
       <li class="navigation__item">
-        <a (click)="changeCheckboxStatus()" routerLink="clients" class="navigation__link">Clients</a>
+        <a (click)="changeCheckboxStatus()" routerLink="clients" class="navigation__link">
+          <span style="margin-right: 1rem">Log Out</span>
         <i class="material-icons navigation__mat-icon navigation__mat-icon--group">group</i>
+        </a>
+      </li>
       <!--<i class="fa fa-user-circle-o"></i>-->
       <li class="navigation__item">
-      <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">Calendar</a>
+      <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">
+        <span style="margin-right: 1rem">Calendar</span>
       <i class="material-icons navigation__mat-icon navigation__mat-icon--calendar">date_range</i>
+      </a>
     </li>
       <li class="navigation__item">
-        <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">Messages</a>
+        <a (click)="changeCheckboxStatus()" routerLink="" class="navigation__link">
+          <span style="margin-right: 1rem">Messages</span>
         <i class="material-icons navigation__mat-icon navigation__mat-icon--message">message</i>
+        </a>
       </li>
       <li class="navigation__item">
-        <a (click)="changeCheckboxStatus()" routerLink="profile" class="navigation__link">Profile</a>
+        <a (click)="changeCheckboxStatus()" routerLink="profile" class="navigation__link">
+          <span style="margin-right: 1rem">Profile</span>
         <i class="material-icons navigation__mat-icon navigation__mat-icon--profile">person_pin</i>
+        </a>
       </li>
-
+      <li class="navigation__item">
+        <a (click)="changeCheckboxStatus(); logout()" routerLink="/" class="navigation__link">
+          <span style="margin-right: 1rem">Log Out</span>
+        <i class="material-icons navigation__mat-icon navigation__mat-icon--log">exit_to_app</i>
+        </a>
+      </li>
     </ul>
   </nav>
 </div>

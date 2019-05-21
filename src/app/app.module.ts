@@ -38,7 +38,7 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faAngleLeft, faAngleRight,
   faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
-  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faTimes, faUpload, faUser
+  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faSignOutAlt, faTimes, faUpload, faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NotifierModule} from 'angular-notifier';
@@ -211,6 +211,6 @@ export class AppModule {
     library.add(faCoffee, faPalette, faHeadphones,
       faHome, faFile, faEnvelope, faChartLine, faClock,
       faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
-      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight);
+      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt);
   }
 }

@@ -18,4 +18,7 @@ export class NavigationPhoneComponent implements OnInit {
     this.checkboxChecked = !this.checkboxChecked;
   }
 
+  logout() {
+    localStorage.clear();
+  }
 }

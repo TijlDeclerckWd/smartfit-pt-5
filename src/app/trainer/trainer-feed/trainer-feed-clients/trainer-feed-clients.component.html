@@ -1,8 +1,16 @@
 <div class="clients">
-  <img
-    *ngFor="let client of clients"
-    src="/assets/profile-pictures/{{client.profile_pic}}"
-    alt="woman" class="clients__img"
-    (click)="visitClient(client._id)"
-  >
+  <ng-container *ngIf="clients.length > 0; else noClients">
+    <img
+      *ngFor="let client of clients"
+      src="/assets/profile-pictures/{{client.profile_pic}}"
+      alt="woman" class="clients__img"
+      (click)="visitClient(client._id)"
+    >
+  </ng-container>
+  <ng-template #noClients>
+    <div class="no-clients-container">
+      <h3 class="no-clients-text">You haven't connected to any clients yet</h3>
+      <button class="no-clients-btn btn btn-warning">Send invite</button>
+    </div>
+  </ng-template>
 </div>
