@@ -16,8 +16,8 @@ export class ClientNavComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
   }
 
-  closeNav() {
-
+  logout() {
+    localStorage.clear();
   }
 
   navigate(section, toggleEl) {
