@@ -22,7 +22,6 @@ export class TrainerFeedComponent implements OnInit {
       .subscribe((res: any) => {
         this.updates = res.trainer.updates;
         this.clients = res.trainer.clients;
-        console.log('clients', this.clients);
       });
   }
 
