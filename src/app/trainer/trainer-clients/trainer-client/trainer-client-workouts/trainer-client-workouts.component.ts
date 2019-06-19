@@ -6,7 +6,7 @@ import {ExerciseService} from '../../../../services/exercise.service';
 import {WorkoutService} from '../../../../services/workout.service';
 import {ActivatedRoute} from '@angular/router';
 import {NotifierService} from 'angular-notifier';
-
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'trainer-client-workouts',
@@ -23,7 +23,11 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   exerciseName = '';
   exerciseSearchResults = [];
 
+  modalReference;
+
   workoutSearch = '';
+
+  selectedWorkout;
 
   recentWorkouts: any = [];
 
@@ -31,6 +35,7 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   exerciseDialogRef;
 
   @ViewChild('myDrop') myDrop;
+  @ViewChild('content') content;
 
   get f() {
     return this.newWorkoutForm;
@@ -41,7 +46,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
     private exerciseService: ExerciseService,
     private workoutService: WorkoutService,
     private route: ActivatedRoute,
-    private notifierService: NotifierService) { }
+    private notifierService: NotifierService,
+    private modalService: NgbModal) { }
 
 
   ngOnInit() {
@@ -80,7 +86,7 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 
       this.workoutService.createNewWorkout(data)
         .subscribe((res) => {
-          this.notifierService.notify('success', 'You successfully created a new workout')
+          this.notifierService.notify('success', 'You successfully created a new workout');
         });
     }
   }
@@ -94,7 +100,6 @@ export class TrainerClientWorkoutsComponent implements OnInit {
     // index defines which exercise we'll change
     // type defines whether we update the sets or weight
     this.exerciseData[index][type] = data.count;
-    console.log('exercisedata', this.exerciseData[index][type]);
   }
 
   createWorkoutForm() {
@@ -104,6 +109,11 @@ export class TrainerClientWorkoutsComponent implements OnInit {
       'date': new FormControl(null, [Validators.required]),
       'instructions': new FormControl( null)
     });
+  }
+
+  displayWorkout(workout) {
+    this.selectedWorkout = workout;
+    this.modalReference = this.modalService.open(this.content);
   }
 
   getExerciseSearchResults() {
@@ -129,6 +139,12 @@ export class TrainerClientWorkoutsComponent implements OnInit {
       });
   }
 
+  openExerciseDialog(): void {
+    this.exerciseDialogRef = this.dialog.open(CreateExerciseFormComponent, {
+      width: '250px'
+    });
+  }
+
   pickedAllData() {
     // here we make sure that we picked the sets and the weight for every exercise
     return this.exerciseData.every((exercise) => {
@@ -136,13 +152,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
     });
   }
 
-
-  openExerciseDialog(): void {
-    this.exerciseDialogRef = this.dialog.open(CreateExerciseFormComponent, {
-      width: '250px'
-    });
-}
-
-
+  removeChosenExercise(deletedExercise) {
+    this.selectedExercises = this.selectedExercises.filter((chosenExercise) => deletedExercise._id !== chosenExercise._id);
+  }
 
 }

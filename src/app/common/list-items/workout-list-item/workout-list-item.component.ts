@@ -19,8 +19,8 @@ export class WorkoutListItemComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log('this update', this.update);
     this.clientId = localStorage.getItem('userId');
+    console.log('do we have a workout', this.workout);
   }
 
   toggleCollapse(e) {

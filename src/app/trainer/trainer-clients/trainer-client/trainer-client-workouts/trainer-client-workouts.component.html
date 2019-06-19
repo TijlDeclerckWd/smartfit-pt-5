@@ -54,6 +54,7 @@
                 (countChanged)="changeExerciseData($event, i, 'weight')"
                 class="exercise__increment exercise__increment--weight">
               </increment-item>
+              <fa-icon (click)="removeChosenExercise(exercise)" class="exercise__icon" [icon]="['fas', 'trash']"></fa-icon>
             </li>
           </ul>
         </div>
@@ -78,7 +79,6 @@
       <textarea rows="10" type="text" formControlName="instructions" class="form-control" aria-describedby="instructions" placeholder="Instructions">
       </textarea>
     </div>
-
     </form>
   </div>
 
@@ -88,8 +88,10 @@
   <div *ngIf="displayedSection === 'list'" class="list-section">
     <input [(ngModel)]="workoutSearch" placeholder="Search Workouts" type="text" class="workouts__search form-control my-3">
     <div *ngIf="recentWorkouts && !workoutSearch" class="recent-workouts-container">
-      <h3 class="workouts__recent-workouts">Recent Workouts</h3>
-      <workout-list-item *ngFor="let recentWorkout of recentWorkouts" [workout]="recentWorkout" ></workout-list-item>
+      <h3 class="workouts__recent-workouts">Recent Workouts <span style="font-size: .8rem; margin-left: .8rem;">( Click to edit and confirm )</span></h3>
+      <div (click)="displayWorkout(recentWorkout)" *ngFor="let recentWorkout of recentWorkouts" class="workout-container">
+        <workout-list-item [workout]="recentWorkout"></workout-list-item>
+      </div>
     </div>
 
     <h3 *ngIf="!!workoutSearch" class="workouts__search-results">Search Results</h3>
@@ -101,3 +103,31 @@
     <button (click)="addNewWorkout()" class="submit-btn btn p-3">Submit your Workout</button>
   </div>
 </div>
+
+
+<!-- THIS IS THE WORKOUT MODAL -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

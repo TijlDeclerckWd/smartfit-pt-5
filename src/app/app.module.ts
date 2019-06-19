@@ -38,7 +38,7 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faAngleLeft, faAngleRight,
   faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
-  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faSignOutAlt, faTimes, faUpload, faUser
+  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faSignOutAlt, faTimes, faTrash, faUpload, faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NotifierModule} from 'angular-notifier';
@@ -93,6 +93,7 @@ import { OneRMStatsComponent } from './trainee/client-stats/one-rm-stats/one-rm-
 import { ExerciseVolumeStatsComponent } from './trainee/client-stats/exercise-volume-stats/exercise-volume-stats.component';
 import { WeightStatsComponent } from './trainee/client-stats/weight-stats/weight-stats.component';
 import { MuscleGroupStatsComponent } from './trainee/client-stats/muscle-group-stats/muscle-group-stats.component';
+import { WorkoutListItemSecComponent } from './common/list-items/workout-list-item-sec/workout-list-item-sec.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.foldingCube,
@@ -154,7 +155,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     OneRMStatsComponent,
     ExerciseVolumeStatsComponent,
     WeightStatsComponent,
-    MuscleGroupStatsComponent
+    MuscleGroupStatsComponent,
+    WorkoutListItemSecComponent
   ],
   imports: [
     BrowserModule,
@@ -211,6 +213,6 @@ export class AppModule {
     library.add(faCoffee, faPalette, faHeadphones,
       faHome, faFile, faEnvelope, faChartLine, faClock,
       faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
-      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt);
+      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt, faTrash);
   }
 }

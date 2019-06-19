@@ -13,11 +13,18 @@
     color: var(--secondary-color);
     display: flex; }
     .workouts .form .form-group .chosen-exercise-container .exercises-list .exercise__name {
-      width: 50%; }
+      width: 50%;
+      display: flex;
+      align-items: center; }
     .workouts .form .form-group .chosen-exercise-container .exercises-list .exercise__increment {
       width: 25%; }
       .workouts .form .form-group .chosen-exercise-container .exercises-list .exercise__increment--weight {
         margin-left: 2%; }
+    .workouts .form .form-group .chosen-exercise-container .exercises-list .exercise__icon {
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;
+      font-size: 1.2rem; }
   .workouts .form .input-container {
     display: flex;
     justify-content: space-between; }

@@ -12,10 +12,11 @@
       <h5 class="card-title">{{ workout.name }}</h5>
       <p class="card-text">{{ workout.description }}</p>
     </div>
+    <br>
     <hr *ngIf="!update" class="dividing-line">
     <div *ngIf="!update" class="see-exercises-container">
       <button
-        (click)="toggleCollapse($event)"
+        (click)="toggleCollapse($event);"
         [attr.aria-expanded]="!collapsedExercises"
         aria-controls="collapse"
         class="btn btn-warning see-exercises">
