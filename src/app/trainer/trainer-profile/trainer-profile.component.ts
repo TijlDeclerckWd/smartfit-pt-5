@@ -24,7 +24,7 @@ export class TrainerProfileComponent implements OnInit {
 
   profilePic = [];
 
-  BASE_BE_URL = environment.BASE_BE_URL;
+  BASE_URL = environment.BASE_URL;
 
   constructor(
     private route: ActivatedRoute,

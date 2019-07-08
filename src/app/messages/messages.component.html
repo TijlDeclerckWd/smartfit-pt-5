@@ -1,6 +1,7 @@
 <div class="messages">
   <input [checked]="checkboxChecked" type="checkbox" class="messages__checkbox">
   <label (click)="changeCheckboxStatus()" class="messages__button">
+    <span *ngIf="totalNewMessages > 0 && !checkboxChecked" class="badge badge-pill badge-danger">{{ totalNewMessages }}</span>
     <fa-icon class="messages__icon" [icon]="['fas', 'envelope']"></fa-icon>
   </label>
   <div class="messages__background">&nbsp;</div>
@@ -9,8 +10,51 @@
     <messages-menu
       (switchConversation)="switchConversation($event)"
       (switchToMainPage)="switchToMainPage($event)"
+      [conversations]="conversations"
     ></messages-menu>
-    <messages-conversations *ngIf="displayMainPage"></messages-conversations>
-    <messages-conversation></messages-conversation>
+    <messages-conversations
+      (switchConversation)="switchConversation($event)"
+      [conversations]="conversations"
+      [userId]="userId"
+      *ngIf="displayMainPage">
+    </messages-conversations>
+    <messages-conversation
+      *ngIf="displayConversation"
+    [conversation]="displayedConversation"
+      [socket]="socket"
+    [userId]="userId">
+    </messages-conversation>
   </nav>
 </div>
+
+<!-- NEW MESSAGE MODAL -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Send User new message</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="msgForm" class="form">
+      <div ngbDropdown #drop="ngbDropdown" class="form-group">
+        <label for="to">To:</label>
+        <input autocomplete="off" #userInput ngbDropdownAnchor id="to" (keyup)="searchUsers(userInput.value, drop)" class="form-control" formControlName="to">
+        <div ngbDropdownMenu aria-labelledby="to" class="ngb-dropdown-menu">
+          <ul class="search-list">
+            <li (click)="selectTrainer(result)" class="search-list-item" *ngFor="let result of mySearchResults">
+              <img class="search-img" src="{{BASE_URL}}/uploads/{{result.profile_pic}}" alt="profile pic">
+              <span class="search-name">{{result.fullName}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <label for="message">Message:</label>
+      <textarea name="message" class="form-control msg-textarea" formControlName="message"  id="message" rows="10"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" (click)="submitForm()" class="btn btn-outline-dark">Send</button>
+  </div>
+</ng-template>

@@ -1,7 +1,19 @@
 <!-- in the desktop mode this list should be next to an open chat-->
+<div class="no-conv" *ngIf="conversations.length === 0; else conversationsList">
+  <h2 class="no-conv__title">You haven't had any conversations so far<br>Start one now!</h2>
+  <fa-icon (click)="openMsgModal()" class="no-conv__icon" [icon]="['fas', 'plus']"></fa-icon>
+</div>
+<ng-template #conversationsList>
+  <div class="conversation-list">
+    <messages-list-item
+      (click)="openConversation(conversation); updateSeenMessages(conversation)"
+      [userId]="userId"
+      [conversation]="conversation"
+      [lastMessage]="conversation.messages[conversation.messages.length -1]['message']"
+      *ngFor="let conversation of conversations">
+    </messages-list-item>
+    <fa-icon (click)="openMsgModal()" class="no-conv__icon" [icon]="['fas', 'plus']"></fa-icon>
+  </div>
+</ng-template>
 
-<messages-list-item></messages-list-item>
-<messages-list-item></messages-list-item>
-<messages-list-item></messages-list-item>
-<messages-list-item></messages-list-item>
 

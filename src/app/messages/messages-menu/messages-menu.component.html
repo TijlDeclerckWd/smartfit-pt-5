@@ -1,17 +1,12 @@
 <div class="menu">
-  <div class="btn menu__btn menu__btn--main">
+  <div (click)="switchToMainPage.emit()" class="btn menu__btn menu__btn--main">
     <fa-icon class="main-icon" [icon]="['fas', 'list']"></fa-icon>
   </div>
-  <div class="btn menu__btn menu__btn--user">
-    <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" alt="user" class="menu__img">
+  <div (click)="switchConversation.emit(conversation)" *ngFor="let conversation of conversations" class="btn menu__btn menu__btn--user">
+    <img src="{{BASE_URL}}/uploads/{{getOtherPersonsPicture(conversation)}}" alt="user" class="menu__img">
   </div>
   <div class="btn menu__btn menu__btn--user">
-    <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" alt="user" class="menu__img">
+    <fa-icon class="icon" [icon]="['fas', 'plus']"></fa-icon>
   </div>
-  <div class="btn menu__btn menu__btn--user">
-    <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" alt="user" class="menu__img">
-  </div>
-  <div class="btn menu__btn menu__btn--user">
-    <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" alt="user" class="menu__img">
-  </div>
+
 </div>

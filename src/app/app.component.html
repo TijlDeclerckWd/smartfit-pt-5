@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 
-<messages></messages>
+<messages *ngIf="router != '/'"></messages>
 
 <notifier-container></notifier-container>
 <ngx-ui-loader

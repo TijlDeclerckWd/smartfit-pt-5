@@ -18,12 +18,13 @@ export class PickTrainerComponent implements OnInit {
 
   ngOnInit() {
     this.innerWidth = window.innerWidth;
-    this.getTrainers()
+    this.getTrainers();
   }
 
   getTrainers() {
     this.trainerService.getRecentlyRegisteredTrainers()
       .subscribe((res) => {
+        console.log('received trainers from backend', res);
         this.trainers = res['trainers'];
       });
   }

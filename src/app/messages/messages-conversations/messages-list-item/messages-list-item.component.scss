@@ -8,9 +8,18 @@
   color: #000 !important;
   margin: 2rem auto;
   padding: .5rem;
+  position: relative;
+
 
   &:hover {
     background-color: #ccc;
+  }
+
+  .badge {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    padding: .5rem;
   }
 
   .img-container {

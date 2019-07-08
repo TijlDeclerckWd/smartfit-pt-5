@@ -1,14 +1,25 @@
 .menu {
   padding: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 10vh;
 
   &__btn {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: var(--tertiary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      font-size: 2rem;
+    }
 
     &:not(:last-child) {
-      margin-right: .3rem;
+      margin-right: .5rem;
     }
 
     img {
@@ -16,24 +27,6 @@
       height: 5rem;
       border-radius: 50%;
       background-size: cover;
-    }
-
-    &--main {
-      width: 5rem;
-      height: 5rem;
-      border-radius: 50%;
-      background-color: var(--tertiary-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .main-icon {
-        font-size: 2rem;
-      }
-    }
-
-    &--user {
-
     }
   }
 }

@@ -1,0 +1,33 @@
+.no-conv {
+  color: var(--tertiary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+  &__title {
+    text-align: center;
+  }
+
+  &__icon {
+    font-size: 2rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+}
+
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  messages-list-item {
+    width: 100%;
+  }
+}

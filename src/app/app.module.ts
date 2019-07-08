@@ -94,6 +94,8 @@ import { ExerciseVolumeStatsComponent } from './trainee/client-stats/exercise-vo
 import { WeightStatsComponent } from './trainee/client-stats/weight-stats/weight-stats.component';
 import { MuscleGroupStatsComponent } from './trainee/client-stats/muscle-group-stats/muscle-group-stats.component';
 import { WorkoutListItemSecComponent } from './common/list-items/workout-list-item-sec/workout-list-item-sec.component';
+import {MessageService} from './services/message.service';
+import {Conversation} from './interfaces/conversation.interface';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.foldingCube,
@@ -198,6 +200,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, direction: 'ltr' }},
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    MessageService,
     SnotifyService,
     TrainerService,
 ExerciseService,

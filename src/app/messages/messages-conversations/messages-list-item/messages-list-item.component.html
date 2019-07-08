@@ -1,9 +1,10 @@
-<div class="list-item" routerLink="/profile/trainer/hdjfdjhfjdf">
+<div class="list-item">
+  <span *ngIf="thereAreNewMessages()" class="badge badge-pill badge-danger">{{ conversation.messages.length - conversation.seenMessages }}</span>
   <div class="img-container">
-    <img src="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" alt="Profile Picture">
+    <img src="{{BASE_URL}}/uploads/{{otherUser.profile_pic}}" alt="Profile Picture">
   </div>
   <div class="details-container">
-    <h3 class="name">Tijl Declerck</h3>
+    <h3 class="name">{{otherUser.fullName}}</h3>
     <p class="lastmessage">{{ lastMessage | slice:0:40 }}...</p>
   </div>
   <div class="time-container">
