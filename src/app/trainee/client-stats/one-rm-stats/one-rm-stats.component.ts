@@ -55,7 +55,7 @@ export class OneRMStatsComponent implements OnInit {
         responsive: true,
         title: {
           display: true,
-          text: "Display title"
+          text: "Bench Press 1RM"
         },
         scales: {
           xAxes: [{
@@ -71,7 +71,7 @@ export class OneRMStatsComponent implements OnInit {
           }],
           yAxes: [{
             ticks: {
-              beginAtZero: false
+              beginAtZero: true
             },
             scaleLabel: {
               display: true,
