@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'trainer-feed-clients',
@@ -10,6 +11,7 @@ export class TrainerFeedClientsComponent implements OnInit {
 
   @Input('clients') clients = [];
 
+  BASE_URL = environment.BASE_URL;
   constructor(private router: Router) { }
 
   ngOnInit() {

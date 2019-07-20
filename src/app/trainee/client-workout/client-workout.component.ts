@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WorkoutService} from '../../services/workout.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
 import {NotifierService} from 'angular-notifier';
 import {StatsService} from '../../services/stats.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'client-workout',
   templateUrl: './client-workout.component.html',
   styleUrls: ['./client-workout.component.scss']
 })
-export class ClientWorkoutComponent implements OnInit {
+export class ClientWorkoutComponent implements OnInit, OnDestroy {
 
   // make front end model for this.
   workout;
@@ -23,6 +25,8 @@ export class ClientWorkoutComponent implements OnInit {
   workoutComplete = false;
 
   clientId;
+
+  ngUnsubscribe = new Subject();
 
   constructor(private workoutService: WorkoutService,
               private route: ActivatedRoute,
@@ -65,6 +69,7 @@ export class ClientWorkoutComponent implements OnInit {
 
   getWorkout() {
     this.workoutService.getWorkout(this.workoutId)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         this.workout = res['workout'];
 console.log('this.workout', this.workout);
@@ -77,6 +82,7 @@ console.log('this.workout', this.workout);
   // save the data on the backend after each exercise
   // this will prevent chaos when the page would be reloaded
     this.statsService.saveExerciseData(this.workoutId, this.exerciseCount, exerciseId, data)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
         console.log('res data', res);
       }, (err) => {
@@ -106,6 +112,7 @@ console.log('this.workout', this.workout);
       //  show complete workout screen with all the data
         this.workoutComplete = true;
         this.workoutService.completedWorkout(this.workoutId)
+          .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((res) => {
             console.log('res complete', res);
           });
@@ -114,5 +121,10 @@ console.log('this.workout', this.workout);
         this.changeExercise();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

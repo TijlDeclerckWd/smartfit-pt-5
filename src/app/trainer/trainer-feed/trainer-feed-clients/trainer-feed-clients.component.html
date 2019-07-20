@@ -1,11 +1,13 @@
 <div class="clients">
   <ng-container *ngIf="clients.length > 0; else noClients">
-    <img
-      *ngFor="let client of clients"
-      src="/assets/profile-pictures/{{client.profile_pic}}"
-      alt="woman" class="clients__img"
-      (click)="visitClient(client._id)"
-    >
+    <div (click)="visitClient(client._id)" *ngFor="let client of clients" class="clients__container">
+      <img
+        src="{{BASE_URL}}/uploads/{{client.profile_pic}}"
+        alt="woman" class="clients__img"
+      >
+      <p class="clients__name">{{client.firstName}}</p>
+    </div>
+
   </ng-container>
   <ng-template #noClients>
     <div class="no-clients-container">

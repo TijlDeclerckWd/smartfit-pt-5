@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'workout-list-item',
@@ -11,6 +12,8 @@ export class WorkoutListItemComponent implements OnInit {
   @Input('workout') workout;
   @Input('update') update;
   @Input('isClient') isClient = false;
+
+  BASE_URL = environment.BASE_URL;
 
   collapsedExercises = true;
 

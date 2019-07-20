@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AuthService} from '../../../services/auth.service';
 import {NotifierService} from 'angular-notifier';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
 
   signInForm: FormGroup;
+  ngUnsubscribe = new Subject();
 
   // this message will display when there was an issue logging in at the server
   loginErrorMessage = '';
@@ -53,6 +56,7 @@ export class SignInComponent implements OnInit {
     };
 
     this.authService.signIn(data)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res: any) => {
         // set the local storage variables
         localStorage.setItem('token', res.token);
@@ -81,5 +85,10 @@ export class SignInComponent implements OnInit {
         // we need to further differentiate between the different types of errors.
         this.loginErrorMessage = 'Email / password combination was invalid';
       });
+  }
+
+  ngOnDestroy(): void {
+this.ngUnsubscribe.next();
+this.ngUnsubscribe.complete();
   }
 }

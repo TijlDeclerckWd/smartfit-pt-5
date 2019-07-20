@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TrainerService} from '../../../../services/trainer.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-trainer-client-feed',
   templateUrl: './trainer-client-feed.component.html',
   styleUrls: ['./trainer-client-feed.component.scss']
 })
-export class TrainerClientFeedComponent implements OnInit {
+export class TrainerClientFeedComponent implements OnInit, OnDestroy {
 
   trainerId: string;
   clientId: string;
@@ -17,6 +19,8 @@ export class TrainerClientFeedComponent implements OnInit {
 
   updatesStart = 0;
   updatesEnd = 3;
+
+  ngUnsubscribe = new Subject();
 
   constructor(
     private router: Router,
@@ -37,6 +41,7 @@ export class TrainerClientFeedComponent implements OnInit {
 
   loadClientSchedule() {
     this.trainerService.loadClientSchedule(this.clientId)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
         this.scheduledWorkouts = res['workouts'];
       });
@@ -44,6 +49,7 @@ export class TrainerClientFeedComponent implements OnInit {
 
   loadClientUpdates() {
     this.trainerService.loadClientUpdates(this.clientId)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
         console.log('RES', res);
         this.clientUpdates = res['updates'];
@@ -56,5 +62,10 @@ export class TrainerClientFeedComponent implements OnInit {
 
   navigateNewWorkout() {
     this.router.navigateByUrl(`/trainer/${this.trainerId}/clients/${this.clientId}/workouts`);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

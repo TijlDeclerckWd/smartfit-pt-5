@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {isEqualPassword} from '../../../common/validators/equal-passwords.validator';
 import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AuthService} from '../../../services/auth.service';
 import {NotifierService} from 'angular-notifier';
 import {countries} from '../../../common/countries';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'register-trainer',
   templateUrl: './register-trainer.component.html',
   styleUrls: ['./register-trainer.component.scss']
 })
-export class RegisterTrainerComponent implements OnInit {
+export class RegisterTrainerComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup;
   countries = countries;
@@ -19,6 +21,8 @@ export class RegisterTrainerComponent implements OnInit {
   get f() {
     return this.registerForm;
   }
+
+  ngUnsubscribe = new Subject();
 
   constructor(private authService: AuthService, notifierService: NotifierService) {
     this.notifier = notifierService;
@@ -75,6 +79,7 @@ export class RegisterTrainerComponent implements OnInit {
 
       // and send it to the server where it will create a new user
       this.authService.signUp(data)
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((res) => {
           this.notifier.notify( 'success', 'Successfully created an account!' );
           this.authService.registrationComplete.next();
@@ -93,6 +98,11 @@ export class RegisterTrainerComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete;
   }
 
 }

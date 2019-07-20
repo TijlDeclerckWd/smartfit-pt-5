@@ -1,17 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {isEqualPassword} from '../../../common/validators/equal-passwords.validator';
 import {countries} from '../../../common/countries';
 import {AuthService} from '../../../services/auth.service';
 import {SnotifyService} from 'ng-snotify';
 import {NotifierService} from 'angular-notifier';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'register-trainee',
   templateUrl: './register-trainee.component.html',
   styleUrls: ['./register-trainee.component.scss']
 })
-export class RegisterTraineeComponent implements OnInit {
+export class RegisterTraineeComponent implements OnInit, OnDestroy {
 
   registerForm: FormGroup;
   countries = countries;
@@ -20,6 +22,8 @@ export class RegisterTraineeComponent implements OnInit {
   get f() {
     return this.registerForm;
   }
+
+  ngUnsubscribe = new Subject();
 
   constructor(private authService: AuthService, notifierService: NotifierService) {
     this.notifier = notifierService;
@@ -76,6 +80,7 @@ export class RegisterTraineeComponent implements OnInit {
 
       // and send it to the server where it will create a new user
       this.authService.signUp(data)
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((res) => {
           this.notifier.notify( 'success', 'Successfully created an account!' );
           // to close the dialog
@@ -84,5 +89,10 @@ export class RegisterTraineeComponent implements OnInit {
     } else {
       this.notifier.notify( 'error', 'There is an invalid value in your form, please correct this before submitting!' );
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

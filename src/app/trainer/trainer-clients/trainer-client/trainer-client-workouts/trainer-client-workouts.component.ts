@@ -1,19 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {CreateExerciseFormComponent} from '../../../../common/forms/create-exercise-form/create-exercise-form.component';
 import {ExerciseService} from '../../../../services/exercise.service';
 import {WorkoutService} from '../../../../services/workout.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from 'angular-notifier';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+// import * as moment from 'moment';
 
 @Component({
   selector: 'trainer-client-workouts',
   templateUrl: './trainer-client-workouts.component.html',
   styleUrls: ['./trainer-client-workouts.component.scss']
 })
-export class TrainerClientWorkoutsComponent implements OnInit {
+export class TrainerClientWorkoutsComponent implements OnInit, OnDestroy {
 
   displayedSection = 'form';
   newWorkoutForm: FormGroup;
@@ -34,8 +37,11 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   clientId;
   exerciseDialogRef;
 
+  ngUnsubscribe = new Subject();
+
   @ViewChild('myDrop') myDrop;
   @ViewChild('content') content;
+  @ViewChild('exerciseInput') exerciseInput;
 
   get f() {
     return this.newWorkoutForm;
@@ -47,14 +53,18 @@ export class TrainerClientWorkoutsComponent implements OnInit {
     private workoutService: WorkoutService,
     private route: ActivatedRoute,
     private notifierService: NotifierService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private router: Router
+  ) { }
 
 
   ngOnInit() {
    this.createWorkoutForm();
    this.clientId = this.route.parent.snapshot.params.clientId;
 
-   this.exerciseService.NewExerciseAdded.subscribe((exercise) => {
+   this.exerciseService.NewExerciseAdded
+     .pipe(takeUntil(this.ngUnsubscribe))
+     .subscribe((exercise) => {
      this.selectedExercises.push(exercise);
      this.exerciseData.push({ sets: 0, weight: 0 });
      this.exerciseDialogRef.close();
@@ -73,11 +83,10 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 //   add this workout to the database and make it show it up on the client his feed
       const exercises = this.selectedExercises.map((item: any) => item._id);
       const values = this.newWorkoutForm.value;
-      const date = new Date(values.date.year, values.date.month, values.date.day);
+
       const data = {
         name: values.name,
-        type: values.type,
-        date,
+        date: values.date,
         instructions: values.instructions,
         exercises,
         exerciseData: this.exerciseData,
@@ -85,8 +94,10 @@ export class TrainerClientWorkoutsComponent implements OnInit {
       };
 
       this.workoutService.createNewWorkout(data)
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((res) => {
           this.notifierService.notify('success', 'You successfully created a new workout');
+          this.router.navigate(['../feed'], { relativeTo: this.route });
         });
     }
   }
@@ -94,6 +105,8 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   addToSelectedExercises(exercise) {
     this.selectedExercises.push(exercise);
     this.exerciseData.push({ sets: 0, weight: 0 });
+    this.exerciseName = '';
+    this.exerciseInput.nativeElement.focus();
   }
 
   changeExerciseData(data, index, type) {
@@ -105,7 +118,6 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   createWorkoutForm() {
     this.newWorkoutForm = new FormGroup({
       'name': new FormControl(null, [Validators.required]),
-      'type': new FormControl(null, [Validators.required]),
       'date': new FormControl(null, [Validators.required]),
       'instructions': new FormControl( null)
     });
@@ -119,8 +131,10 @@ export class TrainerClientWorkoutsComponent implements OnInit {
   getExerciseSearchResults() {
     if (this.exerciseName) {
       this.exerciseService.getExerciseSearchResults(this.exerciseName)
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((res) => {
           this.exerciseSearchResults = res['exercises'];
+          console.log('res', res);
 
           if (this.exerciseSearchResults) {
             this.myDrop.open();
@@ -154,6 +168,11 @@ export class TrainerClientWorkoutsComponent implements OnInit {
 
   removeChosenExercise(deletedExercise) {
     this.selectedExercises = this.selectedExercises.filter((chosenExercise) => deletedExercise._id !== chosenExercise._id);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

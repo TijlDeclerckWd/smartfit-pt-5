@@ -1,6 +1,6 @@
 .card {
   width: 100% !important;
-  margin: 1rem 0;
+  margin: 0;
 
   .card-body {
     display: flex;
@@ -14,6 +14,9 @@
     .card-data {
       flex: 1 0 0;
       padding: .5rem;
+
+      display: flex;
+      align-items: center;
     }
 
     .collapse {

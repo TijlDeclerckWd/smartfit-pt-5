@@ -1,6 +1,6 @@
 <div class="card">
   <div *ngIf="update" class="card-header">
-    <img src="/assets/profile-pictures/{{update.client.profile_pic}}" alt="woman">
+    <img src="{{BASE_URL}}/uploads/{{update.client.profile_pic}}" alt="woman">
     <div class="update-data">
       <h5 class="update-user">{{ update.client.fullName }}</h5>
       <h6 class="update-title">{{ update.text }}</h6>

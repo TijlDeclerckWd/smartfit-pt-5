@@ -27,7 +27,7 @@
         placeholder="Bullet point"
         [(ngModel)]="bullet" type="text"
         class="form-control">
-      <button (click)="addBulletPoint()" class="btn btn-warning mb-2 add-btn"><fa-icon [icon]="['fas', 'plus']"></fa-icon></button>
+      <button (click)="addBulletPoint($event)" class="btn btn-warning mb-2 add-btn"><fa-icon [icon]="['fas', 'plus']"></fa-icon></button>
     </div>
     <div class="form-group">
       <div class="custom-file">

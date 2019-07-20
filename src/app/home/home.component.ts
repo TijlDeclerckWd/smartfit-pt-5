@@ -1,9 +1,11 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {RegisterComponent} from '../auth/register/register.component';
 import {SignInComponent} from '../auth/signIn/sign-in/sign-in.component';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 
 @Component({
@@ -11,12 +13,14 @@ import {Router} from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   innerWidth;
 
   dialogRef;
   signInDialogRef;
+
+  ngUnsubscribe = new Subject();
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -31,8 +35,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.innerWidth = window.innerWidth;
 
-    this.authService.registrationComplete.subscribe(() => this.dialogRef.close());
-    this.authService.signInComplete.subscribe((type) => {
+    // handle when the registration is complete
+    this.authService.registrationComplete
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => this.dialogRef.close());
+
+    // handle when user successfully signs in
+    this.authService.signInComplete
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((type) => {
       this.signInDialogRef.close();
     });
   }
@@ -51,6 +62,7 @@ export class HomeComponent implements OnInit {
     } else {
     //  So when there is no token, they are not logged in and we want to display a dialog to make them log in
       this.signInDialogRef = this.dialog.open(SignInComponent, {
+        // dynamic width modal based on the window width
         width: this.innerWidth > 600 ? '50%' : '80%'
       });
     }
@@ -77,5 +89,10 @@ export class HomeComponent implements OnInit {
     this.dialogRef = this.dialog.open(RegisterComponent, {
       width: this.innerWidth > 600 ? '50%' : '80%'
     });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
