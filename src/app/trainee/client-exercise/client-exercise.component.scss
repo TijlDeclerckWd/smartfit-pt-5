@@ -19,6 +19,7 @@
   }
 
   &__instructions {
+    text-align: center;
     width: 80%;
     margin: 1rem auto;
   }
@@ -27,11 +28,15 @@
     margin: 1rem auto;
     width: 80%;
     display: grid;
-    grid-row-gap: .5rem;
+    grid-row-gap: 1rem;
     grid-column-gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
 
-    justify-items: start;
+    justify-items: center;
+
+    .bullet-point {
+      text-align: center;
+    }
   }
 
   .dividing-line {

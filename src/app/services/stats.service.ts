@@ -17,6 +17,10 @@ export class StatsService {
     return this.http.get(`${this.BASE_API_URL}/stats/getExerciseVolumeData/${exerciseId}`);
   }
 
+  getTotalWorkouts() {
+    return this.http.get(`${this.BASE_API_URL}/stats/getTotalWorkouts`);
+  }
+
   getWeightStats() {
     return this.http.get(`${this.BASE_API_URL}/stats/getWeightStats`);
   }

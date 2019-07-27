@@ -24,6 +24,7 @@ export class ClientScheduleComponent implements OnInit {
   loadClientSchedule() {
     this.workoutService.loadClientSchedule()
       .subscribe((res) => {
+        console.log('SCHEDULE', res);
         this.scheduledWorkouts = res['workouts'];
       });
   }

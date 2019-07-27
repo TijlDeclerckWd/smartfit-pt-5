@@ -1,14 +1,39 @@
 .completed-workout {
   .chart-container {
-.chart {
-  height: 20rem;
-  width: 100%;
+    .chart {
+      height: 20rem;
+      width: 100%;
 
-  background-color: #fff;
-}
+      background-color: #fff;
+    }
   }
 
-  data-container {
+  .data-container {
+    .workout-list {
+      .workout-list-item {
+        width: 90%;
+        margin: 1rem auto;
+        color: var(--tertiary-color);
+        background-color: var(--secondary-color);
+        display: flex;
+        padding: 1rem;
+        border: 1px solid var(--tertiary-color);
+        border-radius: 5px;
 
+        .workout-number {
+          font-size: 2rem;
+          margin-right: 2rem;
+        }
+
+        .workout-date {
+font-size: 2rem;
+        }
+
+        .workout-btn {
+          display: block;
+          margin-left: auto;
+        }
+      }
+    }
   }
 }

@@ -1,91 +1,141 @@
+//.card {
+//  width: 100% !important;
+//  color: var(--secondary-color);
+//  margin-bottom: 1rem;
+//
+//  .card-header {
+//    display: flex;
+//    align-items: center;
+//
+//    img {
+//      width: 3rem;
+//      height: 3rem;
+//      margin-right: 1rem;
+//    }
+//
+//    h3 {
+//
+//    };
+//  }
+//
+//  .card-body {
+//    display: flex;
+//    align-items: center;
+//    flex-wrap: wrap;
+//
+//    .card-img {
+//      width: 3rem;
+//      height: 3rem;
+//    }
+//
+//    .card-data {
+//      flex: 1 0 0;
+//      padding: .5rem;
+//    }
+//
+//    .dividing-line {
+//      height: 1px;
+//      border-color: #bbb;
+//      width: 100%;
+//      margin: .5rem auto;
+//    }
+//
+//    .see-exercises-container {
+//      width: 100%;
+//      text-align: center;
+//      .see-exercises {
+//        text-decoration: underline;
+//        margin-top: 1rem;
+//        min-width: 20%;
+//      }
+//    }
+//
+//    .collapse {
+//      width: 100% !important;
+//    }
+//
+//  }
+//
+//  // make this into a reusable component
+//  .card-footer {
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//.play-icon {
+//  font-size: 2rem;
+//  color: var(--primary-color);
+//  margin-left: 5%;
+//}
+//  }
+//}
+//
+//.golden-border {
+//  border: 3px solid var(--primary-color);
+//}
+//
+//.transparent-border {
+//  border: 3px solid transparent;
+//}
+//
+//mat-checkbox {
+//  color: var(--secondary-color);
+//  /deep/ .mat-checkbox-background {
+//    background-color: var(--primary-color);
+//  }
+//
+//  /deep/ &.mat-checkbox-focused{
+//    .mat-ink-ripple{
+//      background-color: var(--primary-color);
+//    }
+//  }
+//}
+
+
 .card {
-  width: 100% !important;
-  color: var(--secondary-color);
-  margin-bottom: 1rem;
+  color: white;
+  //background-image: linear-gradient(to bottom right, rgba(#000,.5), rgba(#000,.5)), url("/assets/images/gym-background-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  box-shadow:inset 0 0 0 2000px rgba(0, 0, 0,0.5);
 
   .card-header {
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 3rem;
-      height: 3rem;
-      margin-right: 1rem;
+    position: relative;
+    .card-title {
+      text-align: center;
     }
-
-    h3 {
-
-    };
+    .card-enlarge {
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+      font-size: 1.5rem;
+    }
   }
 
   .card-body {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 
-    .card-img {
-      width: 3rem;
-      height: 3rem;
-    }
-
-    .card-data {
-      flex: 1 0 0;
+    .exercises-column {
+      border-right: 1px solid var(#bbb);
       padding: .5rem;
-    }
-
-    .dividing-line {
-      height: 1px;
-      border-color: #bbb;
-      width: 100%;
-      margin: .5rem auto;
-    }
-
-    .see-exercises-container {
-      width: 100%;
       text-align: center;
-      .see-exercises {
-        text-decoration: underline;
-        margin-top: 1rem;
-        min-width: 20%;
-      }
     }
 
-    .collapse {
-      width: 100% !important;
+    .instructions-column {
+      padding: .5rem;
+      text-align: center;
     }
-
   }
 
-  // make this into a reusable component
   .card-footer {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
-.play-icon {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-left: 5%;
-}
-  }
-}
 
-.golden-border {
-  border: 3px solid var(--primary-color);
-}
-
-.transparent-border {
-  border: 3px solid transparent;
-}
-
-mat-checkbox {
-  color: var(--secondary-color);
-  /deep/ .mat-checkbox-background {
-    background-color: var(--primary-color);
-  }
-
-  /deep/ &.mat-checkbox-focused{
-    .mat-ink-ripple{
-      background-color: var(--primary-color);
+    .play-icon {
+      font-size: 1.7rem;
+      margin-top: 1rem;
     }
   }
 }

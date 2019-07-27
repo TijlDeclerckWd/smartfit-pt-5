@@ -1,7 +1,8 @@
 .schedule {
-  color: var(--tertiary-color);
+  color: var(--secondary-color-color);
   padding: 1rem;
-
+  min-height: 100vh;
+  background-color: var(--tertiary-color);
   &__title {
     margin-bottom: 2rem;
     text-align: center;

@@ -43,6 +43,7 @@ export class TrainerClientFeedComponent implements OnInit, OnDestroy {
     this.trainerService.loadClientSchedule(this.clientId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
+        console.log('RES', res);
         this.scheduledWorkouts = res['workouts'];
       });
   }
@@ -51,7 +52,6 @@ export class TrainerClientFeedComponent implements OnInit, OnDestroy {
     this.trainerService.loadClientUpdates(this.clientId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
-        console.log('RES', res);
         this.clientUpdates = res['updates'];
       });
   }

@@ -7,7 +7,7 @@ import {NotifierService} from 'angular-notifier';
   templateUrl: './client-exercise.component.html',
   styleUrls: ['./client-exercise.component.scss']
 })
-export class ClientExerciseComponent implements OnChanges {
+export class ClientExerciseComponent implements OnChanges, OnInit {
 
   @Input('exercise') exercise;
   @Input('exerciseData') exerciseData;
@@ -19,9 +19,15 @@ export class ClientExerciseComponent implements OnChanges {
 
   amountOfSets: number;
 
+  numbers = [];
+
   @ViewChildren('repInputs') repInputs;
 
   constructor(private sanitizer: DomSanitizer, private notifierService: NotifierService) { }
+
+  ngOnInit(): void {
+    this.setNumbers();
+  }
 
   ngOnChanges() {
     this.amountOfSets = this.exerciseData.sets;
@@ -30,20 +36,12 @@ export class ClientExerciseComponent implements OnChanges {
   }
 
   getDataFromInputs() {
-    console.log('repInput', this.repInputs);
-    this.data = this.repInputs._results.map((input) => {
-      return input.nativeElement.value;
-    });
+    this.data = this.repInputs._results.map((input) => input._value);
   }
 
   checkValidityInputs() {
     // check if every input value is a valid number
-
-    const result = this.repInputs._results.every((input) => {
-      return !!input.nativeElement.value.match(/^[0-9]+$/);
-    });
-
-    return result;
+    return this.repInputs._results.every((input) => typeof input._value === 'number');
   }
 
   completeExercise() {
@@ -55,6 +53,9 @@ export class ClientExerciseComponent implements OnChanges {
       this.getDataFromInputs();
       // ... and send it to the parent workout component
       this.exerciseCompleted.emit(this.data);
+      // Quick way to reset the values when switching to new exercise.
+      this.numbers = [];
+      this.setNumbers();
     } else {
       this.notifierService.notify('error', 'Please enter valid number values');
     }
@@ -62,6 +63,14 @@ export class ClientExerciseComponent implements OnChanges {
 
   safeUrl(link) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(link);
+  }
+
+  setNumbers() {
+    return new Promise(() => {
+      for (let i = 1; i < 31; i++) {
+        this.numbers.push(i);
+      }
+    });
   }
 
 }

@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
+import {backgroundImages} from '../../li-backgrounds';
 
 @Component({
   selector: 'workout-list-item',
@@ -19,20 +20,26 @@ export class WorkoutListItemComponent implements OnInit {
 
   clientId;
 
+  backgroundImgs = backgroundImages;
+  chosenImage: string;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
     this.clientId = localStorage.getItem('userId');
-    console.log('do we have a workout', this.workout);
+    this.chosenImage = this.backgroundImgs[Math.floor(Math.random() * this.backgroundImgs.length)];
+    console.log('choseImage', this.chosenImage);
+  }
+
+  determineBackground() {
+    const returnedLink = `linear-gradient(to bottom right, rgba(#000,.5), rgba(#000,.5)), url("/assets/images/${this.chosenImage}")`;
+    console.log('returnedLink', returnedLink);
+    return returnedLink;
   }
 
   toggleCollapse(e) {
     e.stopPropagation();
     this.collapsedExercises = !this.collapsedExercises;
-  }
-
-  toggleCheckbox(e) {
-    e.stopPropagation();
   }
 
   startWorkout(workoutId) {

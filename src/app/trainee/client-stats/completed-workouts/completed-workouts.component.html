@@ -1,14 +1,17 @@
 <div class="completed-workout">
   <div class="chart-container">
-    <canvas class="chart" baseChart
-            [datasets]="labelMFL"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [chartType]="lineChartType"
-            [colors]="lineChartColors"
+    <canvas
+      #chart
+      class="chart"
     ></canvas>
   </div>
   <div class="data-container">
-
+<ul class="workout-list">
+  <li class="workout-list-item" *ngFor="let workout of data.reverse()">
+    <span class="workout-number">{{workout.number}}</span>
+    <span class="workout-date">{{workout.date | momentPipe:'MMMM Do YYYY'}}</span>
+    <button class="btn workout-btn">See workout</button>
+  </li>
+</ul>
   </div>
 </div>

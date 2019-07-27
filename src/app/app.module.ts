@@ -38,7 +38,7 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {
   faAngleLeft, faAngleRight,
   faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
-  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faSignOutAlt, faTimes, faTrash, faUpload, faUser
+  faPalette, faPaperPlane, faPlay, faPlus, faSearch, faSearchPlus, faSignOutAlt, faTimes, faTrash, faUpload, faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 import {NotifierModule} from 'angular-notifier';
@@ -96,6 +96,9 @@ import { MuscleGroupStatsComponent } from './trainee/client-stats/muscle-group-s
 import { WorkoutListItemSecComponent } from './common/list-items/workout-list-item-sec/workout-list-item-sec.component';
 import {MessageService} from './services/message.service';
 import {Conversation} from './interfaces/conversation.interface';
+import {SafePipe} from './pipes/safe.pipe';
+import {MomentPipe} from './pipes/moment.pipe';
+
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsType: SPINNER.foldingCube,
@@ -158,7 +161,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ExerciseVolumeStatsComponent,
     WeightStatsComponent,
     MuscleGroupStatsComponent,
-    WorkoutListItemSecComponent
+    WorkoutListItemSecComponent,
+    SafePipe,
+    MomentPipe
   ],
   imports: [
     BrowserModule,
@@ -216,6 +221,6 @@ export class AppModule {
     library.add(faCoffee, faPalette, faHeadphones,
       faHome, faFile, faEnvelope, faChartLine, faClock,
       faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
-      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt, faTrash);
+      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt, faTrash, faSearchPlus);
   }
 }

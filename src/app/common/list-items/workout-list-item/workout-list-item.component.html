@@ -1,34 +1,34 @@
-<div class="card">
-  <div *ngIf="update" class="card-header">
-    <img src="{{BASE_URL}}/uploads/{{update.client.profile_pic}}" alt="woman">
-    <div class="update-data">
-      <h5 class="update-user">{{ update.client.fullName }}</h5>
-      <h6 class="update-title">{{ update.text }}</h6>
-    </div>
+
+
+
+
+
+<div
+  class="card"
+  [ngStyle]="{'background-image': (chosenImage) ? 'url(\'/assets/images/' + chosenImage + '\')' : ''}"
+>
+  <div class="card-header">
+    <h3 class="card-title">{{workout.name}}</h3>
+    <fa-icon class="card-enlarge" [icon]="['fas', 'search-plus']"></fa-icon>
   </div>
+
   <div class="card-body">
-    <img class="card-img" src="/assets/dumbbell.png" alt="woman">
-    <div class="card-data">
-      <h5 class="card-title">{{ workout.name }}</h5>
-      <p class="card-text">{{ workout.description }}</p>
+    <div class="exercises-column">
+      <h5>Exercises:</h5>
+      <div *ngFor="let exercise of workout.exercises; let i = index" class="exercise-item">
+        <span>{{exercise.name}}: </span>
+        <span>{{workout.exerciseData[i].sets}} sets with {{workout.exerciseData[i].weight}}KG</span>
+      </div>
+<!--      <exercise-list-item class="exercise-list-item" *ngFor="let exercise of workout.exercises" [exercise]="exercise"></exercise-list-item>-->
     </div>
-    <br>
-    <hr *ngIf="!update" class="dividing-line">
-    <div *ngIf="!update" class="see-exercises-container">
-      <button
-        (click)="toggleCollapse($event);"
-        [attr.aria-expanded]="!collapsedExercises"
-        aria-controls="collapse"
-        class="btn btn-warning see-exercises">
-        See Exercises
-      </button>
-    </div>
-    <div id="collapse" [ngbCollapse]="collapsedExercises">
-      <exercise-list-item class="exercise-list-item" *ngFor="let exercise of workout.exercises" [exercise]="exercise"></exercise-list-item>
+    <div class="instructions-column">
+      <h5>Instructions:</h5>
+      <p>{{workout.instructions}}</p>
     </div>
   </div>
-  <div *ngIf="isClient" class="card-footer">
-   <mat-checkbox (click)="toggleCheckbox($event)" color="warn">Workout Complete?</mat-checkbox>
-    <fa-icon (click)="startWorkout(workout._id)" class="play-icon" [icon]="['fas', 'play']"></fa-icon>
-  </div>
+
+    <div *ngIf="isClient" class="card-footer">
+      <span class="footer-text">Let's get started</span>
+      <fa-icon (click)="startWorkout(workout._id)" class="play-icon" [icon]="['fas', 'play']"></fa-icon>
+    </div>
 </div>

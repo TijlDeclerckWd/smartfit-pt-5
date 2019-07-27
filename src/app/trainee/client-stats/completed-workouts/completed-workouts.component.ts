@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Color} from 'ng2-charts';
+import {NgxUiLoaderService} from 'ngx-ui-loader';
+import * as Chart from 'chart.js';
+import {StatsService} from '../../../services/stats.service';
 
 @Component({
   selector: 'app-completed-workouts',
@@ -8,60 +11,101 @@ import {Color} from 'ng2-charts';
 })
 export class CompletedWorkoutsComponent implements OnInit {
 
-   public SystemName: string = "MF1";
-  firstCopy = false;
+  myChart;
+  @ViewChild('chart') chart;
 
-  // data
-  public lineChartData: Array<number> = [ 1,8,49,50,51];
+  // How we receive the data from backend
+  data = [];
+  // How we use the data in the chart
+  organizedData = [];
 
-  public labelMFL: Array<any> = [
-    { data: this.lineChartData,
-      label: this.SystemName
-    }
-  ];
 
-  // labels
-  public lineChartLabels: Array<any> =
-    ["2018-01-29 10:00:00", "2018-01-29 10:27:00", "2018-01-29 10:28:00", "2018-01-29 10:29:00", "2018-01-29 10:30:00" ];
+  constructor(private ngxService: NgxUiLoaderService, private statsService: StatsService) { }
 
-  constructor() { }
+  async ngOnInit() {
+    // overlay while we prepare the chart
+    this.ngxService.start();
+    // call server to see how many workouts this client has completed
+    await this.getTotalWorkouts();
+    // to display the x and Y axis of the chart appropriately
+    this.organizeData();
+    // Actual creation of the chart
+    this.createNewChart();
+    // Stop the overlay
+    this.ngxService.stop();
+  }
 
-  public lineChartOptions: any = {
-    responsive: true,
-    scales : {
-      yAxes: [{
-      }],
-      xAxes: [{
-        min: '2018-01-29 10:08:00', // how to?
-        //  max: '2018-01-29 10:48:00', // how to?
-        type: 'time',
-        time: {
-          unit: 'minute',
-          unitStepSize: 10,
-          displayFormats: {
-            'second': 'HH:mm:ss',
-            'minute': 'HH:mm:ss',
-            'hour': 'HH:mm',
-          },
+  createNewChart() {
+    const ctx = this.chart.nativeElement.getContext('2d');
+
+    this.myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Total workouts',
+          data: this.organizedData,
+          lineTension: 0,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 1,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: "Total workouts"
         },
-      }],
-    },
-  };
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              tooltipFormat: 'l',
+              unit: 'day'
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Date'
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Rep Max'
+            }
+          }]
+        }
+      }
+    });
+  }
 
-  public lineChartColors: Color[] = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
+  // Get the total amount of workouts from this particular client
+  getTotalWorkouts() {
+    return new Promise(resolve => {
+      this.statsService.getTotalWorkouts()
+        .subscribe((res: {data}) => {
+          console.log('result', res);
+          this.data = res.data.sort((a, b) => {
+            return a.date > b.date ? 1 : -1;
+          });
+          resolve();
+        });
+    });
+  }
 
-  public lineChartType = 'line';
-
-  ngOnInit() {
+  // prepare for the X and Y-axis
+  organizeData() {
+    this.organizedData = this.data.map((item, index) => {
+      return { x: item.date, y: index + 1 };
+    });
   }
 
 }

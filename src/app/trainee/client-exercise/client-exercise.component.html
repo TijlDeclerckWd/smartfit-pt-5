@@ -12,7 +12,7 @@
   <p class="exercise__instructions">{{ exercise.instructions }}</p>
   <hr class="dividing-line">
   <div class="exercise__bullet-points">
-    <div *ngFor="let bulletPoint of exercise.bulletPoints" class="bullet-point">- {{ bulletPoint }}</div>
+    <div *ngFor="let bulletPoint of exercise.bulletPoints" class="bullet-point">{{ bulletPoint }}</div>
   </div>
   <hr class="dividing-line">
   <div class="exercise__enter-data">
@@ -20,7 +20,15 @@
     <!-- for every set there should be an input-->
     <div *ngFor="let input of inputs; let i = index" class="set-container">
       <p class="number">Set {{ i + 1 }}</p>
-      <input #repInputs type="text" class="form-control rep-input rep-input--{{i}}">
+<!--      <input #repInputs type="text" class="form-control rep-input rep-input&#45;&#45;{{i}}">-->
+      <mat-form-field>
+        <mat-label>Reps</mat-label>
+        <mat-select #repInputs>
+          <mat-option *ngFor="let number of numbers" [value]="number">
+            {{number}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
   <!-- we should make this dynamic so that text is different for the last exercise-->

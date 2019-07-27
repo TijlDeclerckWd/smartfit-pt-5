@@ -15,6 +15,7 @@ export class TrainerFeedClientsComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    setTimeout(() => console.log('CLIETNS', this.clients), 3000);
   }
 
   visitClient(clientId) {
