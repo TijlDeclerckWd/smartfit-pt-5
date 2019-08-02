@@ -21,7 +21,7 @@
   </section>
   <section class="navigation">
     <div (click)="changeMenu('main')" [ngClass]="{'selected-menu': selectedMenu === 'main'}" class="navigation__item">Main</div>
-    <div (click)="changeMenu('details')" [ngClass]="{'selected-menu': selectedMenu === 'details'}" class="navigation__item">Trainer details</div>
+    <div (click)="changeMenu('details')" [ngClass]="{'snpm auditelected-menu': selectedMenu === 'details'}" class="navigation__item">Trainer details</div>
     <div (click)="changeMenu('connect')" [ngClass]="{'selected-menu': selectedMenu === 'connect'}" class="navigation__item">Connect</div>
   </section>
   <!-- we load different sections based on the section picked in the menu-->

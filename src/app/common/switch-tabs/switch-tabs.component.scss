@@ -1,0 +1,15 @@
+.switch {
+  display: flex;
+  background-color: var(--tertiary-color);
+  padding: .5rem;
+
+  .icon-container {
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+
+    .fa-icon {
+      font-size: 1.8rem;
+    }
+  }
+}

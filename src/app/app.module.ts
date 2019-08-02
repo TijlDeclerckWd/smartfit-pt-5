@@ -36,6 +36,7 @@ import { TrainerClientNavComponent } from './trainer/trainer-clients/trainer-cli
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
+  faAngleDoubleLeft, faAngleDoubleRight,
   faAngleLeft, faAngleRight,
   faChartLine, faCheck, faClock, faCoffee, faEnvelope, faFile, faHeadphones, faHome, faList, faMapMarkerAlt,
   faPalette, faPaperPlane, faPlay, faPlus, faSearch, faSearchPlus, faSignOutAlt, faTimes, faTrash, faUpload, faUser
@@ -98,6 +99,8 @@ import {MessageService} from './services/message.service';
 import {Conversation} from './interfaces/conversation.interface';
 import {SafePipe} from './pipes/safe.pipe';
 import {MomentPipe} from './pipes/moment.pipe';
+import { SwitchTabsComponent } from './common/switch-tabs/switch-tabs.component';
+
 
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -163,7 +166,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MuscleGroupStatsComponent,
     WorkoutListItemSecComponent,
     SafePipe,
-    MomentPipe
+    MomentPipe,
+    SwitchTabsComponent
   ],
   imports: [
     BrowserModule,
@@ -221,6 +225,7 @@ export class AppModule {
     library.add(faCoffee, faPalette, faHeadphones,
       faHome, faFile, faEnvelope, faChartLine, faClock,
       faUser, faSearch, faMapMarkerAlt, faList, faPaperPlane,
-      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt, faTrash, faSearchPlus);
+      faCheck, faTimes, faPlus, faUpload, faPlay, faAngleLeft, faAngleRight, faSignOutAlt, faTrash, faSearchPlus, faAngleLeft, faAngleRight
+    , faAngleDoubleLeft, faAngleDoubleRight);
   }
 }

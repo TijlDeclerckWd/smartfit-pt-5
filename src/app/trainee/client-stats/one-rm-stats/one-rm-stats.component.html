@@ -4,14 +4,14 @@
   </select>
   <div class="chart-container">
     <div class="btn-container">
-      <button (click)="changeChartView('day')" class="btn btn-warning btn-lg">Day</button>
-      <button (click)="changeChartView('week')" class="btn btn-warning btn-lg">Week</button>
-      <button (click)="changeChartView('month')" class="btn btn-warning btn-lg">Month</button>
+      <button (click)="switchToWeekView()" class="btn btn-warning btn-lg" [class.selected]="chartOptions.chosenDisplay === 'week'">Week</button>
+      <button (click)="switchToMonthView()" class="btn btn-warning btn-lg" [class.selected]="chartOptions.chosenDisplay === 'month'">Month</button>
     </div>
     <canvas
       #chart
       class="chart"
     ></canvas>
+    <switch-tabs (changeView)="changeView($event)"></switch-tabs>
   </div>
   <div class="data-container">
 

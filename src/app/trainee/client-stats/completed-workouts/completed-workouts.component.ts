@@ -1,15 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Color} from 'ng2-charts';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
 import * as Chart from 'chart.js';
 import {StatsService} from '../../../services/stats.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-completed-workouts',
   templateUrl: './completed-workouts.component.html',
   styleUrls: ['./completed-workouts.component.scss']
 })
-export class CompletedWorkoutsComponent implements OnInit {
+export class CompletedWorkoutsComponent implements OnInit, OnDestroy {
 
   myChart;
   @ViewChild('chart') chart;
@@ -18,6 +20,8 @@ export class CompletedWorkoutsComponent implements OnInit {
   data = [];
   // How we use the data in the chart
   organizedData = [];
+
+  ngUnsubscribe = new Subject();
 
 
   constructor(private ngxService: NgxUiLoaderService, private statsService: StatsService) { }
@@ -91,6 +95,7 @@ export class CompletedWorkoutsComponent implements OnInit {
   getTotalWorkouts() {
     return new Promise(resolve => {
       this.statsService.getTotalWorkouts()
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((res: {data}) => {
           console.log('result', res);
           this.data = res.data.sort((a, b) => {
@@ -106,6 +111,11 @@ export class CompletedWorkoutsComponent implements OnInit {
     this.organizedData = this.data.map((item, index) => {
       return { x: item.date, y: index + 1 };
     });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }
