@@ -5,4 +5,18 @@
       class="chart"
     ></canvas>
   </div>
+  <increment-item
+    [incrementSize]=".1"
+    [count]="count"
+    (countChanged)="changeNewWeightValue($event)">
+  </increment-item>
+  <button (click)="addNewWeight()" class="btn btn-block btn-warning my-2">Add new weight</button>
+
+  <ul class="weight-list">
+    <li *ngFor="let item of filteredWeight" class="weight-list-item">
+      <span class="date">{{item.date | date:'mediumDate'}}</span>
+      <span class="weight-value">{{item.weight | number: '1.0-1'}}</span>
+      <fa-icon (click)="deleteWeight(item)" class="icon" [icon]="['fas', 'trash']"></fa-icon>
+    </li>
+  </ul>
 </div>

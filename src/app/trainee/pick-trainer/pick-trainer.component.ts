@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ClientService} from '../../services/client.service';
 import {TrainerService} from '../../services/trainer.service';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'pick-trainer',
@@ -32,6 +33,7 @@ export class PickTrainerComponent implements OnInit {
   searchTrainer(e) {
     // look for trainers based on the input of users
     this.clientService.searchTrainer(e)
+      .pipe(debounceTime(500))
       .subscribe((res: any) => {
         this.trainers = res.trainers;
       });

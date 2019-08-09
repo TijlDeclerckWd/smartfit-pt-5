@@ -1,5 +1,22 @@
 <div class="increment">
-  <button (click)="changeCount('minus')" class="btn btn-warning increment__btn increment__btn--minus">-</button>
-  <input #input (change)="changedInput(input.value)" [value]="inputValue" [placeholder]="placeholder" type="text" class="increment__input">
-  <button (click)="changeCount('plus')" class="btn btn-warning increment__btn increment__btn--plus">+</button>
+  <button
+    [ngStyle]="{
+    color: color || 'white',
+    backgroundColor: bgc || 'black'}"
+    (click)="changeCount('minus')"
+    class="btn increment__btn increment__btn--minus">
+    -
+  </button>
+  <input #input (change)="changedInput(input.value)" [value]="inputValue | number: '1.0-1'" [placeholder]="placeholder" type="text"
+         class="increment__input">
+  <button
+    [ngStyle]="
+    {
+    color: color || 'white',
+    backgroundColor: bgc || 'black'
+    }"
+    (click)="changeCount('plus')"
+    class="btn increment__btn increment__btn--plus">
+    +
+  </button>
 </div>

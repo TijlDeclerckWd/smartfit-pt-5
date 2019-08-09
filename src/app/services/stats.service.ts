@@ -9,6 +9,14 @@ export class StatsService {
 
   constructor(private http: HttpClient) { }
 
+  addNewWeight(value) {
+    return this.http.post(`${this.BASE_API_URL}/stats/addNewWeight`, value);
+  }
+
+  deleteWeight(id) {
+    return this.http.delete(`${this.BASE_API_URL}/stats/deleteWeight/${id}`);
+  }
+
   getExerciseRMData(exerciseId) {
     return this.http.get(`${this.BASE_API_URL}/stats/getExerciseRMData/${exerciseId}`);
   }

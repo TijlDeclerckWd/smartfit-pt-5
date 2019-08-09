@@ -1,0 +1,28 @@
+.weight {
+  min-height: 100vh;
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+
+  .chart {
+    min-height: 30vh;
+  }
+
+  .weight-list {
+    .weight-list-item {
+      padding: 1rem;
+      background-color: var(--color-white);
+      display: flex;
+      justify-content: flex-end;
+      margin: 1rem;
+
+      .date {
+        margin-right: auto;
+      }
+
+      .icon {
+        margin-left: 1rem;
+        color: red;
+      }
+    }
+  }
+}

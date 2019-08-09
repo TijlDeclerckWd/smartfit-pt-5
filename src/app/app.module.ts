@@ -100,6 +100,7 @@ import {Conversation} from './interfaces/conversation.interface';
 import {SafePipe} from './pipes/safe.pipe';
 import {MomentPipe} from './pipes/moment.pipe';
 import { SwitchTabsComponent } from './common/switch-tabs/switch-tabs.component';
+import { PhotoProgressComponent } from './trainee/client-stats/photo-progress/photo-progress.component';
 
 
 
@@ -167,7 +168,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     WorkoutListItemSecComponent,
     SafePipe,
     MomentPipe,
-    SwitchTabsComponent
+    SwitchTabsComponent,
+    PhotoProgressComponent
   ],
   imports: [
     BrowserModule,

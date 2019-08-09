@@ -23,6 +23,7 @@ import {OneRMStatsComponent} from './trainee/client-stats/one-rm-stats/one-rm-st
 import {ExerciseVolumeStatsComponent} from './trainee/client-stats/exercise-volume-stats/exercise-volume-stats.component';
 import {WeightStatsComponent} from './trainee/client-stats/weight-stats/weight-stats.component';
 import {MuscleGroupStatsComponent} from './trainee/client-stats/muscle-group-stats/muscle-group-stats.component';
+import {PhotoProgressComponent} from './trainee/client-stats/photo-progress/photo-progress.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -64,6 +65,7 @@ const APP_ROUTES: Routes = [
       { path: 'statistics/weight', component: WeightStatsComponent },
       { path: 'statistics/muscle-groups', component: MuscleGroupStatsComponent },
       { path: 'statistics/RM', component: OneRMStatsComponent },
+      { path: 'statistics/progress-photos', component: PhotoProgressComponent },
       { path: 'workout/:workoutId', component: ClientWorkoutComponent }
     ]
   },

@@ -1,31 +1,37 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ExerciseService} from '../../../services/exercise.service';
 import * as Chart from 'chart.js';
 import {StatsService} from '../../../services/stats.service';
 import * as moment from 'moment';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-exercise-volume-stats',
   templateUrl: './exercise-volume-stats.component.html',
   styleUrls: ['./exercise-volume-stats.component.scss']
 })
-export class ExerciseVolumeStatsComponent implements OnInit {
+export class ExerciseVolumeStatsComponent implements OnInit, OnDestroy {
 
   exercises = [];
+  weightLiftedData = [];
+  averageRepsData = [];
 
   myChart;
 
   @ViewChild('chart') chart;
 
+  ngUnsubscribe = new Subject();
+
   constructor(private exerciseService: ExerciseService, private statsService: StatsService) { }
 
-  ngOnInit() {
-    this.getClientExercises();
-    this.createNewChart();
+  async ngOnInit() {
+    await this.getClientExercises();
+    this.getExerciseVolumeData(this.exercises[0]._id, true);
   }
 
   changeSelectedExercise(e) {
-this.getExerciseVolumeData(e.target.value);
+    this.getExerciseVolumeData(e.target.value);
   }
 
   createNewChart() {
@@ -36,28 +42,19 @@ this.getExerciseVolumeData(e.target.value);
       data: {
         datasets: [{
           label: 'Weight lifted',
-          data: [
-            {x: new Date(1990, 4, 11), y: 4 },
-            {x: new Date(1990, 6, 12), y: 5 },
-            {x: new Date(1990, 8, 13), y: 8 },
-            {x: new Date(1990, 4, 13), y: 10 }
-          ],
+          data: this.weightLiftedData,
           backgroundColor: [
-            '#B9272E'
+           'rgba(99, 82, 14, .3)'
           ],
           borderColor: [
-            '#B9272E)'
+            '#444'
           ],
           borderWidth: 1,
-          fill: false
+          fill: false,
+          pointBackgroundColor: '#000'
         }, {
           label: 'Average rep',
-          data: [
-            {x: new Date(1990, 4, 11), y: 4 },
-            {x: new Date(1990, 6, 12), y: 5 },
-            {x: new Date(1990, 8, 13), y: 8 },
-            {x: new Date(1990, 4, 13), y: 10 }
-          ],
+          data: this.averageRepsData,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)'
           ],
@@ -71,11 +68,14 @@ this.getExerciseVolumeData(e.target.value);
       options: {
         responsive: true,
         title: {
-          display: true,
+          display: false,
           text: "Weight + Reps / Exercise"
         },
         scales: {
           xAxes: [{
+            gridLines: {
+              color: '#eee'
+            },
             type: 'time',
             time: {
               tooltipFormat: 'll',
@@ -87,6 +87,9 @@ this.getExerciseVolumeData(e.target.value);
             }
           }],
           yAxes: [{
+            gridLines: {
+              color: '#eee'
+            },
             ticks: {
               beginAtZero: false
             },
@@ -100,29 +103,41 @@ this.getExerciseVolumeData(e.target.value);
     });
   }
 
-  getClientExercises() {
-    this.exerciseService.getClientExercises()
-      .subscribe((res) => {
-        this.exercises = res['exercises'];
-      });
+  async getClientExercises() {
+    return new Promise((resolve) => {
+      this.exerciseService.getClientExercises()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((res) => {
+          this.exercises = res['exercises'];
+          console.log('this.exercises', this.exercises);
+          resolve();
+        });
+    });
   }
 
-  getExerciseVolumeData(exerciseId) {
+  getExerciseVolumeData(exerciseId: string, initialFetch?: boolean) {
     this.statsService.getExerciseVolumeData(exerciseId)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((res) => {
         console.log('res', res);
         const refactoredData = this.refactorData(res['data']);
-        this.myChart.data.datasets[0].data = refactoredData.weightData;
-        this.myChart.data.datasets[1].data = refactoredData.repData;
-        this.myChart.update();
+        this.weightLiftedData = refactoredData.weightData;
+        this.averageRepsData = refactoredData.repData;
+        // if this is the first fetch, then we create a new chart...
+        if (initialFetch) {
+          this.createNewChart();
+        } else {
+          // if not, we update the existing one
+          this.myChart.update();
+        }
       });
   }
 
   refactorData(data) {
     const weightData = [];
     const repData = [];
-console.log('DATA', data);
-    // average reps worden nu hier berekend, maar later wordt dit gedaan bij het opslaan van de data
+    console.log('DATA', data);
+    // Calculating the average rep, this should be moved to the backend when saving the data
     data.forEach((item) => {
       const averageRep = Math.round((item.reps.reduce((prev, cur) => prev + cur) / item.reps.length) * 100) / 100;
       const date = moment(item.date).format('ll');
@@ -130,6 +145,11 @@ console.log('DATA', data);
       repData.push({x: date, y: averageRep});
     });
 
-    return { weightData, repData };
+    return {weightData, repData};
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

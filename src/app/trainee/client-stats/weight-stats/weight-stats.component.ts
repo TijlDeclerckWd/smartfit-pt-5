@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {StatsService} from '../../../services/stats.service';
 import * as Chart from 'chart.js';
+import {pipe} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-weight-stats',
@@ -11,11 +13,38 @@ export class WeightStatsComponent implements OnInit {
 
   @ViewChild('chart') chart;
 
+  weight = [];
+  filteredWeight = [];
+
+  chartData;
+
+  count = 0;
+
+  newWeightValue;
+
   constructor(private statsService: StatsService) { }
 
-  ngOnInit() {
-    // this.getWeightStats();
-this.createNewChart();
+  async ngOnInit() {
+    await this.getWeightStats();
+    this.filterWeights();
+    this.prepareData();
+
+    this.createNewChart();
+  }
+
+  addNewWeight() {
+    this.statsService.addNewWeight(this.newWeightValue)
+      .subscribe((res: any) => {
+        this.filteredWeight.unshift(res.newValue);
+        this.chartData.unshift({ x: res.newValue.date, y: res.newValue.weight });
+        this.chart.update();
+        // show that adding was successful
+      });
+  }
+
+  changeNewWeightValue(value) {
+    console.log('type', typeof value.count);
+    this.newWeightValue = value;
   }
 
   createNewChart() {
@@ -24,33 +53,34 @@ this.createNewChart();
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'Weight in KG',
+          data: this.chartData,
           backgroundColor: [
             'rgba(0, 99, 132, 0.5)'
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+            'rgba(255, 99, 132, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          lineTension: .6
         }]
       },
       options: {
         title: {
           display: true,
           text: 'Weight',
-          fontColor: '#fff',
-          position: 'bottom',
-          padding: 30
+          fontColor: '#000',
+          position: 'bottom'
         },
         scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              tooltipFormat: 'l',
+              unit: 'day'
+            }
+          }],
           yAxes: [{
             ticks: {
               beginAtZero: true
@@ -61,13 +91,38 @@ this.createNewChart();
     });
   }
 
+  deleteWeight(item) {
+    this.statsService.deleteWeight(item._id)
+      .subscribe((res) => {
+        console.log('deleted', res);
+        this.filteredWeight = this.filteredWeight.filter((weight) =>  item._id !== weight._id);
+        this.prepareData();
+        this.chart.update();
+      });
+  }
 
+  filterWeights() {
+    console.log('this.weight', this.weight);
+    this.filteredWeight = this.weight.slice(0, 5);
+    console.log('filteredWeights', this.filteredWeight);
+  }
 
-  // getWeightStats() {
-  //   this.statsService.getWeightStats()
-  //     .subscribe((res) => {
-  //       console.log('RES', res);
-  //     });
-  // }
+  getWeightStats() {
+    return new Promise((resolve) => {
+      this.statsService.getWeightStats()
+        .subscribe((res: any) => {
+          this.weight = res.data.bodyWeight.reverse();
+          this.count = this.weight[0].weight;
+          resolve();
+        });
+    });
+  }
 
+  prepareData() {
+    this.chartData = this.filteredWeight.map((item) => {
+      return { x: item.date, y: item.weight };
+    });
+
+    console.log('chartData', this.chartData);
+  }
 }

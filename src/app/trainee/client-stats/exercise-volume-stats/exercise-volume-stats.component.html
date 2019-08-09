@@ -1,6 +1,5 @@
 <div class="exercise-volume">
   <select (change)="changeSelectedExercise($event)" class="custom-select">
-    <option selected>Select An Exercise</option>
     <option *ngFor="let exercise of exercises" [value]="exercise._id">{{exercise.name}}</option>
   </select>
 
