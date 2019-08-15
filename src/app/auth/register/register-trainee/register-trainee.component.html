@@ -15,17 +15,17 @@
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" formControlName="password1" class="form-control" id="password" placeholder="Password">
-      <ng-container *ngIf="f.get('password1').invalid">
+      <ng-container *ngIf="f.get('password1').invalid && f.get('password1').touched">
         <mat-error *ngIf="f.get('password1').hasError('required')">Password is required</mat-error>
-        <mat-error *ngIf="f.get('password1').hasError('minlength') && !password1.hasError('required')">Password needs to have at least 6 characters</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('minlength') && f.get('password1').hasError('required')">Password needs to have at least 6 characters</mat-error>
         <mat-error *ngIf="f.get('password1').hasError('maxlength')">Password needs to be less than 15 characters</mat-error>
-        <mat-error *ngIf="f.get('password1').hasError('pattern') && !password1.hasError('minlength') && !password1.hasError('maxlength')">Password needs to have letters and numbers</mat-error>
+        <mat-error *ngIf="f.get('password1').hasError('pattern') && f.get('password1').hasError('minlength') && !f.get('password1').hasError('maxlength')">Password needs to have letters and numbers</mat-error>
       </ng-container>
     </div>
     <div class="form-group">
       <label for="password2">Repeat Password</label>
       <input type="password" formControlName="password2" class="form-control" id="password2" placeholder="Repeat Password">
-      <ng-container *ngIf="f.get('password2').invalid">
+      <ng-container *ngIf="f.get('password2').invalid && f.get('password2').touched">
         <mat-error *ngIf="f.get('password2').hasError('required')">Password is required</mat-error>
         <mat-error *ngIf="f.get('password2').hasError('isNotEqual') && !f.get('password2').hasError('required')">Passwords need to match</mat-error>
       </ng-container>

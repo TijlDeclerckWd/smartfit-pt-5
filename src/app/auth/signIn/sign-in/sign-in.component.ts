@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AuthService} from '../../../services/auth.service';
 import {NotifierService} from 'angular-notifier';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'sign-in',
@@ -19,6 +20,8 @@ export class SignInComponent implements OnInit, OnDestroy {
   // this message will display when there was an issue logging in at the server
   loginErrorMessage = '';
 
+  chosenButton: string;
+
   get f() {
     return this.signInForm;
   }
@@ -26,9 +29,13 @@ export class SignInComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private notifierService: NotifierService,
-    private router: Router) { }
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+    // chosen button trainer || client
+    console.log('TEST', this.data.type);
+    this.chosenButton = this.data.type;
     // create the sign in form
     this.signInForm = new FormGroup({
       email: new FormControl(null, [
@@ -39,7 +46,7 @@ export class SignInComponent implements OnInit, OnDestroy {
         Validators.required
       ]),
       // type to differentiate between trainers and clients
-      type: new FormControl(null)
+      type: new FormControl(this.chosenButton)
     });
   }
 

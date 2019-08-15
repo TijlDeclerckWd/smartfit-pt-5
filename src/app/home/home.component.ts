@@ -1,5 +1,5 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {RegisterComponent} from '../auth/register/register.component';
 import {SignInComponent} from '../auth/signIn/sign-in/sign-in.component';
 import {AuthService} from '../services/auth.service';
@@ -63,7 +63,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     //  So when there is no token, they are not logged in and we want to display a dialog to make them log in
       this.signInDialogRef = this.dialog.open(SignInComponent, {
         // dynamic width modal based on the window width
-        width: this.innerWidth > 600 ? '50%' : '80%'
+        width: this.innerWidth > 600 ? '50%' : '80%',
+        data: {
+          type: 'client'
+        }
       });
     }
   }
@@ -79,7 +82,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.signInDialogRef = this.dialog.open(SignInComponent, {
         // we want the width of the login dialog to be dependent on the width of the screen
-        width: this.innerWidth > 600 ? '50%' : '80%'
+        width: this.innerWidth > 600 ? '50%' : '80%',
+        data: {
+          type: 'trainer'
+        }
       });
     }
   }
