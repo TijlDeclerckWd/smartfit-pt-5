@@ -1,5 +1,5 @@
 <div class="list-item">
-  <span *ngIf="thereAreNewMessages()" class="badge badge-pill badge-danger">{{ conversation.messages.length - conversation.seenMessages }}</span>
+  <span *ngIf="thereAreNewMessages()" class="badge badge-pill badge-danger">{{ conversation.messages.length - conversation.seenMessages || 0}}</span>
   <div class="img-container">
     <img src="{{BASE_URL}}/uploads/{{otherUser.profile_pic}}" alt="Profile Picture">
   </div>

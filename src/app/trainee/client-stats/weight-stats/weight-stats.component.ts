@@ -83,7 +83,7 @@ export class WeightStatsComponent implements OnInit {
           }],
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: false
             }
           }]
         }

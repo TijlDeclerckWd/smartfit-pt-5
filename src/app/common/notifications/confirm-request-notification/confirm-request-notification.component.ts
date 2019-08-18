@@ -12,12 +12,9 @@ export class ConfirmRequestNotificationComponent implements OnInit {
 
   @Output('handleRequestResponse') handleRequestResponse = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onResponse(response, request) {
     this.handleRequestResponse.emit({response, request});

@@ -1,0 +1,4 @@
+This component will display all the clients that a trainer has. Each card represents a client.
+
+TO-DO:
+Make cards dynamic and filled with user information

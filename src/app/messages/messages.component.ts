@@ -69,6 +69,7 @@ export class MessagesComponent implements OnInit {
 
 
   changeCheckboxStatus() {
+    console.log('trigger function');
     // close / open the message overlay
     this.checkboxChecked = !this.checkboxChecked;
   }
@@ -96,9 +97,11 @@ export class MessagesComponent implements OnInit {
   }
 
   searchUsers(value, drop) {
+
     this.messageService.getUserList(value)
       .subscribe((res: {myResults}) => {
         // we receive list of all the users that mactched the input
+        console.log('userlist', res);
         this.mySearchResults = res.myResults;
         if (this.mySearchResults.length > 0) {
           // we display these users in the dropdown
@@ -158,7 +161,9 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  selectTrainer(result) {
+  selectTrainer(e, result) {
+    e.stopPropagation();
+    console.log('result', result);
     // this to value represents the object of the selected trainer / client
     this.to = result;
     // we display their fullName in the input element

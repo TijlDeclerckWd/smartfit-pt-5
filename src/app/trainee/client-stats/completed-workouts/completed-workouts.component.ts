@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Color} from 'ng2-charts';
+
 import {NgxUiLoaderService} from 'ngx-ui-loader';
 import * as Chart from 'chart.js';
 import {StatsService} from '../../../services/stats.service';
@@ -79,7 +79,8 @@ export class CompletedWorkoutsComponent implements OnInit, OnDestroy {
           }],
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              stepSize: 1
             },
             scaleLabel: {
               display: true,

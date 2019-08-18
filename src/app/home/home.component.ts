@@ -38,12 +38,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     // handle when the registration is complete
     this.authService.registrationComplete
       .pipe(takeUntil(this.ngUnsubscribe))
+      // close the registration dialog
       .subscribe(() => this.dialogRef.close());
 
     // handle when user successfully signs in
     this.authService.signInComplete
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((type) => {
+      //  close the registration dialog
       this.signInDialogRef.close();
     });
   }

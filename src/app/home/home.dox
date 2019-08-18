@@ -1,0 +1,20 @@
+Welcome to the homepage.
+
+This page will display three different options:
+
+The trainers and clients buttons will give access to the subsections of the website if the user has logged in.
+If he hasn't we will display a login screen where we ask his login credentials. After the user entered the right credentials
+new data will be saved in the localstorage and this token will be used as safety whenever the user makes server request.
+
+
+The register button leads to a register form where a user can either register as a client or a trainer.
+
+
+To-do:
+1. After registering a new user we should automatically redirect the user to their specific subsection. At the moment
+the user has to login manually.
+2. There's an issue where the user who has a token in his localstorage can enter either subsection. Perhaps we should
+check what type of user it is and whether this type matches the section this user is trying to enter. Alternative would
+be to redirect to the homepage if there is an authentication issue within the section.
+3. The validators of both forms need to be updated. First thing that comes to mind is that the unique email needs to be
+implemented

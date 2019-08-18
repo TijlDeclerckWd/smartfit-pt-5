@@ -4,7 +4,7 @@
   <confirm-request-notification
     *ngIf="update.type === 'request'"
     [update]="update"
-    (handleRequestResponse)="handleRequestResponse($event)"
+    (handleRequestResponse)="handleRequestResponse($event, update)"
   ></confirm-request-notification>
 </ng-container>
 

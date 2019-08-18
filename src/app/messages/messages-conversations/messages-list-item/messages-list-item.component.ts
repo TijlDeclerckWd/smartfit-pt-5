@@ -34,13 +34,13 @@ export class MessagesListItemComponent implements OnInit{
   }
 
   thereAreNewMessages() {
+    // there are new messages in this conversation
+    const lastMessage = this.conversation.messages[this.conversation.messages.length - 1];
+
 //    Are there new messages in this conversation?
 if (this.conversation.seenMessages === this.conversation.messages.length) {
   return false;
 } else {
-  // there are new messages in this conversation
-  const lastMessage = this.conversation.messages[this.conversation.messages.length - 1];
-
   // if I am the person who sent the last msg in this conversation we return false
   return lastMessage[lastMessage.sentBy] !== this.userId;
 }

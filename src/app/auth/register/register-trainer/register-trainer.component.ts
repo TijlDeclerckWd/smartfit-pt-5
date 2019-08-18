@@ -102,7 +102,7 @@ export class RegisterTrainerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete;
+    this.ngUnsubscribe.complete();
   }
 
 }

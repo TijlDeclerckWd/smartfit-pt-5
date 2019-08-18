@@ -1,0 +1,12 @@
+On this component a new client will have to select a new trainer to connect with
+He can search for a trainer in the input or select one from the list we present that can be sorted based on one
+of the possibilities.
+
+TO-DO:
+1. Use trackby so that we don't have to rerender the entire list
+2. Link the list item content to the data of the user
+3. place a location icon next to the location name in the top right corner
+4. We need to think about what the client can do while he waits for the hiring response of the trainer. Because at the
+moment this user can't do anything until this trainer accepts his request. We should probably put more emphasis on
+trainers creating email invites which will lead to registration of clients that automatically link a new client to a
+trainer. This page can still be used as a backend for that system

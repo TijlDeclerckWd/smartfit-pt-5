@@ -38,12 +38,13 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="msgForm" class="form">
-      <div ngbDropdown #drop="ngbDropdown" class="form-group">
+      <div ngbDropdown #drop=ngbDropdown class="form-group">
         <label for="to">To:</label>
-        <input autocomplete="off" #userInput ngbDropdownAnchor id="to" (keyup)="searchUsers(userInput.value, drop)" class="form-control" formControlName="to">
-        <div ngbDropdownMenu aria-labelledby="to" class="ngb-dropdown-menu">
+        <input autocomplete="off" #userInput ngbDropdownAnchor id="to" (keyup)="searchUsers(userInput.value, drop)"
+               class="form-control" formControlName="to">
+        <div ngbDropdownMenu aria-labelledby="to" class="dropdown-menu">
           <ul class="search-list">
-            <li (click)="selectTrainer(result)" class="search-list-item" *ngFor="let result of mySearchResults">
+            <li ngbDropdownItem (click)="selectTrainer($event, result)" class="search-list-item" *ngFor="let result of mySearchResults">
               <img class="search-img" src="{{BASE_URL}}/uploads/{{result.profile_pic}}" alt="profile pic">
               <span class="search-name">{{result.fullName}}</span>
             </li>

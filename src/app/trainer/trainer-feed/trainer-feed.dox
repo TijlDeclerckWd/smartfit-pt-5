@@ -1,0 +1,15 @@
+I am currently thinking about what to do with this section. At the moment I will display all the updates in here, but
+I think it will be best if I later place most updates in a bell notification icon on the notification bar and display the most important ones
+on this page in a section that spans across 50vh.
+
+At this moment we display only the hire requests on this page
+
+TO-DO:
+
+1. The hire requests need to display user information
+2. after accepting a hire request the user should be added to the list
+3. We need to think about how we structure the feed page to maximize the use of space
+
+
+
+

@@ -279,7 +279,6 @@ if (type === 'right') {
   }
 
   switchToMonthView() {
-    console.log('triggered');
     this.chartOptions.chosenDisplay = 'month';
 
     // reset chart data
@@ -287,7 +286,7 @@ if (type === 'right') {
     this.chartOptions.finalData = [];
 
     const filteredData = this.filterData(this.data, 'month');
-    console.log('filteredData', filteredData);
+
     this.refactorData(filteredData, this.chartOptions.chosenDisplay);
     this.createNewChart();
   }
